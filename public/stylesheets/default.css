@@ -1,0 +1,183 @@
+/*#############################################################
+Name: Indigo
+Description: A lightweight (7kb images), simple and professional design.
+Date: 2006-07-27
+Author: Viktor Persson
+URL: http://arcsin.se
+
+Feel free to use and modify but please provide credits.
+#############################################################*/
+
+/* standard elements */
+* {
+	margin: 0;
+	padding: 0;
+}
+a {
+	color: #F70;
+}
+a:hover {
+	color: #C60;
+}
+body {
+	background:url(/images/headerbg.png) repeat-x;
+	color: #466;
+	font: normal 0.85em Helvetica, Arial,sans-serif;
+	margin: 0;
+}
+input {
+	color: #555;
+}
+cite,code,ul {
+	font-size: 1.2em;
+	padding-bottom: 1.2em;
+}
+h1 {
+	font-size: 1.4em;
+	margin-bottom: 4px;
+}
+code {
+	background: url(/images/bgcode.gif);
+	border: 1px solid #F0F0F0;
+	border-left: 6px solid #39F;
+	color: #555;
+	display: block;
+	font: normal 1.1em "Lucida Sans Unicode",serif;
+	margin-bottom: 12px;
+	padding: 8px 10px;
+	white-space: pre;
+}
+cite {
+	background: url(/images/quote.gif) no-repeat;
+	color: #666;
+	display: block;
+	font: normal 1.3em "Lucida Sans Unicode",serif;
+	padding-left: 28px;
+}
+h1,h2,h3 {
+	color: #06C;
+	padding-top: 6px;
+}
+/* misc */
+.clearer {
+	clear: both;
+}
+
+.header {
+	height: 100px;
+	background: url(/images/logo.png) 10px 35px no-repeat;
+}
+
+/* title */
+.title {
+	float: left;
+	padding: 0 0 0 4em;
+}
+
+.title h1 {
+	color: #FFF;
+	font: normal 2em Helvetica,sans-serif;
+}
+
+/* main */
+.main {
+	background: #FFF ;
+	clear: both;
+	padding: 10px;
+}
+
+/* navigation */
+.navigation {
+	float: left;
+	width: 15%;
+	height: 12px;
+	margin-left: 14px;
+	padding: 0 16px;
+}
+.navigation a {
+	color: #FFF;
+	float: left;
+	font: bold 1.2em "Trebuchet MS",sans-serif;
+	margin-top: 16px;
+	padding: 8px 18px;
+	text-align: center;
+	text-decoration: none;
+}
+.navigation a:hover {
+	background-color: #4A91C3;
+	color: #FFF;
+}
+
+.navigation h1 {
+	border-bottom: 1px dashed #DDD;
+	color: #E73;
+	font-size: 1.2em;
+	height: 20px;
+	margin-top: 1.2em;
+}
+.navigation ul {
+	margin: 0;
+	padding: 0;
+}
+.navigation li {
+	border-bottom: 1px dashed #EEE;
+	list-style: none;
+	margin: 0;
+}
+.navigation li a {
+	color: #777;
+	display: block;
+	font-size: 0.9em;
+	padding: 3px 6px 3px 18px;
+	text-decoration: none;
+}
+
+/* content */
+.content {
+	float: left;
+	margin: 0 0.1em;
+	width: 85%;
+}
+.content .descr {
+	color: #C60;
+	margin-bottom: 6px;
+}
+.content li {
+	list-style: url(/images/li.gif);
+	margin-left: 18px;
+}
+
+.minsize {
+	height: 500px;
+}
+#ajax-indicator {
+	width:100px;
+	height: 100px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	background:url(/images/ajax-loader.gif) no-repeat center;
+	text-align:center;
+	padding:10px;
+	margin-left: -50px;
+	margin-top: -50px;
+	z-index:2;
+	overflow: auto;
+}
+
+/* footer */
+.footer {
+	background: #0094D6 url(/images/bgfooter.gif) repeat-x;
+	color: #C1DEF0;
+	font-size: 0.9em;
+	text-align: left;
+	padding:2em 0 2em 4em;
+}
+.footer a {
+	color: #FFF;
+	text-decoration: none;
+}
+.footer a:hover {
+	color: #FFF;
+	text-decoration: underline;
+}

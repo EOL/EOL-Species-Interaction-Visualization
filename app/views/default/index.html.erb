@@ -1,0 +1,43 @@
+<div class="navigation">
+  <%= render :partial=>'sidenav' %>
+</div>
+
+<div class="content">
+
+  <div id="navTabs">
+    <ul>
+        <li><a href="#add">Add data</a></li>
+        <li><a href="#viz">Visualize</a></li>
+        <li><a href="#view">View data</a></li>
+     </ul>
+     
+     <div id="add">
+       
+       <%= render :partial=>'add_data' %>
+
+     </div>
+     
+     <div id="viz">
+     
+      <%= render :partial=>'visualize' %>
+     
+     </div>
+     
+     <div id="view">
+     
+       <%= render :partial=>'view_data' %>
+     
+     </div>
+  
+  </div>
+
+  <script>
+  	$(function() {
+  		$( "#navTabs" ).tabs();
+  	});
+  </script>
+
+  <br />
+    
+ 
+</div>

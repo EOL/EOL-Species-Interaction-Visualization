@@ -1,0 +1,1253 @@
+<div class="container">
+
+	<div class="header">
+
+
+	</div>
+	<div class="main">
+
+<div class="sidenav">
+        <form name="searchForm" action="" method="GET">
+<div class="controlTablSection">
+
+
+        <div id="controlTabs">
+	        <ul>
+		        <li><a href="#tabs-1">Search & Visualize</a></li>
+                <li><a href="#tabs-2">Add to Database</a></li>
+	        </ul>
+	        <div id="tabs-1">
+	            <fieldset class="VisualizeParam">
+	                <legend>Visualize</legend>
+		            <div>
+		                <label for="interactionDropdown">Interaction Type</label><select name="interactionDropdown" style="width:180px;"></select>
+                    </div>
+                    <div>
+		                <label for="ecosystemDropdown">Ecosystem</label><select name="ecosystemDropdown" style="margin-left: 27px; width:180px;"></select>
+                    </div>
+        	        <div>
+    			        <label for="vizResolution">Resolution</label>
+			            <select id="vizResolution" name="vizResolution" style="margin-left: 30px;">
+			                <option value="everything">Everything</option>
+			                <option value="class">Class</option>
+			                <option value="order">Order</option>
+			                <option value="family">Family</option>
+			                <option value="genus">Genus</option>
+			            </select>
+			        </div>
+                    <div class="layoutbutton">
+		                <input type="button" name="button" value="Visualize" onClick='onClickSearchInteraction()'>
+                    </div>
+                </fieldset>
+                <fieldset class="SearchSpecies">
+                    <legend>Search Species</legend>
+                    <div>
+		                <label for="searchSpeciesTextBox">Search for species</label> <input type="text" name="searchSpeciesTextBox" id="searchSpeciesTextBox" size="25" style="width:150px;">
+                    </div>
+                    <div>
+    			        <label for="numDegreeToShow"># of degrees to </label>
+			            <select id="numDegreeToShow" name="numDegreeToShow" style="margin-left:25px;">
+			                <option value="1">1</option>
+			                <option value="2">2</option>
+			                <option value="3">3</option>
+			                <option value="inf">Everything</option>
+			            </select>
+			        </div>
+                    <!--
+                    <div>
+                        <input type="button" name="searchSpeciesButton" value="Search Species" onClick='onClickSearchSpecies()'>
+                    </div>
+                    <div>
+		                <label for="">Species Search Result:</label><select name="speciesSearchResultDropdown"></select>
+                    </div>
+                    -->
+                    <div class="layoutbutton">
+		                <input type="button" name="gotoSpeciesButton" value="Visualize this Species" onClick='onClickGotoSpecies()'>
+                    </div>
+                </fieldset>
+                <fieldset class="LayoutType">
+                    <legend>Layout Type</legend>
+                    <div>
+		                <input type="button" name="fdFreeLayoutButton" value="Free Form" onClick='onClickFDFreeLayoutButton()' class="layoutbutton1">
+						<input type="button" name="hierarchyClusteredLayoutButton" value="Hierarchical Clustered" onClick='onClickHierarchyClusteredLayoutButton()' class="layoutbutton2">
+					</div>
+                    <div>
+		                <input type="button" name="fdSpringLayoutButton" value="Clustered" onClick='onClickFDClusteredLayoutButton()' class="layoutbutton1">
+		                <input type="button" name="hierarchyLayoutButton" value="Hierarchical" onClick='onClickHierarchyLayoutButton()' class="layoutbutton1">
+					</div>
+                    <div>
+                        <input type="button" name="verticalHierarchyButton" value="Vertical Hierarchy" onClick='onClickVerticalHierarchyButton()' class="layoutbutton2">
+       	                <input type="button" name="horizontalHierarchyButton" value="Horizontal Hierarchy" onClick='onClickHorizontalHierarchyButton()' class="layoutbutton2">
+					</div>
+                </fieldset>
+				<!--
+				<fieldset class="NameAlternation">
+                    <legend>Name Alternation</legend>
+                    <div>
+		                <input type="button" name="NameAlternationButton" value="Alternate Name" onClick='onClickNameAlternationButton()' class="layoutbutton">
+                    </div>
+                </fieldset>
+				-->
+                <fieldset class="Experiment">
+                    <legend>Experiment</legend>
+                    <div class="layoutbutton">
+						<a title="Eliminate the selected specie and its edges. This does not affect the database. When you refresh, the specie and the edges will be back.">
+							<input type="button" name="knockOutSpeciesButton" value="Knock Out Selected Species" onClick='onClickKnockOutSpeciesButton()'>
+						</a>
+					</div>
+                </fieldset>
+	        </div>
+            <div id="tabs-2">
+            <div id="AddToDB">
+            <h3><a href="#">Add Species</a></h3>
+            <div>
+            	<fieldset class="addspecies">
+			        <legend>Add Species</legend>
+			        <div>
+				        <label for="newSpecieSciNameTextBox" style="width:10em;">Scientific Name</label> <input type="text" name="newSpecieSciNameTextBox" size="25" id="newSpecieSciNameTextBox" style="margin-left:1em;">
+			        </div>
+			        <div>
+				        <label for="newSpecieComNameTextBox" style="width:10em;">Common Name</label><input type="text" name="newSpecieComNameTextBox" size="25" id="newSpecieComNameTextBox" style="margin-left:1em;">
+			        </div>
+			        <div>
+    			        <label for="newSpeciesRank" style="width:10em;">Rank</label>
+			            <select id="newSpeciesRank" name="newSpeciesRank" style="margin-left:1em;">
+			                <option value="Phylum">Phylum</option>
+			                <option value="Class">Class</option>
+			                <option value="Order">Order</option>
+			                <option value="Super-family">Super-family</option>
+			                <option value="Family">Family</option>
+			                <option value="Genus">Genus</option>
+                            <option value="species">species</option>
+                            <option value="sub-species">sub-species</option>
+			            </select>
+			        </div>
+			        <div>
+    			        <label for="newSpeciesGroup" style="width:10em;">Group</label>
+			            <select id="newSpeciesGroup" name="newSpeciesGroup" style="margin-left:1em;">
+			                <option value="0">Birds</option>
+			                <option value="1">Insects</option>
+			                <option value="2">Mammals</option>
+			                <option value="3">Molluscs</option>
+			                <option value="4">"Reptiles</option>
+			                <option value="5">Vas. Plants</option>
+                            <option value="6">Other</option>
+			            </select>
+			        </div>
+                    <input type="button" name="addSpeciesButton" value="Add New Species" onClick='onClickAddSpecies()'>
+		        </fieldset>
+            </div>
+            <h3><a href="#">Add Ecosystem</a></h3>
+        	<div>
+            	<fieldset class="addEcosystem">
+			        <legend>Add Ecosystem</legend>
+			        <div>
+			            <label for="newEcosystemNameTextBox" style="width:10em;">Ecosystem Name</label><input type="text" name="newEcosystemNameTextBox" id="newEcosystemNameTextBox" size="25" style="margin-left:1em;">
+                    </div>
+                    <div>
+			            <label for="newEcosystemDescTextBox" style="width:10em;">Ecosystem Description</label><input type="text" name="newEcosystemDescTextBox"id="newEcosystemDescTextBox" size="25" style="margin-left:1em;">
+                    </div>
+                     <div><input type="button" name="addEcosystemButton" value="Add New Ecosystem" onClick='onClickAddEcosystem()'></div>
+		        </fieldset>
+            </div>
+
+            <h3><a href="#">Add Interaction</a></h3>
+        	<div>
+            	<fieldset class="addInteraction">
+			        <legend>Add Interaction</legend>
+			        <div>
+			            <label for="newInteractionTitleTextBox" style="width:10em;">Interaction Name</label><input type="text" name="newInteractionTitleTextBox" id="newInteractionTitleTextBox" size="25" style="margin-left:1em;">
+                    </div>
+                    <div>
+			            <label for="newInteractionCategoryTextBox" style="width:10em;">Interaction Category</label><input type="text" name="newInteractionCategoryTextBox" id="newInteractionCategoryTextBox" size="25" style="margin-left:1em;">
+                    </div>
+				<input type="button" name="addInteractionButton" value="Add New Interaction" onClick='onClickAddInteraction()'>
+		        </fieldset>
+            </div>
+
+            <h3><a href="#">Add Species in Ecosystem</a></h3>
+        	<div>
+            	<fieldset class="addSpeciesInEcosystem">
+	                <div>
+			            <label for="newSIESpeciesName" style="width:7em;">Species</label><input type="text" name="newSIESpeciesName" size="25" id="newSIESpeciesName" style="margin-left:0.5em;">
+                    </div>
+                    <div>
+			            <label for="newSIEEcosystemDropdown" style="width:7em;">Ecosystem</label><select name="newSIEEcosystemDropdown" id="newSIEEcosystemDropdown" style="margin-left:0.5em;"></select>
+                    </div>
+                    <input type="button" name="addSpeciesInEcosystemButton" value="Add Species to Ecosystem" onClick='onClickAddSpeciesInEcosystem()'>
+		        </fieldset>
+            </div>
+
+            <h3><a href="#">Add Interaction between Species</a></h3>
+        	<div>
+            	<fieldset class="addSpeciesInteraction">
+	                <div>
+		                <label for="newSISpeciesNameTextBox1" style="width:10em;">Species</label><input type="text" name="newSISpeciesNameTextBox1" size="24" id="newSISpeciesNameTextBox1" style="margin-left:1em;">
+		            </div>
+		            <div>
+		                <label for="newSIInteractionDropdown" style="width:10em;">Interaction</label><select name="newSIInteractionDropdown" id="newSIInteractionDropdown" style="margin-left:1em;"></select>
+		            </div>
+		            <div>
+		                <label for="newSISpeciesNameTextBox2" style="width:10em;">Species</label><input type="text" name="newSISpeciesNameTextBox2" size="24" id="newSISpeciesNameTextBox2" style="margin-left:1em;">
+		            </div>
+                   <input type="button" name="addSpeciesInteractionButton" value="Add Species Interaction" onClick='onClickAddSpeciesInteraction()'>
+		        </fieldset>
+            </div>
+            </div>
+        </div>
+
+
+    </div>
+</form>
+</div>
+</div>
+
+		<div class="content">
+
+			<h1>Visualization</h1>
+
+<script type="text/javascript">
+
+var jsonServerURL= "www.rememberedfuture.com:8080"
+var notificationContainer;
+
+function notificationWindow( template, vars, opts ){
+    return notificationContainer.notify("create", template, vars, opts);
+}
+
+function onClickAddSpecies()
+{
+    var newSpeciesObj = new Object;
+    newSpeciesObj.sci_name = $("#newSpecieSciNameTextBox").val();
+    newSpeciesObj.com_name = $("#newSpecieComNameTextBox").val();
+    newSpeciesObj.rank = $("#newSpeciesRank").val();
+    newSpeciesObj.group = $("#newSpeciesGroup").val();
+
+    var jsonUrl='http://' + jsonServerURL + '/add_species/?callback=?'
+    $.getJSON(jsonUrl, newSpeciesObj, function (resultData)
+    {
+        if(resultData.status == "success")
+        {
+            notificationWindow("default", { title:'Species Added', text:'Species Added'});
+	        initSpecieList();
+	        initSpeciesSuggest();
+        }
+        else
+        {
+            notificationWindow("default", { title:'Error', text:resultData.reason});
+        }
+    }
+    );
+
+}
+
+function onClickAddEcosystem()
+{
+    var newRequestObj = new Object;
+    newRequestObj.eco_name = $("#newEcosystemNameTextBox").val();
+    newRequestObj.eco_desc = $("#newEcosystemDescTextBox").val();
+
+    var jsonUrl='http://' + jsonServerURL + '/add_ecosystem/?callback=?'
+    $.getJSON(jsonUrl, newRequestObj, function (resultData)
+    {
+        if(resultData.status == "success")
+        {
+            notificationWindow("default", { title:'Ecosystem Added', text:'Ecosystem Added'});
+            initEcosystemList();
+        }
+        else
+        {
+            notificationWindow("default", { title:'Error', text:resultData.reason});
+        }
+    }
+    );
+}
+
+// *************************************************************
+// *** these are newly refactored ajax callback that can be re-used
+
+function onClickAddInteraction()
+{
+    var formData = {interaction: { name: $("#newInteractionTitleTextBox").val() } };
+    var ajaxURL='/interactions.json'
+    var httpVerb = 'POST';
+
+    doAjaxWithJsonResponse(formData,ajaxURL,httpVerb,'Interaction added');
+    initInteractionTitleList();
+
+}
+
+function doAjaxWithJsonResponse(formData,ajaxURL,httpVerb,successText) {
+//this method is used to post or get json from the server for a request that is creating or editing model objects
+//it will return either the model object or a message if something bad happens
+  $.ajax({
+     type: httpVerb,
+     url: ajaxURL,
+     data: formData,
+     complete: function(httpResponse){
+       var jsonData=$.parseJSON(httpResponse.responseText);
+       if (httpResponse.status < 210)
+        {
+          notificationWindow("default", { title:'Success', text:successText});
+        }
+        else
+        {
+          notificationWindow("default", { title:'Problem', text:buildErrorMessage(jsonData)});          
+        }
+     }
+   });      
+}
+
+function buildErrorMessage(jsonData) {
+  var msg='';
+  $.each(jsonData, function(key, val) {msg += key + ' ' + val});
+  return msg; 
+}
+
+
+// *************************
+
+function onClickAddSpeciesInEcosystem()
+{
+    var newRequestObj = new Object;
+    newRequestObj.species = $("#newSIESpeciesName").val();
+    newRequestObj.ecosystem = $("#newSIEEcosystemDropdown").val();
+
+    var jsonUrl='http://' + jsonServerURL + '/add_species_in_ecosystem/?callback=?'
+    $.getJSON(jsonUrl, newRequestObj, function (resultData)
+    {
+        if(resultData.status == "success")
+        {
+            notificationWindow("default", { title:'Species Added to Ecosystem', text:'Species Added to Ecosystem'});
+        }
+        else
+        {
+            notificationWindow("default", { title:'Error', text:resultData.reason});
+        }
+    }
+    );
+}
+
+function onClickAddSpeciesInteraction()
+{
+    var newRequestObj = new Object;
+    newRequestObj.species1 = $("#newSISpeciesNameTextBox1").val();
+    newRequestObj.species2 = $("#newSISpeciesNameTextBox2").val();
+    newRequestObj.interaction = $("#newSIInteractionDropdown").val();
+
+    var jsonUrl='http://' + jsonServerURL + '/add_species_interaction/?callback=?'
+    $.getJSON(jsonUrl, newRequestObj, function (resultData)
+    {
+        if(resultData.status == "success")
+        {
+            notificationWindow("default", { title:'Success', text:'Species Interaction Added to Ecosystem'});
+        }
+        else
+        {
+            notificationWindow("default", { title:'Error', text:resultData.reason});
+        }
+    }
+    );
+}
+
+/*
+function makenewinteraction(interaction_value){
+	if (interaction_value == "new interaction"){
+		document.getElementById("newinteraction").style.visibility = "visible";
+	}
+	else{
+		document.getElementById("newinteraction").style.visibility = "hidden";
+	}
+
+	if (interaction_value != "none"){
+		document.getElementById("interactionpair").style.display = "inline";
+	}
+	else{
+		document.getElementById("interactionpair").style.display = "none";
+	}
+}
+*/
+
+
+function makeneweco1(eco_value){
+	if (eco_value == "make new ecosystem"){
+		document.getElementById("neweco1").style.visibility = "visible";
+	}
+	else{
+		document.getElementById("neweco1").style.visibility = "hidden";
+	}
+}
+function makeneweco2(eco_value){
+	if (eco_value == "make new ecosystem"){
+		document.getElementById("neweco2").style.visibility = "visible";
+	}
+	else{
+		document.getElementById("neweco2").style.visibility = "hidden";
+	}
+}
+
+function onReceiveSpeciesSearchJSON(dataList)
+{
+    document.searchForm.speciesSearchResultDropdown.options.length = 0
+    for (var i=0; i < dataList.length;++i)
+    {
+        addOption(document.searchForm.speciesSearchResultDropdown, dataList[i].sci_name, dataList[i].sci_name);
+    }
+}
+
+function onClickSearchSpecies()
+{
+    var searchTextBox = document.searchForm.searchSpeciesTextBox.value
+    var jsonUrl='http://' + jsonServerURL + '/search_by_name/organism/' + searchTextBox + '?callback=?'
+    $.getJSON(jsonUrl, {}, onReceiveSpeciesSearchJSON);
+}
+
+function onClickGotoSpecies()
+{
+    var selectedInteractionTitle = document.searchForm.interactionDropdown.value;
+    // use a dummy ecosystem so that we are not restricted to a ecosystem
+    var selectEcosystem = "no such ecosystem"
+    var selectedSpecies = document.searchForm.searchSpeciesTextBox.value;
+    //var jsonUrl='http://' + jsonServerURL + '/node_link/' + selectedInteractionTitle + '?callback=?';
+
+    var searchOptionObj = new Object;
+    searchOptionObj.numDegreeToShow = $("#numDegreeToShow").val();
+    var jsonUrl='http://' + jsonServerURL + '/search_by_interaction_ecosystem_species/' + selectedInteractionTitle + '/' + selectEcosystem + '/' + selectedSpecies + '?callback=?'
+    $.getJSON(jsonUrl, searchOptionObj, onReceiveJSON);
+}
+
+function addOption(selectbox,text,value)
+{
+    var optn = document.createElement("OPTION");
+    optn.text = text;
+    optn.value = value;
+    selectbox.options.add(optn);
+}
+
+
+function onClickSearchInteraction()
+{
+    var selectedInteractionTitle = document.searchForm.interactionDropdown.value;
+    var selectedEcosystem = document.searchForm.ecosystemDropdown.value;
+
+    var searchOptionObj = new Object
+    searchOptionObj.vizResolution = $("#vizResolution").val();
+    //var jsonUrl='http://' + jsonServerURL + '/node_link/' + selectedInteractionTitle + '?callback=?';
+    var jsonUrl='http://' + jsonServerURL + '/search_by_interaction_ecosystem/' + selectedInteractionTitle + '/' + selectedEcosystem  + '?callback=?'
+    $.getJSON(jsonUrl, searchOptionObj, onReceiveJSON);
+
+    legendChange(selectedInteractionTitle);
+}
+
+function initInteractionTitleList()
+{
+  var jsonUrl='/interactions.json?list=name';
+  //addOption(document.searchForm.newSIInteractionDropdown, "none (delete this later)", "none");
+	//addOption(document.searchForm.newSIInteractionDropdown, "make new interaction", "new interaction");
+    $.getJSON(jsonUrl, {}, function(interactionList)
+        {
+            for (var i=0; i < interactionList.length;++i)
+            {
+                addOption(document.searchForm.interactionDropdown, interactionList[i], interactionList[i]);
+				addOption(document.searchForm.newSIInteractionDropdown, interactionList[i], interactionList[i]);
+            }
+        }
+    );
+}
+function initEcosystemList()
+{
+    var jsonUrl='/ecosystems.json?list=name';
+    document.searchForm.ecosystemDropdown.options.length = 0;
+    document.searchForm.newSIEEcosystemDropdown.options.length = 0;
+
+    addOption(document.searchForm.ecosystemDropdown, "not specified", "no such eco");
+	//addOption(document.searchForm.newSIEEcosystemDropdown, "not specified", "no such eco");
+	//addOption(document.searchForm.newSIEEcosystemDropdown2, "not specified", "no such eco");
+	//addOption(document.searchForm.newSIEEcosystemDropdown, "make new ecosystem", "make new ecosystem");
+	//addOption(document.searchForm.newSIEEcosystemDropdown2, "make new ecosystem", "make new ecosystem");
+    $.getJSON(jsonUrl, {}, function(dataList)
+        {
+            for (var i=0; i < dataList.length;++i)
+            {
+                addOption(document.searchForm.ecosystemDropdown, dataList[i], dataList[i]);
+				addOption(document.searchForm.newSIEEcosystemDropdown, dataList[i], dataList[i]);
+				//addOption(document.searchForm.newSIEEcosystemDropdown2, dataList[i], dataList[i]);
+            }
+        }
+    );
+}
+
+
+function initSpecieList()
+{
+//    var jsonUrl='http://www.rememberedfuture.com:8080/interaction_title_list/?callback=?';
+	//addOption(document.searchForm.new_specieDropdown, "make new specie", "make new specie");
+
+/*    $.getJSON(jsonUrl, {}, function(interactionList)
+        {
+            for (var i=0; i < interactionList.length;++i)
+            {
+                addOption(document.searchForm.interactionDropdown, interactionList[i], interactionList[i]);
+				addOption(document.searchForm.newSIInteractionDropdown, interactionList[i], interactionList[i]);
+            }
+        }
+    );*/
+}
+
+function initControlTabs()
+{
+	$(function() {
+		$( "#AddToDB" ).accordion({active: false, collapsible: true});
+	});
+
+	$(function()
+	{
+		$( "#controlTabs" ).tabs();
+	});
+
+
+
+}
+
+
+
+function initSpeciesSuggest()
+{
+    //first suggestion object (use default options)
+    var jsonUrl='/taxa.json?list=name';
+    $.getJSON(jsonUrl, {}, function(dataList)
+        {
+            $("#searchSpeciesTextBox").autocomplete({
+			    source: dataList
+		    });
+		    $("#newSIESpeciesName").autocomplete({
+			    source: dataList
+		    });
+            $("#newSISpeciesNameTextBox1").autocomplete({
+			    source: dataList
+		    });
+            $("#newSISpeciesNameTextBox2").autocomplete({
+			    source: dataList
+		    });
+        }
+    );
+
+    jsonUrl='/interaction_categories.json?list=name';
+    $.getJSON(jsonUrl, {}, function(dataList)
+        {
+            $("#newInteractionCategoryTextBox").autocomplete({
+			    source: dataList
+		    });
+        }
+    );
+
+}
+// The ajax version, same function as the above one
+function onClickSearchInteractionAjax()
+{
+    $.ajax({
+        url: 'http://' + jsonServerURL + '/node_link/is%20a%20predator%20of',
+        dataType: 'jsonp',
+        success: function(data) {
+            alert("success");
+        }
+});
+}
+
+$(document).ready(
+    function()
+    {
+        initInteractionTitleList();
+        initEcosystemList();
+	    initSpecieList();
+	    initSpeciesSuggest();
+	    initControlTabs();
+
+        notificationContainer = $("#notification-container-bottom").notify();
+
+        $('#controlTabs').bind('tabsshow', function(event, ui) {
+            if (ui.panel.id == "tabs-6") {
+                initSpeciesSuggest();
+            }
+        });
+    }
+);
+
+
+/*
+function showData(){
+	alert("woo " + interactions.links[5].target);
+}
+
+function test(d){
+	if(d.source != "2"){
+		return false;
+	}
+	return true;
+};
+
+function test2(d){
+	if(d.group != "1"){
+		return false;
+	}
+	return true;
+};
+
+/*
+function search(text) {
+	if (back == 1){
+		text = "";
+		back = 0;
+	}
+  if (text != re) {
+    if (query.value != text) {
+      query.value = text;
+      query.focus();
+    }
+    re = new RegExp(text, "i");
+    update();
+  }
+}
+
+
+function update() {
+  y.domain(0, Math.min(12000, pv.max(pv.values(pv.nest(jobs.filter(test))
+      .key(function(d) d.year)
+      .rollup(function(v) pv.sum(v, function(d) d.people))))));
+  vis.render();
+}
+*/
+
+</script>
+<script type="text/javascript+protovis">
+
+interactions = {"links":[{"value":1,"target":1,"source":0},{"value":1,"target":3,"source":2},{"value":1,"target":4,"source":2},{"value":1,"target":5,"source":2},{"value":1,"target":6,"source":2},{"value":1,"target":7,"source":2},{"value":1,"target":8,"source":2},{"value":1,"target":9,"source":2},{"value":1,"target":11,"source":10},{"value":1,"target":12,"source":10},{"value":1,"target":3,"source":13},{"value":1,"target":14,"source":13},{"value":1,"target":16,"source":15},{"value":1,"target":3,"source":17},{"value":1,"target":19,"source":18},{"value":1,"target":21,"source":20},{"value":1,"target":23,"source":22},{"value":1,"target":25,"source":24},{"value":1,"target":10,"source":26},{"value":1,"target":10,"source":27},{"value":1,"target":28,"source":22}],
+"nodes":[{"group":"0","com_name":"Cape Sable seaside sparrow","rankName":"sub-species","nodeName":"Ammodramus maritimus mirabilis","sci_name":"Ammodramus maritimus mirabilis"},{"group":"1","com_name":"Grasshoppers","rankName":"Family","nodeName":"Acrididae","sci_name":"Acrididae"},{"group":"0","com_name":"Florida grasshopper sparrow","rankName":"sub-species","nodeName":"Ammodramus savannarum floridanus","sci_name":"Ammodramus savannarum floridanus"},{"group":"6","com_name":"Spiders","rankName":"Family","nodeName":"Araneae","sci_name":"Araneae"},{"group":"1","com_name":"Parasitic wasp","rankName":"Family","nodeName":"Braconidae","sci_name":"Braconidae"},{"group":"1","com_name":"Ground beetles","rankName":"Family","nodeName":"Carabidae","sci_name":"Carabidae"},{"group":"1","com_name":"Click beetles","rankName":"Family","nodeName":"Elateridae","sci_name":"Elateridae"},{"group":"1","com_name":"Grasshoppers","rankName":"Genus","nodeName":"Melanoplus","sci_name":"Melanoplus"},{"group":"1","com_name":"Scudder's mantis","rankName":"species","nodeName":"Oligonicella scudderi","sci_name":"Oligonicella scudderi"},{"group":"1","com_name":"Two-lined spittlebug","rankName":"species","nodeName":"Prosapia bicincta","sci_name":"Prosapia bicincta"},{"group":"4","com_name":"American crocodile","rankName":"species","nodeName":"Crocodylus acutus","sci_name":"Crocodylus acutus"},{"group":"6","com_name":"Crabs","rankName":"Genus","nodeName":"Callinectes","sci_name":"Callinectes"},{"group":"6","com_name":"Yellowfin mojarras","rankName":"species","nodeName":"Gerres","sci_name":"Gerres"},{"group":"4","com_name":"Bluetail (blue-tailed) mole skink","rankName":"sub-species","nodeName":"Eumeces egregius lividus","sci_name":"Eumeces egregius lividus"},{"group":"1","com_name":"Crickets","rankName":"Family","nodeName":"Gryllidae","sci_name":"Gryllidae"},{"group":"1","com_name":"Schaus swallowtail butterfly","rankName":"sub-species","nodeName":"Heraclides aristodemus ponceanus","sci_name":"Heraclides aristodemus ponceanus"},{"group":"5","com_name":"Wild Lime","rankName":"species","nodeName":"Xanthoxylum fagara","sci_name":"Xanthoxylum fagara"},{"group":"4","com_name":"Sand skink","rankName":"species","nodeName":"Neoseps reynoldsi","sci_name":"Neoseps reynoldsi"},{"group":"0","com_name":"Audubon's crested caracara","rankName":"sub-species","nodeName":"Polyborus plancus audubonii","sci_name":"Polyborus plancus audubonii"},{"group":"2","com_name":"Rodents","rankName":"Order","nodeName":"Rodentia","sci_name":"Rodentia"},{"group":"1","com_name":"Grass moths","rankName":"species","nodeName":"Pyralidae","sci_name":"Pyralidae"},{"group":"5","com_name":"Scrub mint","rankName":"species","nodeName":"Dicerandra frutescens","sci_name":"Dicerandra frutescens"},{"group":"0","com_name":"Snail kite","rankName":"sub-species","nodeName":"Rostrhamus sociabilis plumbeus","sci_name":"Rostrhamus sociabilis plumbeus"},{"group":"3","com_name":"Florida apple snail","rankName":"species","nodeName":"Pomacea paludosa","sci_name":"Pomacea paludosa"},{"group":"1","com_name":"Red imported fire ant","rankName":"species","nodeName":"Solenopsis invicta","sci_name":"Solenopsis invicta"},{"group":"3","com_name":"Stock Island tree snail","rankName":"species","nodeName":"Orthalicus reses","sci_name":"Orthalicus reses"},{"group":"3","com_name":"TESTER","rankName":"species","nodeName":"TEST SPECIE","sci_name":"TEST SPECIE"},{"group":"3","com_name":"TESTER2","rankName":"species","nodeName":"TEST SPECIE2","sci_name":"TEST SPECIE2"},{"group":"0","com_name":"TESTER3","rankName":"Genus","nodeName":"TEST SPECIE3","sci_name":"TEST SPECIE3"}]
+};
+
+
+/*
+{"links":[{"value":1,"target":1,"source":0}],
+"nodes":[{"group":"0","com_name":"Cape Sable seaside sparrow","rankName":"sub-species",
+          "nodeName":"Ammodramus maritimus mirabilis","sci_name":"Ammodramus maritimus mirabilis"},
+{"group":"1","com_name":"Grasshoppers","rankName":"Family","nodeName":"Acrididae","sci_name":"Acrididae"}],
+"title": ""
+};
+*/
+legendFakeData = {"links":[{"value":1,"target":1,"source":0}],
+"nodes":[{"group":"0","com_name":"Cape Sable seaside sparrow","rankName":"sub-species",
+
+          "nodeName":"Ammodramus maritimus mirabilis","sci_name":"Ammodramus maritimus mirabilis"},
+{"group":"1","com_name":"Grasshoppers","rankName":"Family","nodeName":"Acrididae","sci_name":"Acrididae"}],
+"title": "Interaction Diagram"
+};
+/*
+{
+  nodes:[
+{nodeName:"Acacia", group:5},{nodeName:"American alligator", group:3} ],
+  links:[333
+{source:1, target:0, value:1, interaction:"competes for habitat with", intCat:1}]
+};
+*/
+var w = 850,
+    h = 800,
+    colors = pv.colors("#7375b5","#d6616b","#a55194","#8c564b","#e7ba52","#8ca252");
+	edgeColorRange = pv.Scale.linear(0,1).range("#cc3333", "#0094D6"); //"#66cccc"
+
+/* "#7375b5","#8ca252","#8c564b","#d6616b","#e7ba52","#a55194" */
+var classColors = ["#7375b5","#a55194","#8c564b","#d6616b","#e7ba52","#8ca252","#dddddd"];
+var classCats = ["Birds","Insects","Mammals","Molluscs","Reptiles","Vas. Plants","Other"];
+var forLegend = ["aaa", "bbb"];
+var nameflag = 0;
+
+/* Define base vis (to leave room for a legend */
+var baseVis = new pv.Panel()
+    .width(w)
+    .height(h)
+    .fillStyle("white");
+
+/* Define vis */
+var vis = baseVis.add(pv.Panel)
+    .top(40)
+    .width(w)
+    .height(600)
+    .fillStyle("white")
+    //.event("mousedown", pv.Behavior.pan())
+    //.event("mousewheel", pv.Behavior.zoom(3));
+
+var legendVis = baseVis.add(pv.Panel)
+    .bottom(0)
+    .width(w)
+    .height(130);
+    //.fillStyle("yellow");
+
+
+
+
+
+/* Main Title */
+var baseVisTitle = baseVis.add(pv.Label);
+baseVisTitle.left(345)
+    .top(30)
+    .textAlign("center")
+    .font(20 + "px sans-serif")
+    .text(interactions.title);
+
+/* Legend */
+
+var classIcons = ["http://www.iconspedia.com/uploads/9274526911274625269.png","http://www.iconspedia.com/uploads/591503688431713791.png","http://images3.wikia.nocookie.net/__cb20091218075728/farmville/images/3/35/Caramel_Bear-icon.png","http://weloveicons.s3.amazonaws.com/icons/100116_snail.png","http://www.wpclipart.com/animals/L/lizard/.cache/lizard_icon.png","/images/taxa_icons/plant_icon.png","http://stanford.edu/~andreaz/QuestionMark.png"];
+
+var pts = [0, 1/6, 2/6, 3/6, 4/6, 5/6, 1];
+   /*   for (var t = 0; t <= 1.0; t += 1/numOfSegment) { // The 8 is the number of parts in hte line: more parts = beter greadeant = heavy.
+        points.push({t:t, x:p.sourceNode.x + dx*t, y:p.sourceNode.y + dy*t})
+      }*/
+var modifier = 30;
+var modifier2 = 50;
+var interaction_type = "is a predator of "
+
+var interLegentLeft = 360-modifier;
+legendVis.add(pv.Image)
+	.data(classIcons)
+	.bottom(50+modifier2)
+	.left(function() 120 + this.index * 90)
+	.strokeStyle(null)
+	.url(function() classIcons[this.index])
+	.width(30)
+    .height(30)
+  .add(pv.Label)
+	.data(classCats)
+	.bottom(50+modifier2)
+	.left(function() 150 + this.index * 90)
+	.strokeStyle(null)
+	.width(30)
+     .height(30)
+	.text(function() classCats[this.index])
+	.font(10 + "px sans-serif")
+  .add(pv.Line)
+    .data([1, 1, 1, 1, 1, 1])
+	.lineWidth(3)
+    .bottom(function(d) d * 15 + modifier2)
+    .left(function() this.index * 20 + interLegentLeft)
+    .segmented(true)
+    .strokeStyle(function() edgeColorRange(pts[this.index]*2))
+  .add(pv.Dot)
+//	.data(forLegend)
+	.bottom(15+modifier2)
+	.left(interLegentLeft)//function() 350 + this.index * 80)
+	.strokeStyle(null)
+	.fillStyle(function() "#0094D6")
+	.size(80)
+	.anchor("left").add(pv.Label).text("A")
+	.font(12 + "px sans-serif")
+  .add(pv.Dot)
+	.bottom(15+modifier2)
+	.left(interLegentLeft + 100)//function() 350 + this.index * 80)
+	.strokeStyle(null)
+	.fillStyle(function() "#0094D6")
+	.size(80)
+	.anchor("right").add(pv.Label).text("B")
+	.font(12 + "px sans-serif")
+
+var legendInterText = legendVis.add(pv.Label)
+legendInterText.left(interLegentLeft);
+legendInterText.top(90);
+legendInterText.font(16 + "px sans-serif");
+legendInterText.text(interaction_type);
+
+//    .textAlign("center")
+
+legendInterText.root.render();
+
+
+
+function legendChange(text){
+	interaction_type = text;
+	//alert(interaction_type);
+	legendInterText.text(text);
+	legendVis.render();
+	legendVis.reset();
+}
+
+baseVis.add(pv.Image)
+	.data(classIcons)
+	.bottom(50)
+	.left(function() 120 + this.index * 80)
+	.strokeStyle(null)
+	.url(function() classIcons[this.index])
+	.width(30)
+    .height(30);
+
+baseVis.add(pv.Label)
+	.data(classCats)
+	.bottom(50)
+	.left(function() 150 + this.index * 80)
+	.strokeStyle(null)
+	.width(30)
+     .height(30)
+	.text(function() classCats[this.index])
+	.font(10 + "px sans-serif");
+
+baseVis.add(pv.Dot)
+	.data(forLegend)
+	.bottom(15)
+	.left(function() 120 + this.index * 80)
+	.strokeStyle(null)
+	.fillStyle(function() classColors[this.index])
+	.size(45)
+	.anchor("right").add(pv.Label)
+	.font(12 + "px sans-serif");
+
+/*  .add(pv.Line)
+	.lineWidth(3)
+	.strokeStyle("lightgray");
+*/
+/*
+baseVis.add(pv.Line)
+	.data(function(p) {
+      var dx = p.targetNode.x - p.sourceNode.x,
+          dy = p.targetNode.y - p.sourceNode.y;
+      points = []
+      for (var t = 0; t <= 1.0; t += 1/numOfSegment) { // The 8 is the number of parts in hte line: more parts = beter greadeant = heavy.
+        points.push({t:t, x:p.sourceNode.x + dx*t, y:p.sourceNode.y + dy*t})
+      }
+      return points;
+    })
+    .segmented(true)
+    .strokeStyle(function(d) edgeColorRange(d.t*2))
+	.lineWidth(3);
+	*/
+
+function onClickKnockOutSpeciesButton()
+{
+    if(active == -1)
+    {
+        return;
+    }
+
+    var links = interactions.links;
+    var newLinks = new Array();
+    for(i = 0 ; i < links.length ; i++)
+    {
+        var link = links[i];
+        if(link.target != active && link.source != active)
+        {
+            if(link.target >= active)
+            {
+                link.target--;
+            }
+            if(link.source >= active)
+            {
+                link.source--;
+            }
+            newLinks.push(link);
+        }
+    }
+
+    var nodes = interactions.nodes;
+    var orgName = nodes[active].com_name;
+    var newNodes = new Array();
+    for(i = 0 ; i < nodes.length ; i++)
+    {
+        var node = nodes[i];
+        if(i != active)
+        {
+            newNodes.push(node);
+        }
+    }
+
+    interactions.links = newLinks;
+    interactions.nodes = newNodes;
+
+    active=-1;
+
+    notificationWindow("default", { title:'Experiemnt', text:("Knock out " + orgName + " temporarily.")});
+	vis.render();
+	force.reset();
+}
+
+var defaultSpringLength = 120;
+var defaultSpringConstant = 0.0;
+var defaultChargeConstant = -100;
+var defaultHierarchyForce = 0.5;
+var defaultHierarchyDistanceY = 80;
+var defaultHierarchyDistanceX = 100;
+var defaultChargeMaxDistance = 250;
+var defaultFuzzyDistance = 10;
+
+function onClickFDFreeLayoutButton()
+{
+    vis.render();
+	force.springConstant(defaultSpringConstant) //by setting this value as 0, stops the attractive force.
+    .hierarchyForce(0.0) // by setting this to 0, you can disable the hierarchy behavior
+	force.reset();
+}
+function onClickHierarchyLayoutButton()
+{
+    vis.render();
+	force.springConstant(defaultSpringConstant) //by setting this value as 0, stops the attractive force.
+    .hierarchyForce(defaultHierarchyForce) // by setting this to 0, you can disable the hierarchy behavior
+	force.reset();
+}
+function onClickHierarchyClusteredLayoutButton()
+{
+    vis.render();
+	force.springConstant(0.1) //by setting this value as 0, stops the attractive force.
+    .hierarchyForce(defaultHierarchyForce) // by setting this to 0, you can disable the hierarchy behavior
+	force.reset();
+}
+function onClickFDClusteredLayoutButton()
+{
+    vis.render();
+    force.springConstant(0.1) //by setting this value as 0, stops the attractive force.
+    .hierarchyForce(0.0) // by setting this to 0, you can disable the hierarchy behavior
+	force.reset();
+}
+function onClickVerticalHierarchyButton()
+{
+    vis.render();
+    force.hierarchyForce(defaultHierarchyForce) // by setting this to 0, you can disable the hierarchy behavior
+    .hierarchyDistanceY(defaultHierarchyDistanceY) // y distance between between hierarchy
+    .hierarchyDistanceX(0) // x distance between between hierarchy
+	force.reset();
+}
+function onClickHorizontalHierarchyButton()
+{
+    vis.render();
+    force.hierarchyForce(defaultHierarchyForce) // by setting this to 0, you can disable the hierarchy behavior
+    .hierarchyDistanceY(0) // y distance between between hierarchy
+    .hierarchyDistanceX(defaultHierarchyDistanceX) // x distance between between hierarchy
+	force.reset();
+}
+/* Layout Def */
+var force = vis.add(pv.Layout.ForceWithHierarchy)
+    .links(function() interactions.links)//.filter(test))
+    .nodes(function() interactions.nodes)//.filter(test2))
+    .bound(true)
+    .springLength(defaultSpringLength)
+	.springConstant(defaultSpringConstant) //by setting this value as 0, stops the attractive force.
+    .chargeConstant(defaultChargeConstant)
+    .hierarchyForce(defaultHierarchyForce) // by setting this to 0, you can disable the hierarchy behavior
+    .hierarchyDistanceY(defaultHierarchyDistanceY) // y distance between between hierarchy
+    .hierarchyDistanceX(0) // x distance between between hierarchy
+    .chargeMaxDistance(defaultChargeMaxDistance)
+    .fuzzyDistance(defaultFuzzyDistance); // y distance tolerance
+
+/*
+var legendForce = legendVis.add(pv.Layout.ForceWithHierarchy)
+    .links(function() legendFakeData.links)//.filter(test))
+    .nodes(function() legendFakeData.nodes)//.filter(test2))
+    .bound(true)
+    .springLength(defaultSpringLength)
+	.springConstant(0) //by setting this value as 0, stops the attractive force.
+    .chargeConstant(defaultChargeConstant)
+    .hierarchyForce(0) // by setting this to 0, you can disable the hierarchy behavior
+    .hierarchyDistance(defaultHierarchyDistance) // y distance between between hierarchy
+    .chargeMaxDistance(defaultChargeMaxDistance)
+    .fuzzyDistance(defaultFuzzyDistance); // y distance tolerance
+*/
+/* CREATE THE LINKS */
+var numOfSegment = 6;
+force.link.add(pv.Line)
+/*
+	.segmented(true)
+    //.data([1, 1.2, 1.7, 1.5, .7, .5, .2])
+    //.bottom(function(d) d * 70)
+    //.left(function() this.index * 20 + 15)
+    .strokeStyle(function(d) "hsl(" + (d * 180) + ",50%,50%)")*/
+	.lineWidth(3)
+	.data(function(p) {
+      var dx = p.targetNode.x - p.sourceNode.x,
+          dy = p.targetNode.y - p.sourceNode.y;
+      points = []
+      for (var t = 0; t <= 1.0; t += 1/numOfSegment) { // The 8 is the number of parts in hte line: more parts = beter greadeant = heavy.
+        points.push({t:t, x:p.sourceNode.x + dx*t, y:p.sourceNode.y + dy*t})
+      }
+      return points;
+    })
+    .segmented(true)
+    .strokeStyle(function(d) edgeColorRange(d.t*2))
+
+	//.strokeStyle("#999")
+	//.segmented(true)
+	//.fillStyle(function(d) d.fix ? pv.ramp("black", "white") : "red")
+	//.fillStyle(pv.colors("red", "green", "white"))
+	//.fillStyle(pv.Scale.linear(0, .5, 1).range('red', 'yellow', 'green'))
+	//.strokeStyle(function() this.fillStyle())
+	//.strokeStyle(function(n,l) l.source == "0" ? "orange" : l.source == "2" ? "red" : pv.Scale.linear(0, .5, 1).range('red', 'yellow', 'green'))   //"lightgray")
+	//.strokeStyle(function(d) "hsl(" + (d * 180) + ",50%,50%)")
+	.title(function (n,l) l.interaction);
+  //.root.render();
+/*
+legendForce.link.add(pv.Line)
+	.lineWidth(3)
+	.data(function(p) {
+      var dx = p.targetNode.x - p.sourceNode.x,
+          dy = p.targetNode.y - p.sourceNode.y;
+      points = []
+      for (var t = 0; t <= 1.0; t += 1/numOfSegment) { // The 8 is the number of parts in hte line: more parts = beter greadeant = heavy.
+        points.push({t:t, x:p.sourceNode.x + dx*t, y:p.sourceNode.y + dy*t})
+      }
+      return points;
+    })
+    .segmented(true)
+    .strokeStyle(function(d) edgeColorRange(d.t*2))
+	.title(function (n,l) l.interaction);
+ */
+
+/* CREATE THE NODES */
+/*
+legendForce.node.add(pv.Dot)
+    .size(function(d) (d.linkDegree + 50) * Math.pow(this.scale, -1.5))
+    .fillStyle(function(d) d.fix ? "brown" : classColors[d.group])
+    .strokeStyle(function() this.fillStyle().darker())
+    .lineWidth(1)
+    .title(function(d) d.nodeName)
+    //.event("mousedown", pv.Behavior.drag())
+    //.event("drag", force)
+	.anchor("right").add(pv.Label)
+		.font(function(d) 10 + "px sans-serif")
+		.text(function(d) d.nodeName);
+  */
+/* .strokeStyle(function(n,l) colors(l.intCat))
+
+.strokeStyle(function(n,l) l.targetNode.index == n.activeNode ? "red" : "black")
+
+	*/
+
+var active = -1;
+
+function getHierarchy(taxonID){
+	var jsonUrl="http://www.eol.org/api/hierarchy_entries/1.0/"+taxonID+".json?callback=1";
+	$.ajax({
+        url: jsonUrl,
+        dataType: 'jsonp',
+		async:  false,
+        success: function(data) {
+			$("#info").append('<br><h2>Ancestor Information</h2>');
+			for(var key in data.ancestors){
+				if(data.ancestors.hasOwnProperty(key)){
+					if(data.ancestors[key].taxonRank!=undefined){
+						$("#info").append('<p><b>'+data.ancestors[key].taxonRank+':</b> '+data.ancestors[key].scientificName+'</p>');
+					}
+				}
+			}
+		}
+	});
+}
+
+function getImage(nodeName, id)
+{
+	var jsonUrl="http://www.eol.org/api/pages/1.0/"+id+".json?common_names=1&details=1&vetted=1&subjects=all&text=1?callback=1";
+	$.ajax({
+        url: jsonUrl,
+        dataType: 'jsonp',
+		async:  false,
+        success: function(data) {
+			for(var key in data.vernacularNames){
+				if(data.vernacularNames.hasOwnProperty(key)){
+					if(data.vernacularNames[key].language=="en")
+						$("#info").append('<p><b>Common name: </b>'+data.vernacularNames[key].vernacularName+'</p>');
+				}
+			}
+
+			if(data.scientificName!=undefined){
+				$("#info").append('<p><b>Scientific name: </b>'+data.scientificName+'</p>');
+			}
+
+			if(data.dataObjects[0]!=undefined){
+				$("<img/>").attr("src", data.dataObjects[0].mediaURL).appendTo("#info");
+			}
+
+			if(data.taxonConcepts[0]!=undefined){
+				getHierarchy(data.taxonConcepts[0].identifier);
+			}
+		}
+	});
+}
+
+function mouseoverID(nodeName, rankName)
+{
+
+    var jsonUrl="http://www.eol.org/api/search/1.0/"+nodeName+".json?exact=1?callback=1";
+	$.ajax({
+        url: jsonUrl,
+        dataType: 'jsonp',
+		async:  false,
+        success: function(data) {
+			if(data.results[0]!=undefined){
+				getImage(nodeName, data.results[0].id);
+			}
+			else{
+				$("#info").append('<p>No information available.</p>');
+			}
+        }
+	});
+	//$.getJSON(jsonUrl, {}, onReceiveJSON);
+}
+
+/* CREATE THE NODES */
+
+force.node.add(pv.Image)
+     .width(30)
+     .height(30)
+     .fillStyle(null)
+     .strokeStyle(null)
+     .left(function(n) n.x - 10)
+     .top(function(n) n.y - 25)
+     .bottom(null)
+     .right(null)
+	 .url(function(d) classIcons[d.group])
+     .event("mousedown", pv.Behavior.drag())
+
+
+  //   .imageWidth(50)
+   //  .imageHeight(50)
+     .title(function(d) (d.nodeName))
+	 .event("click", function(d) {active = this.index;
+	 	$("#info").html('<h2>Information about this '+d.rankName+'</h2><h3>'+d.com_name+'</h3>'+'<h4>'+d.rankName+'</h4>').show();
+		mouseoverID(d.sci_name, d.rankName);
+	 	return vis;})
+
+	 .anchor("left").add(pv.Label)
+	 	.left(function(n) n.x +20)
+		.font(function(d) (active == this.index)? "bold 18px sans-serif": "10px sans-serif")
+		.text(function(d) (nameflag == 0) ? d.com_name : d.sci_name);
+
+/*
+force.node.add(pv.Dot)
+    .size(function(d) (active == this.index)? (d.linkDegree + 400) * Math.pow(this.scale, -1.5) : (d.linkDegree + 50) * Math.pow(this.scale, -1.5))
+	.fillStyle(function(d) classColors[d.group])
+    .strokeStyle(function() this.fillStyle().darker())
+    .lineWidth(1)
+    .title(function(d) d.com_name)
+    .event("click", function(d) {active = this.index; mouseoverID(d.sci_name, d.rankName); return vis;})
+	.event("mousedown", pv.Behavior.drag())
+    //.event("mouseout", function(d) {active = null; $("#info").hide(); return vis;})
+	.anchor("right").add(pv.Label)
+		.font(function(d) (active == this.index)? "bold 18px sans-serif": "10px sans-serif")
+		.text(function(d) d.com_name + " (" + d.rankName + ")");
+*/
+
+/*
+//Image version
+force.node.add(pv.Image)
+     .width(50)
+     .height(50)
+     .fillStyle(null)
+     .strokeStyle(null)
+     .left(function(n) n.x - 25)
+     .top(function(n) n.y - 25)
+     .bottom(null)
+     .right(null)
+     .imageWidth(50)
+     .imageHeight(50)
+     .event("mousedown", pv.Behavior.drag())
+     .url("http://www.sevensidedcube.net/wp-content/uploads/pacman.png")
+     .imageWidth(50)
+     .imageHeight(50)
+     .title(function(d) (d.com_name))
+	 .anchor("right").add(pv.Label)
+		.font(function(d) 10 + "px sans-serif")
+		.text(function(d) d.com_name);
+*/
+/*
+
+    force.link.add(pv.Line)
+        .strokeStyle(function(p) p.targetNode.index == activeNode ?
+"red" : "black");
+
+force.node.add(pv.Dot)
+        .size(function(d) (d.linkDegree + 4) * Math.pow(this.scale, -1.5))
+        .fillStyle(function() activeNode == this.index ? "orangered" :
+contains(nodeNeighbors[activeNode], this.index) ? "darkorange":"grey")
+
+*/
+
+
+function onReceiveJSON(data)
+{
+    // TODO: copy data to protovis for visualizations
+    // data.nodes
+    // data.links
+
+	//alert("bb" + interactions);
+    //alert("data received: " + data.links[5]);
+	interactions = data;
+	    baseVisTitle.left(345)
+        .top(30)
+        .textAlign("center")
+        .font(20 + "px sans-serif")
+        .text("Something else"); //interactions.title
+
+    active=-1;
+
+	vis.render();
+	force.reset();
+}
+/*
+function whatever(){
+	//alert("c " + interactions.links[5].source);
+	vis.render();
+	force.reset();
+}
+*/
+/*
+function onClickNameAlternationButton()
+{
+	if(nameflag == 0){
+		nameflag == 1;
+	force.node.anchor("left").text(function(d) d.sci_name);
+
+		vis.render();
+		force.reset();
+		//force.render();
+
+	}
+	else{
+		nameflag = 0;
+force.node.anchor("left").text(function(d) d.sci_name);
+		vis.render();
+		force.reset();
+	}
+}
+*/
+vis.render();
+force.reset();
+
+</script>
+
+</div>
+<div id="info"></div>
+
+<div id="notification-container-bottom" style="display: none; top:auto; left:0; bottom:0; margin:0 0 10px 10px">
+		<div id="default">
+			<a class="ui-notify-close ui-notify-cross" href="#">x</a>
+			<div style="float:left;margin:0 10px 0 0"></div>
+			<h1>#{title}</h1>
+			<p>#{text}</p>
+		</div>
+</div>
+
+		<div class="clearer"><span></span></div>
+
+	</div> <!-- end of main-->
+
+</div> <!-- end of container -->
+
+<div class="footer">
+
+			EOL: <a href="http://www.eol.org/">Encyclopedia of Life</a><br />
+            The team: <a href="index.html">Aki</a> | <a href="index.html">Andrea</a> | <a href="index.html">Yanzhu</a><br />
+			<!--<h1>About EOL</h1>
+			<ul>
+				<li><a href="http://www.eol.org/">Encyclopedia of Life</a></li>
+			</ul>
+
+			<h1>About the Team</h1>
+			<ul>
+				<li><a href="index.html">Aki</a></li>
+				<li><a href="index.html">Andrea</a></li>
+				<li><a href="index.html">Yanzhu</a></li>
+			</ul>-->
+&copy; 2010 <a href="index.html"> EOL Species Interaction Visualization </a>. Template design from <a href="http://www.oswd.org/designs/favorites/page/4/">OSWD</a>
+</div>

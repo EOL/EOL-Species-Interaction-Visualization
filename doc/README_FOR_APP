@@ -1,0 +1,28 @@
+== EOL Species Visualization Project
+
+This is the EOL Species Visualization Project.
+
+March 2010
+
+MIT License
+
+== Requirements
+
+* Rails 3.0.5 or better
+* MySQL 4
+
+= Gems
+
+* jquery-rails
+* mysql
+
+= Javascript frameworks
+
+* jQuery 1.5 or better
+* jQuery UI 1.8 or better (Cupertino theme in use)
+  * All UI Core
+  * All interactions
+  * All widgets except slider
+  * Effects: core, blind, fade, highlight
+* jQuery jNotify Plugin (http://www.givainc.com/labs/jnotify_jquery_plugin.htm)
+* jqGrid Table Plugin 3.8 (http://www.trirand.com/blog/)
