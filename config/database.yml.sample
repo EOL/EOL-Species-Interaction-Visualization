@@ -1,0 +1,23 @@
+common: &common
+  adapter: mysql
+  encoding: utf8
+  reconnect: true
+  
+development:
+  <<: *common
+  database: eol_species_viz_development
+  username: root
+  password:
+  
+test:
+  <<: *common
+  database: eol_species_viz_test
+  username: root
+  password:  
+
+production:
+  <<: *common
+  database: eol_species_viz
+  username: user
+  password: pass
+  socket: /data/mysql/var/mysql.sock
