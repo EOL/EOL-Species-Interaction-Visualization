@@ -2,28 +2,20 @@
 // This file is automatically included by javascript_include_tag :defaults
 
 function buildErrorMessage(jsonData) {
-  var msgText='<ul>';
+  var msgText='';
   var objMsg=$.parseJSON(jsonData);
-  $.each(objMsg, function(key, val) {msgText += '<li>' + key + ' ' + val + '</li>'});
-	msgText+='</ul>';
+  $.each(objMsg, function(key, val) {msgText += '* ' + key + ' ' + val + '<br />'});
   return msgText; 
-}
-
-function errorMessage(response) {
-	$.jnotify("An error occurred.","error");
-	// ** todo: log this somehow -- something bad happened when making an ajax call	
-}
-
-function displayWarningIfNeeded(response) {
-if (response.status > 400 && response.status < 450) {
-		$.jnotify("There was a problem: " + buildErrorMessage(response.responseText),"warning",7000);
-	}
 }
 
 function successMessage(msgText) {
 	$.jnotify(msgText);	
 }
 
+function errorMessage(response) {
+	$.jnotify("An error occurred.","error");
+	// ** todo: log this somehow -- something bad happened when making an ajax call	
+}
 function startLoading() {
 	$("#page").fadeTo("fast",.6);
 	$("#ajax-indicator").show();
@@ -34,6 +26,7 @@ function endLoading() {
 	$("#page").fadeTo("fast",1);
 }
 
+// TODO: we can delete this if we don't have any add/update forms anymore 
 function bindAjaxFormEvents() {
 	ajax_forms=$('form[id*="ajax"]');
 	jQuery(function($){ 
@@ -51,9 +44,17 @@ function bindAjaxFormEvents() {
 	});
 }
 
+function displayWarningIfNeeded(response) {
+if (response.status > 400 && response.status < 450) {
+		$.jnotify("There was a problem: " + buildErrorMessage(response.responseText),"warning",7000);
+	}
+}
+
 $(document).ready(
     function()
     {
 			bindAjaxFormEvents();
     }
 );
+
+// END TODO remove functions

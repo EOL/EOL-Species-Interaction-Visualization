@@ -1,0 +1,25 @@
+<script>
+
+  $(function(){ 
+    $("#taxa_table").jqGrid({
+      url:'/taxa.json?jqgrid=true',
+      datatype: 'json',mtype: 'GET',height: '100%',viewrecords: true,jsonReader : {repeatitems: false},
+      colNames:['Scientific Name','Common Name'],
+      colModel :[ 
+        {name:'scientific_name', label:'Scientific Name', index:'scientific_name', width:300, editable: true, edittype:'text', searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'common_name', label:'Common Name',index:'common_name', width:450, editable: true, edittype:'text', searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+      ],
+      pager: '#taxa_pager',
+      sortname: 'scientific_name',sortorder: 'asc',
+      editurl: "/taxa/actions_jqgrid?format=json&model=taxon"      
+    }).navGrid('#taxa_pager',{},{width: 500, serializeEditData: function(postdata){return {'taxon':postdata};}},{width: 500, serializeEditData: function(postdata){return {'taxon':postdata};}})
+  });
+      
+</script>
+
+<h1>Species</h1>
+
+<div class="minsize">
+   <table id="taxa_table"></table> 
+   <div id="taxa_pager"></div>   
+</div>

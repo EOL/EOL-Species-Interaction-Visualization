@@ -5,15 +5,29 @@
 <div class="content">
 
   <div id="navTabs">
+    
     <ul>
-        <li><a href="#add">Add data</a></li>
+        <li><a href="#species">Species</a></li>
+        <li><a href="#otherdata">Ecosystems/Interaction Types</a></li>
+        <li><a href="#observations">Observations</a></li>
         <li><a href="#viz">Visualize</a></li>
-        <li><a href="#view">View data</a></li>
      </ul>
      
-     <div id="add">
+     <div id="species">
        
-       <%= render :partial=>'add_data' %>
+       <%= render :partial=>'species' %>
+
+     </div>
+
+     <div id="otherdata">
+       
+       <%= render :partial=>'otherdata' %>
+
+     </div>
+
+     <div id="observations">
+       
+       <%= render :partial=>'observations' %>
 
      </div>
      
@@ -22,13 +36,7 @@
       <%= render :partial=>'visualize' %>
      
      </div>
-     
-     <div id="view">
-     
-       <%= render :partial=>'view_data' %>
-     
-     </div>
-  
+       
   </div>
 
   <script>

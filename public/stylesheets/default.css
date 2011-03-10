@@ -136,7 +136,8 @@ h1,h2,h3 {
 .content {
 	float: left;
 	margin: 0 0.1em;
-	width: 85%;
+	width: 100%;
+	height: 800px;
 }
 .content .descr {
 	color: #C60;
@@ -148,7 +149,7 @@ h1,h2,h3 {
 }
 
 .minsize {
-	height: 500px;
+  height: 500px;
 }
 #ajax-indicator {
 	width:100px;

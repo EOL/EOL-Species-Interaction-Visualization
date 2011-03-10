@@ -1,21 +1,25 @@
 module Resourceful
 
-  def model_name
+  def model_class_name
     controller_name.singularize.camelize
+  end
+  
+  def model_name
+    model_class_name.downcase
   end
           
   def index
-    result_set=eval("#{model_name}.all")
+    result_set=eval("#{model_class_name}.all")
     
-    if request[:list]  # return a simple of list of elements in an array, with the column name to be returned specified as the value of the "list" parameter
+    if params[:list]  # return a simple of list of elements in an array, with the column name to be returned specified as the value of the "list" parameter
 
-      eval("@#{model_name.downcase}=Array.new")
-      result_set.each {|entry| eval("@#{model_name.downcase} << entry.#{request[:list]}")}
+      eval("@#{model_name}=Array.new")
+      result_set.each {|entry| eval("@#{model_name} << entry.#{params[:list]}")}
 
-    elsif request[:jqgrid] # if set to true, return data as expected by the jqGrid plugin, it will return all columns in the model, so use jqGrid to control which ones you need
+    elsif params[:jqgrid] # if set to true, return data as expected by the jqGrid plugin, it will return all columns in the model, so use jqGrid to control which ones you need
       
       on_page=params[:page] || 1
-      rows_to_return=params[:rows] || 10
+      rows_to_return=params[:rows] || 20
       sort_by=params[:sidx]
       sort_order=params[:sord] || "asc"
       
@@ -28,10 +32,10 @@ module Resourceful
       
       total_pages=(result_set.size/rows_to_return.to_f).ceil
       
-      eval("@#{model_name.downcase}=Hash.new")
-      eval("@#{model_name.downcase}[:total]=total_pages.to_s")
-      eval("@#{model_name.downcase}[:page]=on_page.to_s")
-      eval("@#{model_name.downcase}[:records]=result_set.size.to_s")
+      eval("@#{model_name}=Hash.new")
+      eval("@#{model_name}[:total]=total_pages.to_s")
+      eval("@#{model_name}[:page]=on_page.to_s")
+      eval("@#{model_name}[:records]=result_set.size.to_s")
       
       build_query=":limit=>rows_to_return,:offset=>offset"
       build_query+=",:order=>'#{sort_by} #{sort_order}'" if sort_by
@@ -45,71 +49,73 @@ module Resourceful
         end
       end
       
-      page_of_result_set=eval("#{model_name}.find(:all,#{build_query})")
+      page_of_result_set=eval("#{model_class_name}.find(:all,#{build_query})")
             
       rows=Array.new
       page_of_result_set.each {|entry| rows << entry.attributes}
       
-      eval("@#{model_name.downcase}[:rows] = rows")
+      eval("@#{model_name}[:rows] = rows")
       
     else # default response is the full set of model objects
 
-      eval("@#{model_name.downcase}=result_set")
+      eval("@#{model_name}=result_set")
 
     end
 
-    respond_with(eval("@#{model_name.downcase}"))
+    respond_with(eval("@#{model_name}"))
 
   end
 
   def new
-    respond_with(eval("@#{model_name.downcase} = #{model_name}.new"))
+    respond_with(eval("@#{model_name} = #{model_class_name}.new"))
   end
 
   def create
-    eval("@#{model_name.downcase} = #{model_name}.create(params[:#{model_name.downcase}])")    
-    respond_with(eval("@#{model_name.downcase}"))
+    eval("@#{model_name} = #{model_class_name}.create(params[:#{model_name.downcase}])")    
+    respond_with(eval("@#{model_name}"))
   end
       
   def show
-    respond_with(eval("@#{model_name.downcase} = #{model_name}.find(params[:id])"))
+    respond_with(eval("@#{model_name} = #{model_class_name}.find(params[:id])"))
   end
 
   def edit
-    respond_with(eval("@#{model_name.downcase} = #{model_name}.find(params[:id])"))
+    respond_with(eval("@#{model_name} = #{model_class_name}.find(params[:id])"))
   end
 
   def update
-    eval("@#{model_name.downcase} = #{model_name}.find(params[:id])")
-    eval("@#{model_name.downcase}.update_attributes(params[:#{model_name.downcase}])")
-    respond_with(eval("@#{model_name.downcase}"))
+    eval("@#{model_name} = #{model_class_name}.find(params[:id])")
+    eval("@#{model_name}.update_attributes(params[:#{model_name}])")
+    respond_with(eval("@#{model_name}"))
   end
 
   def destroy
-    eval("#{model_name}.destroy(params[:id])")
-    render :nothing=>true
+    eval("@#{model_name} = #{model_class_name}.find(params[:id])")    
+    eval("@#{model_name}.destroy")
+    respond_with(eval("@#{model_name}"))
   end
 
-  # special methods so we can route to restful requests made by a regular post coming from the jqGrid plugin
-  def jqgrid
+  # special method so we can route to restful requests made by a regular post to this url coming from the jqGrid plugin (works for update, add and delete)
+  def actions_jqgrid
 
-    # grab the model name from the params hash (that we inserted when posting) and setup the traditional params model hash that rails expects
-    posted_model_name=params[:model]
-    params_hash=eval("params[:#{posted_model_name}]") if posted_model_name != nil
+    # setup the traditional params model hash that rails expects
+    params_hash=eval("params[:#{model_name}]")
     
-    # the action type will help us route the request as needed, and is added by jqGrid, it's either at the root level of the rash, or under the model object
+    # the action type will help us route the request as needed, and is added by jqGrid, it's either at the root level of the hash, or under the model object
     action=params[:oper] || params_hash[:oper]
 
     case action
       when 'edit' 
-        # remove 'oper' paramater before passing the params to Rails, since it's not part of the model object
-        eval("params[:#{params[:model]}].delete(:oper)")
+        clean_params_hash
         # grab the model id and insert into it's railish place in the params hash
         params[:id]=params_hash[:id]
         self.update
       when 'del'      
         self.destroy
       when 'add'
+        clean_params_hash      
+        # remove 'id' paramaters before passing the params to Rails, since this is a new model object
+        eval("params[:#{model_name}].delete(:id)")    
         self.create
       else
         render :nothing=>true
@@ -117,4 +123,10 @@ module Resourceful
     
   end
   
+  private
+  def clean_params_hash
+    # remove 'oper' paramater before passing the params to Rails, since it's not part of the model object
+    eval("params[:#{model_name}].delete(:oper)")        
+  end
+
 end

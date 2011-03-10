@@ -4,10 +4,10 @@ class DefaultController < ApplicationController
     
   def index
     
-    @interaction_categories=InteractionCategory.find(:all)
-    
-    @ecosystem=Ecosystem.new
-    @interaction=Interaction.new
+    interaction_categories=InteractionCategory.find(:all, :order=>'name asc')
+    @interaction_categories_values=""
+    interaction_categories.each {|category| @interaction_categories_values += "#{category.id}:'#{category.name}',"} 
+    @interaction_categories_values.chomp!(",")
     
   end
     
