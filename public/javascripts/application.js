@@ -13,7 +13,7 @@ function successMessage(msgText) {
 }
 
 function errorMessage(response) {
-	$.jnotify("An error occurred.","error");
+	$.jnotify("An error occurred. " + response,"error");
 	// ** todo: log this somehow -- something bad happened when making an ajax call	
 }
 function startLoading() {

@@ -1,0 +1,43 @@
+<script>
+  
+  function refreshInteractions() { 
+    $("#interaction_types_table").trigger("reloadGrid");
+  }
+
+  $(function(){ 
+    $("#interaction_types_table").jqGrid({
+      url:'/interactions/index_jqgrid?format=json',
+      colNames:['Name','Category'],
+      colModel :[ 
+        {name:'interaction_name', label:'Name', index:'interaction_name', width:300, editable: true, editoptions: {size:50, maxlength: 200}, edittype:'text', searchoptions: { sopt: ['cn', 'bw', 'eq','ew' ]}}, 
+        {name:'category_name', label:'Category',index:'category_name', width:300, sortable: true, editable: true, edittype:'select',editoptions:{dataUrl:'/interaction_categories/htmlselect_jqgrid'}}, 
+      ],
+      pager: '#interaction_types_pager',caption: 'Interaction Types',rowNum:30,rowList:['ALL',30,50,100,200],
+      sortname: 'interaction_name',sortorder: 'asc',
+      editurl: "/interactions/actions_jqgrid?format=json"  
+    }).navGrid('#interaction_types_pager',{},{editCaption: 'Edit interaction type',width: 650, serializeEditData: function(postdata){pd=postdata;return {'interaction':{'oper': 'edit','id': postdata.id, 'interaction_category_id':postdata.category_name,'name':postdata.interaction_name}};}},{addCaption: 'Add interaction type',width: 650, serializeEditData: function(postdata){return {'interaction':{'oper': 'add','interaction_category_id':postdata.category_name,'name':postdata.interaction_name}};}});
+  });
+
+  $(function(){ 
+    $("#interaction_categories_table").jqGrid({
+      url:'/interaction_categories.json?jqgrid=true',
+      colNames:['Name'],
+      colModel :[ 
+        {name:'name', label:'Name', index:'name', width:300, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew' ]}}, 
+      ],
+      pager: '#interaction_categories_pager',caption: 'Interaction Type Categories',rowNum:30,rowList:['ALL',30,50,100,200],
+      sortname: 'name',sortorder: 'asc',
+      editurl: "/interaction_categories/actions_jqgrid?format=json&callback=refreshInteractions"  
+    }).navGrid('#interaction_categories_pager',{},{editCaption: 'Edit interaction category',width: 650, serializeEditData: function(postdata){return {'interactioncategory':postdata};}},{addCaption: 'Add interaction category',width: 650, serializeEditData: function(postdata){return {'interactioncategory':postdata};}});
+  });
+        
+</script>
+
+	<div>
+	   <table id="interaction_types_table"></table> 
+     <div id="interaction_types_pager"></div>
+     <br />
+	   <table id="interaction_categories_table"></table> 
+     <div id="interaction_categories_pager"></div>
+	</div>
+		

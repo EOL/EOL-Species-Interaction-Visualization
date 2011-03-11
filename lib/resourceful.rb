@@ -19,7 +19,7 @@ module Resourceful
     elsif params[:jqgrid] # if set to true, return data as expected by the jqGrid plugin, it will return all columns in the model, so use jqGrid to control which ones you need
       
       on_page=params[:page] || 1
-      rows_to_return=params[:rows] || 20
+      rows_to_return=params[:rows].to_s || "20"
       sort_by=params[:sidx]
       sort_order=params[:sord] || "asc"
       
@@ -27,18 +27,24 @@ module Resourceful
       search_string=params[:searchString]
       search_operator=params[:searchOper] || "cn" # default to contains
       
-      offset=rows_to_return.to_i*on_page.to_i - rows_to_return.to_i
-      offset = 0 if offset < 0
-      
-      total_pages=(result_set.size/rows_to_return.to_f).ceil
-      
+      if rows_to_return.downcase != "all"
+        offset=rows_to_return.to_i*on_page.to_i - rows_to_return.to_i
+        offset = 0 if offset < 0
+        total_pages=(result_set.size/rows_to_return.to_f).ceil
+      else
+        offset=0
+        total_pages=1
+        on_page=1
+      end
+            
       eval("@#{model_name}=Hash.new")
       eval("@#{model_name}[:total]=total_pages.to_s")
       eval("@#{model_name}[:page]=on_page.to_s")
       eval("@#{model_name}[:records]=result_set.size.to_s")
       
-      build_query=":limit=>rows_to_return,:offset=>offset"
-      build_query+=",:order=>'#{sort_by} #{sort_order}'" if sort_by
+      build_query=","
+      build_query+=":limit=>rows_to_return,:offset=>offset," unless rows_to_return.downcase == "all"
+      build_query+=":order=>'#{sort_by} #{sort_order}'," if sort_by
       
       if search_field
         case search_operator
@@ -49,7 +55,7 @@ module Resourceful
         end
       end
       
-      page_of_result_set=eval("#{model_class_name}.find(:all,#{build_query})")
+      page_of_result_set=eval("#{model_class_name}.find(:all#{build_query})")
             
       rows=Array.new
       page_of_result_set.each {|entry| rows << entry.attributes}
@@ -111,7 +117,9 @@ module Resourceful
         params[:id]=params_hash[:id]
         self.update
       when 'del'      
-        self.destroy
+        # jqgrid has the option for a multi-select delete, in which case we will have an array of ids to deal with
+        params[:id].split(',').each {|id| eval("#{model_class_name}.find(id).destroy") } 
+        respond_with(eval("#{model_class_name}.new"))       
       when 'add'
         clean_params_hash      
         # remove 'id' paramaters before passing the params to Rails, since this is a new model object
