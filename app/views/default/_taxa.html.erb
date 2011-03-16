@@ -1,15 +1,15 @@
 <script>
-
+  
   $(function(){ 
     $("#taxa_table").jqGrid({
       url:'/taxa.json?jqgrid=true',
-      colNames:['Scientific Name','Common Name'],
       colModel :[ 
-        {name:'scientific_name', label:'Scientific Name', index:'scientific_name', width:300, editable: true, editoptions: {size:50, maxlength: 200},edittype:'text', searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
-        {name:'common_name', label:'Common Name',index:'common_name', width:450, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'entered_name', label:'Entered Name',index:'entered_name', width:350,editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'scientific_name', label:'EOL Scientific Name', index:'scientific_name', width:350,  searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'eol_taxon_id', label:'EOL ID',index:'eol_taxon_id', width:80, formatter:makeEOLLink}, 
       ],
-      pager: '#taxa_pager',caption:"Taxa",rowNum:30,rowList:['ALL',30,50,100,200],
-      sortname: 'scientific_name',sortorder: 'asc',
+      pager: '#taxa_pager',caption:"Taxa",rowNum:30,rowList:[30,50,100,200],
+      sortname: 'entered_name',sortorder: 'asc',
       editurl: "/taxa/actions_jqgrid?format=json"      
     }).navGrid('#taxa_pager',{},{editCaption: 'Edit species',width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{addCaption: 'Add species', width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}})
   });
@@ -17,7 +17,6 @@
   $(function(){ 
     $("#ecosystems_table").jqGrid({
       url:'/ecosystems.json?jqgrid=true',
-      colNames:['Name','Description'],
       colModel :[ 
         {name:'name', label:'Name', index:'name', width:300, editable: true, edittype:'text',  editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
         {name:'description', label:'Description',index:'description', width:450, sortable: false, editable: true, edittype:'textarea',editoptions:{rows:3,cols:50},searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
@@ -29,31 +28,72 @@
   });
       
  function addTaxaToEcosystem() {
-   var selectedTaxa=jQuery("#taxa_table").getGridParam('selarrrow');
-   var selectedEcosystems=jQuery("#ecosystems_table").getGridParam('selarrrow');
+   var selectedTaxa=$("#taxa_table").getGridParam('selarrrow');
+   var selectedEcosystems=$("#ecosystems_table").getGridParam('selarrrow');
    startLoading();
    $.ajax({
-      type: "POST",
-      dataType: "json",
-      url: "/ecosystems_taxa/add_taxa?format=json",
+      type: "POST",dataType: "json",url: "/ecosystems_taxa/add_taxa?format=json",
       data: "taxa_ids=" + selectedTaxa+ "&ecosystems_ids=" + selectedEcosystems,
       complete: function(jqXHR, textStatus){endLoading();},
       success: function(data, textStatus, jqXHR){successMessage('Success');},
       error: function(jqXHR, textStatus, errorThrown){errorMessage(errorThrown);}
     });
   }
+
+  function makeEOLLink ( cellvalue, options, rowObject )
+  {
+    if (cellvalue == null || cellvalue == 'null' || cellvalue == '') return ''; else return '<a target=_blank href="http://www.eol.org/pages/'+cellvalue+'">' + cellvalue + '</a>';
+  }
+
+  function matchTaxaToEOL () {
+    showMatchWindow();
+    $.get('/taxa/match_to_eol', function(data) {
+      $('#eol_matching_dialog').html(data);
+      })    
+  }
   
+  function matchSelectedTaxonToEOL() {
+    var selectedTaxon=$('#taxa_table').getGridParam("selrow");
+    if (selectedTaxon == '' || selectedTaxon == null) {
+      warningMessage('Select a taxon to match.');
+      return false;
+    }
+    showMatchWindow();
+    $.get('/taxa/match_taxon_to_eol/' + selectedTaxon, function(data) {
+      $('#eol_matching_dialog').html(data);
+      })    
+  }
+  
+  function showMatchWindow() {
+    $('.main').fadeTo(1,.3);
+    $('#eol_matching_dialog').fadeIn(); 
+  }
+</script>   
+    
+<p>Before visualizing species, you need to confirm and match them with taxa in the Encyclopedia of Life.  This process will go through each taxa you entered and attempt to find a matching taxon in EOL.  
+ If a single match is found, the taxon's scientific name will be updated automatically and the corresponding EOL ID will be associated with the entry.  If more than one match is found, you will be shown a window
+ where you can select the most appropriate match.</p>
+ <br />
+  <%= submit_tag 'Match all unknown taxa to EOL', :id=>'match_taxa_to_EOL'%> <%= submit_tag 'Match selected taxon to EOL', :id=>'match_single_taxon_to_EOL'%>
+  
+  <br /><br />
+ 
+ <table id="taxa_table"></table> 
+ <div id="taxa_pager"></div>   
+ <br />
+ <%= submit_tag 'Add selected taxa to selected ecosystems', :id=>'add_taxa_to_ecosystems'%>
+ <br /><br />
+ <table id="ecosystems_table"></table> 
+ <div id="ecosystems_pager"></div>
+
+<script>
+  // bind events
+  $(document).ready(
+      function()
+      {
+  			$('#match_taxa_to_EOL').click(matchTaxaToEOL);
+        $('#add_taxa_to_ecosystems').click(addTaxaToEcosystem);
+        $('#match_single_taxon_to_EOL').click(matchSelectedTaxonToEOL);
+      }
+  );  
 </script>
-
-
-<div>
-   <table id="taxa_table"></table> 
-   <div id="taxa_pager"></div>   
-   <br />
-   <%= submit_tag 'Add selected taxa to selected ecosystems', :onclick=>'addTaxaToEcosystem();'%>
-   <br /><br />
-   <table id="ecosystems_table"></table> 
-    <div id="ecosystems_pager"></div>
-
-     
-</div>

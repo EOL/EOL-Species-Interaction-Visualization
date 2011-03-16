@@ -1,0 +1,126 @@
+<span id="stop_match" style="float:right;" class="ui-icon ui-icon-closethick"></span>
+
+<script>
+   function closePanel() {
+     $('#match_to_eol').html('');
+     $('#eol_matching_dialog').fadeOut();
+     $('.main').fadeTo(1,1);
+   }
+</script>
+
+<% if @taxon %>
+
+  <script>
+
+    $(function(){ 
+      $("#match_taxa_table").jqGrid({
+        url:'<%=$WEB_SERVICE_BASE_URL%>search/<%=URI.escape(@taxon.name_for_searching)%>.json?callback=true&key=<%=$WEB_SERVICE_API_KEY%>',
+        datatype: 'jsonp',
+        jsonReader : { 
+              root: 'results', 
+              page: onPageFromEOL,   // which page we are on
+              total: totalPagesFromEOL,  // total number of pages
+              records: 'totalResults', // total number of results
+              cell: '', 
+              id: 'id',
+              repeatitems: false
+              },      
+        multiselect: false,
+        onSelectRow: function(id){ confirmEOLTaxon(id); },      
+        colModel :[ 
+          {name:'id', hidden: true, label:'EOL ID', sortable:false, width:80}, 
+          {name:'title', label:'EOL Preferred Name', width:400, sortable:false }, 
+          {name:'link', label:'EOL Page', width:150, sortable:false, formatter:makeEOLLink}, 
+          {name:'image',label:'Image', sortable:false,width:300},
+          {name:'image_url',hidden:true}
+        ],
+        loadComplete: function() { 
+          // after loading the grid, check to see if only one match is found, and if so, match immediately  -- if the parameter for auto-matching is set
+          totalResults=$("#match_taxa_table").getGridParam("records")
+          <% if @auto_match_single %>
+            if (totalResults == 1) {
+              $('#status').append('Only one match found in EOL...<br />');
+              confirmEOLTaxon($("#match_taxa_table").jqGrid('getDataIDs')[0]);
+              return false;
+            }
+          <% end %>
+          $('#status').html("Found " + totalResults + " taxa in EOL matching '<%=@taxon.entered_name%>'...<br />");
+          // find all EOL images
+          findImages();
+           if (totalResults > 1)  $('#status').append('Please click the best match.');
+        },
+        pager: '#match_taxa_pager',rowNum:30,caption: 'EOL matches for "<%=@taxon.entered_name%>"',
+      }).navGrid('#match_taxa_pager',{ add: false, edit: false, del: false, search:false, reload: false })
+    });
+    
+    // loop through all of the IDs in the table and try to find matching EOL image
+    function findImages() {
+      var ids = $("#match_taxa_table").jqGrid('getDataIDs'); 
+      for (var i=0;i < ids.length;i++) { 
+        getEOLImage(ids[i]);
+        } 
+    }
+  
+    // get an EOL taxa image for the specified ID and set the image column in the appropriate row of the table
+    function getEOLImage(id) {
+       $.ajax({
+          type: "GET",dataType: "jsonp", url: "http://www.eol.org/api/pages/" + id + ".json",
+          data: "vetted=1&common_names=1&images=1&videos=0&text=0&details=1",
+          success: function(data, textStatus, jqXHR){
+              if (data.dataObjects.length > 0)  {
+                var img_tag='<img src="' + data.dataObjects[0].eolThumbnailURL + '" title="' + data.scientificName + '" alt="' + data.scientificName + '">';
+                $("#match_taxa_table").jqGrid('setCell', id, 'image', img_tag);
+                $("#match_taxa_table").jqGrid('setCell', id, 'image_url',data.dataObjects[0].eolThumbnailURL);
+              }
+            },
+        });
+    }
+
+    // create EOL page links for the column using IDs coming back from the API
+    function makeEOLLink ( cellvalue, options, rowObject )
+    {
+      return '<a target=_blank href="' + cellvalue+'">View in EOL</a>';
+    }
+
+    function confirmEOLTaxon(eol_id) {
+      $('#status').html('Matching to EOL...');
+      startLoading();
+      var eol_scientific_name=$("#match_taxa_table").jqGrid('getCell', eol_id , 'title');
+      var image_url=$("#match_taxa_table").jqGrid('getCell', eol_id , 'image_url');
+      $.ajax({
+         type: "POST",dataType: "json",url: "/taxa/confirm_eol_taxon?format=json",
+         data: "id=" + <%=@taxon.id%> + "&image_url=" + image_url + "&scientific_name=" + eol_scientific_name + "&eol_id=" + eol_id,
+         complete: function(jqXHR, textStatus){endLoading();},
+         success: function(data, textStatus, jqXHR){taxaConfirmed();},
+         error: function(jqXHR, textStatus, errorThrown){errorMessage(errorThrown);}
+       });
+     }
+  
+    <% if @id # this means we are showing only a single taxon, so upon confirmation, we can just close the dialog %>
+      function taxaConfirmed() {
+        closePanel();
+       }
+    <% end %>
+
+  </script>
+    
+
+
+    <div id="status">Finding taxa in EOL matching '<%=@taxon.name%>'...<br /></div>
+  
+   <table id="match_taxa_table"></table> 
+   <div id="match_taxa_pager"></div>   
+ 
+<% else %>
+   <p>There are no more taxa to match.</p>
+<% end %>
+
+<script>
+  // bind events
+  $(document).ready(
+      function()
+      {
+   			$('#stop_match').click(closePanel);
+      }
+  );  
+</script>

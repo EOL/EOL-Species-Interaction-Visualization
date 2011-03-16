@@ -12,10 +12,16 @@ function successMessage(msgText) {
 	$.jnotify(msgText);	
 }
 
-function errorMessage(response) {
+function errorMessage(msgText) {
 	$.jnotify("An error occurred. " + response,"error");
 	// ** todo: log this somehow -- something bad happened when making an ajax call	
 }
+
+function warningMessage(msgText) {
+	$.jnotify(msgText,"warning");
+	// ** todo: log this somehow -- something bad happened when making an ajax call	
+}
+
 function startLoading() {
 	$("#page").fadeTo("fast",.6);
 	$("#ajax-indicator").show();
@@ -24,6 +30,15 @@ function startLoading() {
 function endLoading() {
 	$("#ajax-indicator").hide();		
 	$("#page").fadeTo("fast",1);
+}
+
+// special functions that are used to create the values jqGrid needs to do proper paging, using the EOL API json as a direct source
+function onPageFromEOL (obj) {
+  return obj.self.substr(obj.self.lastIndexOf('page=')+5);
+}
+
+function totalPagesFromEOL (obj) {
+  return Math.ceil(parseFloat(obj.totalResults)/parseFloat(obj.itemsPerPage));
 }
 
 // TODO: we can delete this if we don't have any add/update forms anymore 

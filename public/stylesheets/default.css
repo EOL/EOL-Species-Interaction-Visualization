@@ -151,6 +151,7 @@ h1,h2,h3 {
 .minsize {
   height: 500px;
 }
+
 #ajax-indicator {
 	width:100px;
 	height: 100px;
@@ -162,8 +163,22 @@ h1,h2,h3 {
 	padding:10px;
 	margin-left: -50px;
 	margin-top: -50px;
-	z-index:2;
+	z-index:100;
 	overflow: auto;
+}
+
+#eol_matching_dialog {
+	position: absolute;
+	top:25%;
+	left:5%;
+	width:85%;
+	display: none;
+	z-index: 5;
+	background: #ffffff;
+	opacity: 100%;
+	padding: 10px;
+	margin: 10px;
+	border: 1px solid #bbbbbb;
 }
 
 /* footer */
@@ -173,6 +188,7 @@ h1,h2,h3 {
 	font-size: 0.9em;
 	text-align: left;
 	padding:2em 0 2em 4em;
+	clear: both;
 }
 .footer a {
 	color: #FFF;

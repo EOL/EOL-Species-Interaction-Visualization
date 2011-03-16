@@ -20,10 +20,8 @@ ActiveRecord::Schema.define(:version => 20110216185543) do
   end
 
   create_table "ecosystems_taxa", :id => false, :force => true do |t|
-    t.integer  "taxon_id",     :null => false
-    t.integer  "ecosystem_id", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "taxon_id",     :null => false
+    t.integer "ecosystem_id", :null => false
   end
 
   add_index "ecosystems_taxa", ["taxon_id", "ecosystem_id"], :name => "index_ecosystems_taxa_on_taxon_id_and_ecosystem_id", :unique => true
@@ -50,9 +48,11 @@ ActiveRecord::Schema.define(:version => 20110216185543) do
   end
 
   create_table "taxa", :force => true do |t|
-    t.string   "common_name",     :limit => 200, :null => false
-    t.string   "scientific_name", :limit => 400, :null => false
-    t.integer  "group"
+    t.string   "entered_name",    :limit => 200, :null => false
+    t.string   "scientific_name", :limit => 400
+    t.string   "image_url",       :limit => 400
+    t.datetime "last_eol_update"
+    t.integer  "eol_taxon_id"
     t.string   "rank"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -57,6 +57,9 @@ EolSpeciesViz::Application.routes.draw do
   end
   resources :taxa do
     get 'search', :on=>:collection
+    get 'match_to_eol', :on=>:collection
+    get 'match_taxon_to_eol', :on=>:collection
+    get 'confirm_eol_taxon'
   end
   resources :interactions do
     get 'index_jqgrid', :on=>:collection

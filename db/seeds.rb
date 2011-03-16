@@ -37,296 +37,296 @@ Interaction.create(:name=>'is a disease vector to',:interaction_category=>parasi
 Interaction.create(:name=>'is a parasite of',:interaction_category=>parasitism)
 Interaction.create(:name=>'unspecified',:interaction_category=>other)
 
-taxon=Taxon.create(:rank=>:genus,:group=>'5',:scientific_name=>"Acacia",:common_name=>"Acacia")
+taxon=Taxon.create(:rank=>:genus,:entered_name=>"Acacia")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Fabaceae',:sub_family=>'Mimosoideae',:tribe=>'Acacieae',:genus=>'Acacia',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'3',:scientific_name=>"Alligator mississippiensis",:common_name=>"American alligator")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Alligator mississippiensis")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Alligatoridae',:sub_family=>'',:tribe=>'',:genus=>'Alligator',:species=>'mississippiensis',:sub_species=>'')
 taxon.taxonomies << taxonomy
 taxon.ecosystems << Ecosystem.find_by_name('Florida Everglades')
-taxon=Taxon.create(:rank=>:species,:group=>'4',:scientific_name=>"Crocodylus acutus",:common_name=>"American crocodile")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Crocodylus acutus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Crocodylidae',:sub_family=>'Crocodylinae',:tribe=>'',:genus=>'Crocodylus',:species=>'acutus',:sub_species=>'')
 taxon.taxonomies << taxonomy
 taxon.ecosystems << Ecosystem.find_by_name('Florida Everglades')
-taxon=Taxon.create(:rank=>:species,:group=>'1',:scientific_name=>"Crematogaster ashmeadi",:common_name=>"Ant")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Crematogaster ashmeadi")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Formicidae',:sub_family=>'',:tribe=>'',:genus=>'Crematogaster',:species=>'ashmeadi',:sub_species=>'')
 taxon.taxonomies << taxonomy
 taxon.ecosystems << Ecosystem.find_by_name('Florida Everglades')
-taxon=Taxon.create(:rank=>:species,:group=>'1',:scientific_name=>"Solenopsis abdita",:common_name=>"Ant")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Solenopsis abdita")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Formicidae',:sub_family=>'',:tribe=>'',:genus=>'Solenopsis',:species=>'abdita',:sub_species=>'')
 taxon.taxonomies << taxonomy
 taxon.ecosystems << Ecosystem.find_by_name('Florida Everglades')
-taxon=Taxon.create(:rank=>:family,:group=>'1',:scientific_name=>"Formicidae",:common_name=>"Ants")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Formicidae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Formicidae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
 taxon.ecosystems << Ecosystem.find_by_name('Florida Everglades')
-taxon=Taxon.create(:rank=>:family,:group=>'6',:scientific_name=>"Entomophthoraceae",:common_name=>"Arbuscular mycorrhiza")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Entomophthoraceae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Entomophthoraceae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
 taxon.ecosystems << Ecosystem.find_by_name('Florida Everglades')
-taxon=Taxon.create(:rank=>:sub_species,:group=>'0',:scientific_name=>"Caracara cheriway",:common_name=>"Audubon's crested caracara")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Caracara cheriway")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Falconidae',:sub_family=>'Polyborinae',:tribe=>'',:genus=>'Caracara',:species=>'cheriway',:sub_species=>'')
 taxon.taxonomies << taxonomy
 taxon.ecosystems << Ecosystem.find_by_name('Florida Everglades')
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Crotalaria avonensis",:common_name=>"Avon Park harebells")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Crotalaria avonensis")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Fabaceae',:sub_family=>'Faboideae',:tribe=>'',:genus=>'Crotalaria',:species=>'avonensis',:sub_species=>'')
 taxon.taxonomies << taxonomy
 taxon.ecosystems << Ecosystem.find_by_name('Florida Everglades')
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Jacquemontia reclinata",:common_name=>"Beach jacquemontia")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Jacquemontia reclinata")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Convolvulaceae',:sub_family=>'',:tribe=>'',:genus=>'Jacquemontia',:species=>'reclinata',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Deeringothamnus pulchellus",:common_name=>"Beautiful pawpaw")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Deeringothamnus pulchellus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Annonaceae',:sub_family=>'',:tribe=>'',:genus=>'Deeringothamnus',:species=>'pulchellus',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'1',:scientific_name=>"Bombyliidae",:common_name=>"Bee-flies")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Bombyliidae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Bombyliidae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
 taxon.ecosystems << Ecosystem.find_by_name('Economically Important Pollinators')
-taxon=Taxon.create(:rank=>:super_family,:group=>'1',:scientific_name=>"Apoidea",:common_name=>"Bees")
+taxon=Taxon.create(:rank=>:super_family,:entered_name=>"Apoidea")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'Apoidea',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
 taxon.ecosystems << Ecosystem.find_by_name('Economically Important Pollinators')
-taxon=Taxon.create(:rank=>:order,:group=>'1',:scientific_name=>"Coleoptera",:common_name=>"Beetles")
+taxon=Taxon.create(:rank=>:order,:entered_name=>"Coleoptera")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'Coleoptera',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:class,:group=>'0',:scientific_name=>"Aves",:common_name=>"Birds")
+taxon=Taxon.create(:rank=>:class,:entered_name=>"Aves")
 taxonomy=Taxonomy.create(:class_rank=>'Aves',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:genus,:group=>'5',:scientific_name=>"Avicennia",:common_name=>"Black mangrove")
+taxon=Taxon.create(:rank=>:genus,:entered_name=>"Avicennia")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Acanthaceae',:sub_family=>'',:tribe=>'',:genus=>'Avicennia',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:genus,:group=>'6',:scientific_name=>"Pithecellobium",:common_name=>"Blackbead")
+taxon=Taxon.create(:rank=>:genus,:entered_name=>"Pithecellobium")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Fabaceae',:sub_family=>'',:tribe=>'',:genus=>'Pithecellobium',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'4',:scientific_name=>"Eumeces egregius lividus",:common_name=>"Bluetail (blue-tailed) mole skink")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Eumeces egregius lividus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Scincidae',:sub_family=>'',:tribe=>'',:genus=>'Eumeces',:species=>'egregius',:sub_species=>'lividus')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Leucothrinax morrisii",:common_name=>"Brittle Thatch Palm fruit")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Leucothrinax morrisii")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Arecaceae',:sub_family=>'Coryphoideae',:tribe=>'Cryosophileae',:genus=>'Leucothrinax',:species=>'morrisii',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'4',:scientific_name=>"Python molurus bivittatus",:common_name=>"Burmese python")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Python molurus bivittatus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Pythonidae',:sub_family=>'',:tribe=>'',:genus=>'Python',:species=>'molurus',:sub_species=>'bivittatus')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Sabal palmetto",:common_name=>"Cabbage palm")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Sabal palmetto")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Sabal',:species=>'palmetto',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'0',:scientific_name=>"Ammodramus maritimus mirabilis",:common_name=>"Cape Sable seaside sparrow")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Ammodramus maritimus mirabilis")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Ammodramus',:species=>'maritimus',:sub_species=>'mirabilis')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Warea carteri",:common_name=>"Carter's mustard")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Warea carteri")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Warea',:species=>'carteri',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'1',:scientific_name=>"Leptotes cassius theonus",:common_name=>"Cassius blue butterfly")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Leptotes cassius theonus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Leptotes',:species=>'cassius',:sub_species=>'theonus')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'1',:scientific_name=>"Elateridae",:common_name=>"Click beetles")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Elateridae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Elateridae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Salix caroliniana",:common_name=>"Coastal plain willow")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Salix caroliniana")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:genus,:group=>'6',:scientific_name=>"Callinectes",:common_name=>"Crabs")
+taxon=Taxon.create(:rank=>:genus,:entered_name=>"Callinectes")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Salix',:species=>'caroliniana',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Amorpha crenulata",:common_name=>"Crenulate lead-plant")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Amorpha crenulata")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Amorpha',:species=>'crenulata',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'1',:scientific_name=>"Gryllidae",:common_name=>"Crickets")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Gryllidae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Gryllidae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Chamaesyce deltoidea",:common_name=>"Deltoid spurge")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Chamaesyce deltoidea")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Chamaesyce',:species=>'deltoidea',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Quercus minima",:common_name=>"Drawf live oak")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Quercus minima")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Quercus',:species=>'minima',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Juniperus virginiana",:common_name=>"Eastern Red Ceder")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Juniperus virginiana")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Juniperus',:species=>'virginiana',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Sambucus canadensis",:common_name=>"Elderberry")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Sambucus canadensis")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Sambucus',:species=>'canadensis',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'3',:scientific_name=>"Pomacea paludosa",:common_name=>"Florida apple snail")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Pomacea paludosa")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Pomacea',:species=>'paludosa',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'0',:scientific_name=>"Ammodramus savannarum floridanus",:common_name=>"Florida grasshopper sparrow")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Ammodramus savannarum floridanus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Ammodramus',:species=>'savannarum',:sub_species=>'floridanus')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'6',:scientific_name=>"Cladonia perforata",:common_name=>"Florida perforate reindeer lichen")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Cladonia perforata")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Cladonia',:species=>'perforata',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Asimina tetramera",:common_name=>"Four-petal pawpaw")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Asimina tetramera")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Asimina',:species=>'tetramera',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'5',:scientific_name=>"Cereus eriophorus var. fragrans",:common_name=>"Fragrant prickly-apple")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Cereus eriophorus var. fragrans")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Cereus',:species=>'eriophorus',:sub_species=>'fragrans')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Chamaesyce garberi",:common_name=>"Garber's spurge")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Chamaesyce garberi")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Chamaesyce',:species=>'garberi',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Dicerandra christmanii",:common_name=>"Garrett's mint")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Dicerandra christmanii")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Dicerandra',:species=>'christmanii',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'1',:scientific_name=>"Pyralidae",:common_name=>"Grass moths")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Pyralidae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Pyralidae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'6',:scientific_name=>"Poaceae",:common_name=>"Grasses")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Poaceae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Poaceae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'1',:scientific_name=>"Acrididae",:common_name=>"Grasshoppers")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Acrididae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Acrididae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:genus,:group=>'1',:scientific_name=>"Melanoplus",:common_name=>"Grasshoppers")
+taxon=Taxon.create(:rank=>:genus,:entered_name=>"Melanoplus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Melanoplus',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'1',:scientific_name=>"Carabidae",:common_name=>"Ground beetles")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Carabidae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Carabidae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Psidium guajava",:common_name=>"Guava")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Psidium guajava")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Psidium',:species=>'guajava',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'1',:scientific_name=>"Halictidae",:common_name=>"Halictid bees")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Halictidae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Halictidae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Hypericum cumulicola",:common_name=>"Highlands scrub hypericum")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Hypericum cumulicola")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Hypericum',:species=>'cumulicola',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'1',:scientific_name=>"Apis mellifera",:common_name=>"Honey bees")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Apis mellifera")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Apis',:species=>'mellifera',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Morinda citrifolia",:common_name=>"Indian Mulberry")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Morinda citrifolia")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Morinda',:species=>'citrifolia',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:class,:group=>'1',:scientific_name=>"Insecta",:common_name=>"Insects")
+taxon=Taxon.create(:rank=>:class,:entered_name=>"Insecta")
 taxonomy=Taxonomy.create(:class_rank=>'Insecta',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:genus,:group=>'1',:scientific_name=>"Orchelimum",:common_name=>"Katydids")
+taxon=Taxon.create(:rank=>:genus,:entered_name=>"Orchelimum")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Orchelimum',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'2',:scientific_name=>"Odocoileus virginianus clavium",:common_name=>"Key deer")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Odocoileus virginianus clavium")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Odocoileus',:species=>'virginianus',:sub_species=>'clavium')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'2',:scientific_name=>"Peromyscus gossypinus allapaticola",:common_name=>"Key Largo cotton mouse")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Peromyscus gossypinus allapaticola")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Peromyscus',:species=>'gossypinus',:sub_species=>'allapaticola')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'2',:scientific_name=>"Neotoma floridana smalli",:common_name=>"Key Largo woodrat")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Neotoma floridana smalli")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Neotoma',:species=>'floridana',:sub_species=>'smalli')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Pilosocereus robinii",:common_name=>"Key tree-cactus")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Pilosocereus robinii")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Pilosocereus',:species=>'robinii',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Dicerandra immaculata",:common_name=>"Lakela's mint")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Dicerandra immaculata")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Dicerandra',:species=>'immaculata',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Polygala lewtonii",:common_name=>"Lewton's polygala")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Polygala lewtonii")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Polygala',:species=>'lewtonii',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Liatris ohlingerae",:common_name=>"Scrub blazing star")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Liatris ohlingerae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Liatris',:species=>'ohlingerae',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'0',:scientific_name=>"Cardinalis cardinalis",:common_name=>"Northern Cardinal")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Cardinalis cardinalis")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Cardinalis',:species=>'cardinalis',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'5',:scientific_name=>"Cucurbita okeechobeensis okeechobeensis",:common_name=>"Okeechobee gourd")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Cucurbita okeechobeensis okeechobeensis")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Cucurbita',:species=>'okeechobeensis',:sub_species=>'okeechobeensis')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Paronychia chartacea",:common_name=>"Papery whitlow-wort")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Paronychia chartacea")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Paronychia',:species=>'chartacea',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'1',:scientific_name=>"Braconidae",:common_name=>"Parasitic wasp")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Braconidae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Braconidae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Stylosanthes biflora",:common_name=>"Pencil Flower")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Stylosanthes biflora")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Stylosanthes',:species=>'biflora',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Clitoria fragrans",:common_name=>"Pigeon wings")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Clitoria fragrans")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Clitoria',:species=>'fragrans',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Chionanthus pygmaeus",:common_name=>"Pygmy fringe-tree")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Chionanthus pygmaeus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Chionanthus',:species=>'pygmaeus',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'1',:scientific_name=>"Solenopsis invicta",:common_name=>"Red imported fire ant")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Solenopsis invicta")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Solenopsis',:species=>'invicta',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:genus,:group=>'5',:scientific_name=>"Rhizophora",:common_name=>"Red mangrove")
+taxon=Taxon.create(:rank=>:genus,:entered_name=>"Rhizophora")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:order,:group=>'2',:scientific_name=>"Rodentia",:common_name=>"Rodents")
+taxon=Taxon.create(:rank=>:order,:entered_name=>"Rodentia")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'Rodentia',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'4',:scientific_name=>"Neoseps reynoldsi",:common_name=>"Sand skink")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Neoseps reynoldsi")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Neoseps',:species=>'reynoldsi',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Quercus inopina",:common_name=>"Sandhill oak")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Quercus inopina")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Quercus',:species=>'inopina',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Polygonella myriophylla",:common_name=>"Sandlace")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Polygonella myriophylla")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Polygonella',:species=>'myriophylla',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Serenoa repens",:common_name=>"Saw palmetto")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Serenoa repens")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Serenoa',:species=>'repens',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'1',:scientific_name=>"Heraclides aristodemus ponceanus",:common_name=>"Schaus swallowtail butterfly")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Heraclides aristodemus ponceanus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Heraclides',:species=>'aristodemus',:sub_species=>'ponceanus')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Dicerandra frutescens",:common_name=>"Scrub mint")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Dicerandra frutescens")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Dicerandra',:species=>'frutescens',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'1',:scientific_name=>"Oligonicella scudderi",:common_name=>"Scudder's mantis")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Oligonicella scudderi")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Oligonicella',:species=>'scudderi',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Conradina brevifolia",:common_name=>"Short-leaved rosemary")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Conradina brevifolia")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Conradina',:species=>'brevifolia',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Coccothrinax argentata",:common_name=>"Silver Thatch Palm fruit")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Coccothrinax argentata")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Coccothrinax',:species=>'argentata',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'1',:scientific_name=>"Hesperiidae",:common_name=>"Skippers")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Hesperiidae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Hesperiidae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Galactia smallii",:common_name=>"Small's milkpea")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Galactia smallii")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Galactia',:species=>'smallii',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:sub_species,:group=>'0',:scientific_name=>"Rostrhamus sociabilis plumbeus",:common_name=>"Snail kite")
+taxon=Taxon.create(:rank=>:sub_species,:entered_name=>"Rostrhamus sociabilis plumbeus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Rostrhamus',:species=>'sociabilis',:sub_species=>'plumbeus')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Eryngium cuneifolium",:common_name=>"Snakeroot")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Eryngium cuneifolium")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Eryngium',:species=>'cuneifolium',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:genus,:group=>'1',:scientific_name=>"Dialictus",:common_name=>"Solitary bees")
+taxon=Taxon.create(:rank=>:genus,:entered_name=>"Dialictus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Dialictus',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:genus,:group=>'1',:scientific_name=>"Augochloropsis",:common_name=>"Solitary bees")
+taxon=Taxon.create(:rank=>:genus,:entered_name=>"Augochloropsis")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Augochloropsis',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:family,:group=>'6',:scientific_name=>"Araneae",:common_name=>"Spiders")
+taxon=Taxon.create(:rank=>:family,:entered_name=>"Araneae")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'Araneae',:sub_family=>'',:tribe=>'',:genus=>'',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:genus,:group=>'5',:scientific_name=>"Hypoxis",:common_name=>"Stargrass")
+taxon=Taxon.create(:rank=>:genus,:entered_name=>"Hypoxis")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Hypoxis',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'3',:scientific_name=>"Orthalicus reses",:common_name=>"Stock Island tree snail")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Orthalicus reses")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Orthalicus',:species=>'reses',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Polygala smallii",:common_name=>"Tiny polygala")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Polygala smallii")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Polygala',:species=>'smallii',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'1',:scientific_name=>"Prosapia bicincta",:common_name=>"Two-lined spittlebug")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Prosapia bicincta")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Prosapia',:species=>'bicincta',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Manilkara bahamensis",:common_name=>"Wild Dilly fruits")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Manilkara bahamensis")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Manilkara',:species=>'bahamensis',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Xanthoxylum fagara",:common_name=>"Wild Lime")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Xanthoxylum fagara")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Xanthoxylum',:species=>'fagara',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Polygonella basiramia",:common_name=>"Wireweed")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Polygonella basiramia")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Polygonella',:species=>'basiramia',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'6',:scientific_name=>"Gerres",:common_name=>"Yellowfin mojarras")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Gerres")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Gerres',:species=>'',:sub_species=>'')
 taxon.taxonomies << taxonomy
-taxon=Taxon.create(:rank=>:species,:group=>'5',:scientific_name=>"Florida ziziphus",:common_name=>"Ziziphus celata")
+taxon=Taxon.create(:rank=>:species,:entered_name=>"Florida ziziphus")
 taxonomy=Taxonomy.create(:class_rank=>'',:order=>'',:super_family=>'',:family=>'',:sub_family=>'',:tribe=>'',:genus=>'Florida',:species=>'ziziphus',:sub_species=>'')
 taxon.taxonomies << taxonomy
 

@@ -9,7 +9,7 @@ namespace :import do
       organisms=database.connection.select_all('select * from organisms_new')
       organisms.each do |organism|        
         rank=organism['rank'].sub('-','_').strip.downcase
-        row="taxon=Taxon.create(:rank=>:#{rank},:group=>'#{organism['group']}',:scientific_name=>\"#{organism['sci_name']}\",:common_name=>\"#{organism['com_name']}\")"
+        row="taxon=Taxon.create(:rank=>:#{rank},:group=>'#{organism['group']}',:entered_name=>\"#{organism['sci_name']}\")"
         output_file.puts row
         row="taxonomy=Taxonomy.create(:class_rank=>'#{organism['class']}',:order=>'#{organism['order']}',:super_family=>'#{organism['super-family']}',:family=>'#{organism['family']}',:sub_family=>'#{organism['sub-family']}',:tribe=>'#{organism['tribe']}',:genus=>'#{organism['genus']}',:species=>'#{organism['species']}',:sub_species=>'#{organism['sub-species']}')"
         output_file.puts row

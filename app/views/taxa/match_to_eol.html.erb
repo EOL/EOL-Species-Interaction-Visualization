@@ -1,0 +1,37 @@
+<script language="JavaScript">
+  
+  var totalTaxa=<%=@total_taxa%>;
+  var onTaxon=0;
+  
+  function taxaConfirmed() {
+    onTaxon+=1;
+    $('#on_taxon').html(onTaxon);
+    loadNextMatch();
+  }
+  
+  function loadNextMatch() {
+    $.get('/taxa/match_taxon_to_eol', function(data) {
+      $('#matching_panel').html(data);
+      }) 
+  }
+  
+</script>
+
+  <p>This panel allows you to match taxa you entered to the Encyclopedia of Life.  You will see matching from EOL for each taxon you entered, along with an image if available.
+  If a single match is found, it will be made automatically.  If more than one match is found, you can select the best one.</p>
+  <br />
+
+
+  <div id="num_match_status">Currently on match <span id="on_taxon">1</span> of <span id="total_taxa"><%=@total_taxa%></span>.</div><br />
+
+  <div id="matching_panel"></div>
+  
+
+<script>
+  $(document).ready(
+      function()
+      {
+  		  loadNextMatch();
+      }
+  );  
+</script>

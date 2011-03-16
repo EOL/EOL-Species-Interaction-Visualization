@@ -21,13 +21,16 @@
 <div id="ajax-indicator" style="display:none;" ></div>
 
 <div id="page">
+  
+ 
+  	<div class="header">
     
-	<div class="header">
+      <div class="title"></div>
     
-    <div class="title"></div>
-    
-	</div>
-		
+  	</div>
+
+	<div id="eol_matching_dialog"> </div>
+	 	
 	<div class="main">
 
       <%= yield %>
@@ -35,11 +38,13 @@
   </div>
     
   <div class="clearer"><span></span></div>
+
   
-  <div class="footer">
-  			<a href="http://www.eol.org/">Encyclopedia of Life</a><br />
-        &copy; 2010 EOL Species Interaction Visualization. Template design from <a href="http://www.oswd.org/designs/favorites/page/4/">OSWD</a>
-  </div>
+    <div class="footer">
+    			<a href="http://www.eol.org/">Encyclopedia of Life</a><br />
+          &copy; 2011 EOL Species Interaction Visualization v<%= ENV['APP_VERSION'] unless ENV['APP_VERSION'].blank?%>. Template design from <a href="http://www.oswd.org/designs/favorites/page/4/">OSWD</a>
+    </div>
+
 
 </div>
 

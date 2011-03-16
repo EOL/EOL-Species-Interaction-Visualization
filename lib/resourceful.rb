@@ -19,7 +19,7 @@ module Resourceful
     elsif params[:jqgrid] # if set to true, return data as expected by the jqGrid plugin, it will return all columns in the model, so use jqGrid to control which ones you need
       
       on_page=params[:page] || 1
-      rows_to_return=params[:rows].to_s || "20"
+      rows_to_return=params[:rows] || "30"
       sort_by=params[:sidx]
       sort_order=params[:sord] || "asc"
       
@@ -43,7 +43,7 @@ module Resourceful
       eval("@#{model_name}[:records]=result_set.size.to_s")
       
       build_query=","
-      build_query+=":limit=>rows_to_return,:offset=>offset," unless rows_to_return.downcase == "all"
+      build_query+=":limit=>rows_to_return,:offset=>offset," unless rows_to_return.to_s.downcase == "all"
       build_query+=":order=>'#{sort_by} #{sort_order}'," if sort_by
       
       if search_field

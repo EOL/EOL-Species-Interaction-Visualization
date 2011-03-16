@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
     input.split("?")[0]
   end
   
+  def ajax_only
+    
+    return unless request.post? && request.xhr? 
+  
+  end
   
   def add_callback(response)
     

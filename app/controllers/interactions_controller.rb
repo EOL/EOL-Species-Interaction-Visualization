@@ -10,7 +10,7 @@ class InteractionsController < ApplicationController
     result_set=Interaction.find_by_sql('select i.id,i.name,interaction_category_id,ic.name as category_name,i.created_at,i.updated_at from interactions i inner join interaction_categories ic on ic.id=interaction_category_id')    
     
     on_page=params[:page] || 1
-    rows_to_return=params[:rows].to_s || "20"
+    rows_to_return=params[:rows] || "30"
     sort_by=params[:sidx]
     sort_order=params[:sord] || "asc"
     
@@ -43,7 +43,7 @@ class InteractionsController < ApplicationController
       end
     end
     build_query+=" order by #{sort_by} #{sort_order}" if sort_by
-    build_query+=" limit #{rows_to_return} offset #{offset} " unless rows_to_return.downcase == "all"
+    build_query+=" limit #{rows_to_return} offset #{offset} " unless rows_to_return.to_s.downcase == "all"
     
     page_of_result_set=Interaction.find_by_sql("select i.id,i.name as interaction_name,interaction_category_id,ic.name as category_name,i.created_at,i.updated_at from interactions i inner join interaction_categories ic on ic.id=interaction_category_id #{build_query}")
           

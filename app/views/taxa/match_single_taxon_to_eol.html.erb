@@ -1,0 +1,28 @@
+<script language="JavaScript">
+    
+  function taxaConfirmed() {
+    successMessage('Success');
+  }
+  
+  function loadNextMatch() {
+    $.get('/taxa/match_taxon_to_eol/<%=@id%>', function(data) {
+      $('#matching_panel').html(data);
+      }) 
+  }
+  
+</script>
+
+<div id="matching_panel">
+ 
+</div>
+
+<script>
+ 
+  $(document).ready(
+      function()
+      {
+  		  loadNextMatch();
+      }
+  );  
+  
+</script>
