@@ -3,6 +3,8 @@ class CreateEcosystems < ActiveRecord::Migration
     create_table :ecosystems do |t|
       t.string :name, :null=>false, :limit=>500
       t.text :description
+      t.integer :biome_id
+      t.integer :sort_order, :default => 100
       t.timestamps
     end
   end

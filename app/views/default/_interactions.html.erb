@@ -12,29 +12,41 @@
         {name:'category_name', label:'Category',index:'category_name', width:300, sortable: true, editable: true, edittype:'select',editoptions:{dataUrl:'/interaction_categories/htmlselect_jqgrid'}}, 
       ],
       pager: '#interaction_types_pager',caption: 'Interaction Types',rowNum:30,rowList:[30,50],
-      sortname: 'interaction_name',sortorder: 'asc',
+      sortname: 'interaction_name',sortorder: 'asc',multiselect: false,
       editurl: "/interactions/actions_jqgrid?format=json"  
-    }).navGrid('#interaction_types_pager',{},{editCaption: 'Edit interaction type',width: 650, serializeEditData: function(postdata){pd=postdata;return {'interaction':{'oper': 'edit','id': postdata.id, 'interaction_category_id':postdata.category_name,'name':postdata.interaction_name}};}},{addCaption: 'Add interaction type',width: 650, serializeEditData: function(postdata){return {'interaction':{'oper': 'add','interaction_category_id':postdata.category_name,'name':postdata.interaction_name}};}});
+    }).navGrid('#interaction_types_pager',{'cloneToTop':true},{editCaption: 'Edit interaction type',width: 650, serializeEditData: function(postdata){pd=postdata;return {'interaction':{'oper': 'edit','id': postdata.id, 'interaction_category_id':postdata.category_name,'name':postdata.interaction_name}};}},{addCaption: 'Add interaction type',width: 650, serializeEditData: function(postdata){return {'interaction':{'oper': 'add','interaction_category_id':postdata.category_name,'name':postdata.interaction_name}};}},{jqModal:false,left:20,top:100});
   });
 
   $(function(){ 
     $("#interaction_categories_table").jqGrid({
       url:'/interaction_categories.json?jqgrid=true',
       colModel :[ 
-        {name:'name', label:'Name', index:'name', width:300, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew' ]}}, 
+        {name:'name', label:'Name', index:'name', width:400, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew' ]}}, 
       ],
       pager: '#interaction_categories_pager',caption: 'Interaction Type Categories',rowNum:30,
-      sortname: 'name',sortorder: 'asc',
+      sortname: 'name',sortorder: 'asc',multiselect: false,
       editurl: "/interaction_categories/actions_jqgrid?format=json&callback=refreshInteractions"  
-    }).navGrid('#interaction_categories_pager',{},{editCaption: 'Edit interaction category',width: 650, serializeEditData: function(postdata){return {'interactioncategory':postdata};}},{addCaption: 'Add interaction category',width: 650, serializeEditData: function(postdata){return {'interactioncategory':postdata};}});
+    }).navGrid('#interaction_categories_pager',{'cloneToTop':true},{editCaption: 'Edit interaction category',width: 650, serializeEditData: function(postdata){return {'interactioncategory':postdata};}},{addCaption: 'Add interaction category',width: 650, serializeEditData: function(postdata){return {'interactioncategory':postdata};}},{jqModal:false,left:20,top:100});
   });
         
 </script>
 
+<%=link_to '[export all interaction types to csv]', :controller=>'interactions', :action=>'export'%>
  <table id="interaction_types_table"></table> 
  <div id="interaction_types_pager"></div>
  <br />
+ <%=link_to '[export all interaction categories to csv]', :controller=>'interaction_categories', :action=>'export'%>
  <table id="interaction_categories_table"></table> 
  <div id="interaction_categories_pager"></div>
 
+ <script>
+   // bind events
+   $(document).ready(
+       function()
+       {
+         removeBottomToolbarButtons('interaction_types');
+         removeBottomToolbarButtons('interaction_categories');        
+       }
+   );  
+ </script>
 		

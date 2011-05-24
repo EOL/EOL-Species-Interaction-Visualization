@@ -50,22 +50,18 @@ EolSpeciesViz::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => "default#index"
 
-  resources :ecosystems
-
   resources :observations do
-    get 'find_by_interaction', :on=> :collection
+    get 'find_by_interaction', 'export', :on=> :collection
   end
   resources :taxa do
-    get 'search', :on=>:collection
-    get 'match_to_eol', :on=>:collection
-    get 'match_taxon_to_eol', :on=>:collection
+    get 'search', 'match_to_eol', 'match_taxon_to_eol', 'export', :on=>:collection
     get 'confirm_eol_taxon'
   end
-  resources :interactions do
-    get 'index_jqgrid', :on=>:collection
+  resources :interactions,:ecosystems do
+    get 'index_jqgrid', 'export', :on=>:collection
   end
-  resources :interaction_categories do
-    get 'htmlselect_jqgrid', :on=>:collection
+  resources :interaction_categories,:biomes do
+    get 'htmlselect_jqgrid', 'export', :on=>:collection
   end
   
   # See how all your routes lay out with "rake routes"

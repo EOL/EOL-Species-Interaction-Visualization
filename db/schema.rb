@@ -10,11 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110216185543) do
+ActiveRecord::Schema.define(:version => 20110322215132) do
+
+  create_table "biomes", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "sort_order", :default => 100
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ecosystems", :force => true do |t|
-    t.string   "name",        :limit => 500, :null => false
+    t.string   "name",        :limit => 500,                  :null => false
     t.text     "description"
+    t.integer  "biome_id"
+    t.integer  "sort_order",                 :default => 100
     t.datetime "created_at"
     t.datetime "updated_at"
   end

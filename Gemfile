@@ -15,6 +15,8 @@ gem 'capistrano-ext'
 # To use debugger
 # gem 'ruby-debug'
 
+gem 'acts_as_tree',:git=>'https://github.com/parasew/acts_as_tree.git'
+
 # Bundle the extra gems:
 # gem 'bj'
 # gem 'nokogiri'

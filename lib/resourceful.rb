@@ -101,6 +101,28 @@ module Resourceful
     respond_with(eval("@#{model_name}"))
   end
 
+  # export full model to CSV
+  def export
+  
+     results=eval("#{model_class_name}.find(:all)")
+     outfile=eval("'#{model_name}_#{Time.now.strftime('%m-%d-%Y')}.csv'")
+     column_names=eval("#{model_class_name}.column_names")
+     
+      csv_data = CSV.generate do |csv|
+        csv << column_names
+        results.each do |result| 
+          data_row = []
+          column_names.each {|column| data_row << result[column]}
+          csv << data_row
+        end
+      end
+
+      send_data csv_data,
+        :type => 'text/csv; charset=iso-8859-1; header=present',
+        :disposition => "attachment; filename=#{outfile}"
+    
+  end
+
   # special method so we can route to restful requests made by a regular post to this url coming from the jqGrid plugin (works for update, add and delete)
   def actions_jqgrid
 
@@ -134,7 +156,8 @@ module Resourceful
   private
   def clean_params_hash
     # remove 'oper' paramater before passing the params to Rails, since it's not part of the model object
-    eval("params[:#{model_name}].delete(:oper)")        
+    eval("params.delete(:oper)")        
+    eval("params[:#{model_name}].delete(:oper) if params[:#{model_name}]")        
   end
 
 end

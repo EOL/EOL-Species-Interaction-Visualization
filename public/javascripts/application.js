@@ -37,11 +37,21 @@ function onPageFromEOL (obj) {
   return obj.self.substr(obj.self.lastIndexOf('page=')+5);
 }
 
+// special functions that are used to create the values jqGrid needs to do proper paging, using the EOL API json as a direct source
 function totalPagesFromEOL (obj) {
   return Math.ceil(parseFloat(obj.totalResults)/parseFloat(obj.itemsPerPage));
 }
 
-// TODO: we can delete this if we don't have any add/update forms anymore 
+function removeBottomToolbarButtons (name) {
+	// since we have the toolbar at the top of the jqGrid page now, we can remove the toolbar buttons from the bottom
+	var bottomPagerDiv = $("div#" + name + "taxa_pager")[0];	
+	$("#edit_" + name + "_table", bottomPagerDiv).remove();
+	$("#del_" + name + "_table", bottomPagerDiv).remove();
+	$("#add_" + name + "_table", bottomPagerDiv).remove();
+	$("#search_" + name + "_table", bottomPagerDiv).remove();	
+}
+
+// TODO: we can delete this if we don't have any custom add/update forms anymore 
 function bindAjaxFormEvents() {
 	ajax_forms=$('form[id*="ajax"]');
 	jQuery(function($){ 

@@ -11,20 +11,21 @@
       pager: '#taxa_pager',caption:"Taxa",rowNum:30,rowList:[30,50,100,200],
       sortname: 'entered_name',sortorder: 'asc',
       editurl: "/taxa/actions_jqgrid?format=json"      
-    }).navGrid('#taxa_pager',{},{editCaption: 'Edit species',width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{addCaption: 'Add species', width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}})
+    }).navGrid('#taxa_pager',{'cloneToTop':true},{editCaption: 'Edit species',width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{addCaption: 'Add species', width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{jqModal:false,left:20,top:100})
   });
 
   $(function(){ 
     $("#ecosystems_table").jqGrid({
-      url:'/ecosystems.json?jqgrid=true',
+      url:'/ecosystems/index_jqgrid?format=json',
       colModel :[ 
         {name:'name', label:'Name', index:'name', width:300, editable: true, edittype:'text',  editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
-        {name:'description', label:'Description',index:'description', width:450, sortable: false, editable: true, edittype:'textarea',editoptions:{rows:3,cols:50},searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'description', label:'Description',index:'description', width:350, sortable: false, editable: true, edittype:'textarea',editoptions:{rows:3,cols:50},searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'biome_name', label:'Biome',index:'biome_name', width:250, sortable: true, editable: true, edittype:'select',editoptions:{dataUrl:'/biomes/htmlselect_jqgrid'} }, 
       ],
       pager: '#ecosystems_pager',caption:"Ecosystems",rowNum:10000,
       sortname: 'name',sortorder: 'asc',
       editurl: "/ecosystems/actions_jqgrid?format=json"  
-    }).navGrid('#ecosystems_pager',{},{editCaption: 'Edit ecosystem',width: 650, serializeEditData: function(postdata){return {'ecosystem':postdata};}},{addCaption: 'Add ecosystem',width: 650, serializeEditData: function(postdata){return {'ecosystem':postdata};}});
+    }).navGrid('#ecosystems_pager',{'cloneToTop':true},{editCaption: 'Edit ecosystem',width: 650, serializeEditData: function(postdata){pd=postdata;return {'ecosystem':{'oper': 'edit','id': postdata.id, 'biome_id':postdata.biome_name,'name':postdata.name}};}},{addCaption: 'Add ecosystem',width: 650, serializeEditData: function(postdata){pd=postdata;return {'ecosystem':{'oper': 'add','id': postdata.id, 'biome_id':postdata.biome_name,'name':postdata.name}};}},{jqModal:false,left:20,top:100});
   });
       
  function addTaxaToEcosystem() {
@@ -68,6 +69,11 @@
     $('.main').fadeTo(1,.3);
     $('#eol_matching_dialog').fadeIn(); 
   }
+  
+  function refreshTaxa() { 
+    $("#taxa_table").trigger("reloadGrid");
+  }
+  
 </script>   
     
 <p>Before visualizing species, you need to confirm and match them with taxa in the Encyclopedia of Life.  This process will go through each taxa you entered and attempt to find a matching taxon in EOL.  
@@ -78,11 +84,14 @@
   
   <br /><br />
  
+  <%=link_to '[export all taxa to csv]', :controller=>'taxa', :action=>'export'%>
  <table id="taxa_table"></table> 
- <div id="taxa_pager"></div>   
+  <div id="taxa_pager"></div>  
+   
  <br />
  <%= submit_tag 'Add selected taxa to selected ecosystems', :id=>'add_taxa_to_ecosystems'%>
  <br /><br />
+  <%=link_to '[export all ecosystems to csv]', :controller=>'ecosystems', :action=>'export'%> | <%=link_to '[export all biomes to csv]', :controller=>'biomes', :action=>'export'%>  
  <table id="ecosystems_table"></table> 
  <div id="ecosystems_pager"></div>
 
@@ -94,6 +103,8 @@
   			$('#match_taxa_to_EOL').click(matchTaxaToEOL);
         $('#add_taxa_to_ecosystems').click(addTaxaToEcosystem);
         $('#match_single_taxon_to_EOL').click(matchSelectedTaxonToEOL);
+        removeBottomToolbarButtons('taxa');
+        removeBottomToolbarButtons('ecosystems');        
       }
   );  
 </script>
