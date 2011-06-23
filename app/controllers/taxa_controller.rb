@@ -16,7 +16,7 @@ class TaxaController < ApplicationController
   end
   
   # export results to CSV
-  def export2
+  def export
   
       taxa = Taxon.find(:all, :order => "entered_name ASC")
       outfile = "taxa_" + Time.now.strftime("%m-%d-%Y") + ".csv"

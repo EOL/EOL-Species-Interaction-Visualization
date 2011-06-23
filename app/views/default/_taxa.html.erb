@@ -4,7 +4,7 @@
     $("#taxa_table").jqGrid({
       url:'/taxa.json?jqgrid=true',
       colModel :[ 
-        {name:'entered_name', label:'Entered Name',index:'entered_name', width:350,editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'entered_name', label:'Taxon Name',index:'entered_name', width:350,editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
         {name:'scientific_name', label:'EOL Scientific Name', index:'scientific_name', width:350,  searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
         {name:'eol_taxon_id', label:'EOL ID',index:'eol_taxon_id', width:80, formatter:makeEOLLink}, 
       ],
@@ -33,7 +33,7 @@
    var selectedEcosystems=$("#ecosystems_table").getGridParam('selarrrow');
    startLoading();
    $.ajax({
-      type: "POST",dataType: "json",url: "/ecosystems_taxa/add_taxa?format=json",
+      type: "POST",dataType: "json",url: "/ecosystems/add_taxa?format=json",
       data: "taxa_ids=" + selectedTaxa+ "&ecosystems_ids=" + selectedEcosystems,
       complete: function(jqXHR, textStatus){endLoading();},
       success: function(data, textStatus, jqXHR){successMessage('Success');},

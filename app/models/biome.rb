@@ -1,7 +1,7 @@
 class Biome < ActiveRecord::Base
   
   acts_as_tree :order=>"sort_order"
-  has_many :ecosystems
+  has_many :ecosystems, :dependent=>:nullify
   
   def self.return_tree(params={})
     
@@ -14,11 +14,11 @@ class Biome < ActiveRecord::Base
       result << root
       if levels == "1" || levels == "2" 
         root.children.each do |child|
-          child.name = root.name + ' - ' + child.name
+          child.name = root.name + ' -> ' + child.name
           result << child
           if levels == "2"
             child.children.each do |sub_child|
-              sub_child.name = root.name + ' - ' + child.name + ' - ' + sub_child.name
+              sub_child.name = child.name + ' -> ' + sub_child.name
               result << sub_child
             end
           end

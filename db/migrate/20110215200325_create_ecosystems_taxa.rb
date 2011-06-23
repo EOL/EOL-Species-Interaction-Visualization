@@ -1,6 +1,6 @@
 class CreateEcosystemsTaxa < ActiveRecord::Migration
   def self.up
-    create_table :ecosystems_taxa, :id => false do |t|
+    create_table :ecosystems_taxa, :id=>false do |t|
       t.integer :taxon_id, :null => false
       t.integer :ecosystem_id, :null => false
     end

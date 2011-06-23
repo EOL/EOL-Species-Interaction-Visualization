@@ -4,7 +4,7 @@ class EcosystemsController < ApplicationController
   
   include Resourceful
 
-  # we need a special jqgrid selector only method since we need to add some join tables
+  # we need a special jqgrid selector only method since we need to add some join tables beyond the regular methods we get from :resourceful
    def index_jqgrid
 
      base_query="select e.id,e.name,e.biome_id,b.name as biome_name,e.created_at,e.updated_at from ecosystems e left outer join biomes b on e.biome_id=b.id"
@@ -54,6 +54,27 @@ class EcosystemsController < ApplicationController
      @ecosystems[:rows] = rows
 
      respond_with(@ecosystems)
+
+   end
+
+   # add taxa to the given ecosystem
+   def add_taxa
+
+     ecosystems_ids=params[:ecosystems_ids].split(',')
+     taxa_ids=params[:taxa_ids].split(',')
+
+     taxa_ids.each do |taxon_id|
+       t=Taxon.find(taxon_id)
+       ecosystems_ids.each do |ecosystem_id|
+         e=Ecosystem.find(ecosystem_id)
+         t.ecosystems << e unless t.ecosystems.include?(e)
+       end
+     end
+
+     respond_to do |format|
+       format.xml { render :nothing => true }
+       format.json { render :json => nil }
+     end
 
    end
   
