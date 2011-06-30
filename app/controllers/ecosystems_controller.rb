@@ -7,7 +7,7 @@ class EcosystemsController < ApplicationController
   # we need a special jqgrid selector only method since we need to add some join tables beyond the regular methods we get from :resourceful
    def index_jqgrid
 
-     base_query="select e.id,e.name,e.biome_id,b.name as biome_name,e.created_at,e.updated_at from ecosystems e left outer join biomes b on e.biome_id=b.id"
+     base_query="select e.id,e.description,e.name as ecosystem_name,e.biome_id,b.name as biome_name,e.created_at,e.updated_at from ecosystems e left outer join biomes b on e.biome_id=b.id"
      result_set_size=Ecosystem.count
 
      on_page=params[:page] || 1
@@ -36,6 +36,8 @@ class EcosystemsController < ApplicationController
      build_query=""
 
      if search_field
+       search_field.gsub!('ecosystem_name','e.name')
+       search_field.gsub!('biome_name','b.name')       
        case search_operator
          when "cn" then build_query+=" where #{search_field} like '%#{search_string}%'"
          when "bw" then build_query+=" where #{search_field} like '#{search_string}%'"

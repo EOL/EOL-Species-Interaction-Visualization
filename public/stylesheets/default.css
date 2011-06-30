@@ -198,3 +198,5 @@ h1,h2,h3 {
 	color: #FFF;
 	text-decoration: underline;
 }
+
+.ui-autocomplete-loading { background: white url('/images/ajax-loader.gif') right center no-repeat; }

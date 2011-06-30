@@ -44,7 +44,7 @@ module Resourceful
       
       build_query=","
       build_query+=":limit=>rows_to_return,:offset=>offset," unless rows_to_return.to_s.downcase == "all"
-      build_query+=":order=>'#{sort_by} #{sort_order}'," if sort_by
+      build_query+=":order=>'#{sort_by} #{sort_order}'" if sort_by
       
       if search_field
         case search_operator

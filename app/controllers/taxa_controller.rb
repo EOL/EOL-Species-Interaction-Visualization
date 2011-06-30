@@ -74,6 +74,17 @@ class TaxaController < ApplicationController
 
   end
 
+  def taxon_name_autocomplete
+    
+    scientific_names=Taxon.find(:all,:conditions=>["scientific_name like ?","#{params[:term]}%"])
+    entered_names=Taxon.find(:all,:conditions=>["entered_name like ?","#{params[:term]}%"])
+    results=Array.new
+    scientific_names.each {|taxon| results << {:id=>taxon.id,:label=>taxon.scientific_name,:value=>taxon.scientific_name}}
+    entered_names.each {|taxon| results << {:id=>taxon.id,:label=>taxon.entered_name,:value=>taxon.entered_name}}
+    respond_with (results.uniq)
+    
+  end
+  
   # AJAX ONLY METHODS BELOW
   def confirm_eol_taxon
         
