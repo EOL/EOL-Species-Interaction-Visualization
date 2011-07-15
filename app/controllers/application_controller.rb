@@ -5,7 +5,22 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   after_filter { |controller| add_callback(controller.response) }  # add json callback function if passed in
-  
+
+  rescue_from CanCan::AccessDenied do |exception|
+    not_authorized
+  end
+
+  def not_authorized
+    
+    message="You are not authorized to perform this action."
+    respond_to do |format|
+      format.html 
+      format.xml  { render :xml => message, :status=>401 }
+      format.json { render :json => {:message=>"^#{message}"}, :status=>401}
+    end
+
+  end
+            
   def strip_params(input)
     input.split("?")[0]
   end

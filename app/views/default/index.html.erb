@@ -4,6 +4,12 @@
 
 <div class="content">
 
+  <% if user_signed_in? %>
+    Welcome <%=current_user.email%> | <%= link_to 'Logout', {:controller=>:users, :action=>:sign_out}, :method=>:delete %>
+  <% else %>
+    <%= link_to 'Login', {:controller=>:users, :action=>:sign_in} %> | <%= link_to 'Sign up', {:controller=>:users, :action=>:sign_up} %>
+  <% end %>
+  
   <div id="navTabs">
     
     <ul>

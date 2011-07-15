@@ -11,9 +11,10 @@
   <%= javascript_include_tag :defaults %>
 
   <%= javascript_include_tag 'jquery-ui-1.8.10.custom.min', 'jquery.jnotify.min','grid.locale-en','jquery.jqGrid.min','jqgrid-defaults','jqModal' %>
+
+  <%= javascript_include_tag 'rails' %>
   
   <%= csrf_meta_tag %>
-  
 </head>
 
 <body>
@@ -32,6 +33,17 @@
 	<div id="eol_matching_dialog"> </div>
 	 	
 	<div class="main">
+    
+    <% if notice %>
+      <script language="javascript">
+        $.jnotify('<%=notice%>');	
+      </script>
+    <% end %>
+    <% if alert %>
+      <script language="javascript">
+        $.jnotify('<%=alert%>','error');	
+      </script>
+    <% end %>    
 
       <%= yield %>
       

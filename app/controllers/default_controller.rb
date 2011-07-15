@@ -11,5 +11,5 @@ class DefaultController < ApplicationController
     @interaction_categories_values.chomp!(",")
     
   end
-    
+          
 end

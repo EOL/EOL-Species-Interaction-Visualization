@@ -7,7 +7,6 @@ function buildErrorMessage(jsonData) {
   var objMsg=$.parseJSON(jsonData);
   $.each(objMsg, function(key, val) {
 			msgText += '* '; 
-//			window.alert(String(val).substr(0,1));
 			if (String(val).substr(0,1) == '^')  // an initial ^ in the rails error message indicates a custom error that should not show the attribute
 			{
 				msgText += String(val).replace('^','') + '<br />';

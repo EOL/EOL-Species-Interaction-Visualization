@@ -6,6 +6,12 @@ March 2010
 
 MIT License
 
+== Notes
+
+Most of the views utilize the jqGrid plugin, with data fetched via controllers that output JSON.  
+
+A 'resourceful' class (in the lib folder) is used to provide standard CRUD methods to all controller models in a REST fashion, including being able to output special JSON that is needed for the jqGrid plugin.  Some controllers utilize additional methods for special needs.  Be sure to check the config/routes.rb file for those special cases and if you need to add more.
+
 == Requirements
 
 * Rails 3.0.5 or better
@@ -13,10 +19,21 @@ MIT License
 
 = Gems
 
-* jquery-rails
-* mysql
+See Gemfile for full list.  Run 'bundle install' to get them.
+
+= Authentication
+
+The 'Devise' and 'CanCan' gems are used for authentication and roles based permissions. 
+
+See http://github.com/plataformatec/devise and http://github.com/ryanb/cancan
+
+Currently the app uses the default views for user signup and login.  You can generate the views into files for full customization by running:
+
+rails generate devise:views
 
 = Javascript frameworks
+
+The site uses the Jquery and is configured so that the Rails javascript helpers utilize jQuery instead of Prototype.
 
 * jQuery 1.5 or better
 * jQuery UI 1.8 or better (Cupertino theme in use)
@@ -25,4 +42,4 @@ MIT License
   * All widgets except slider
   * Effects: core, blind, fade, highlight
 * jQuery jNotify Plugin (http://www.givainc.com/labs/jnotify_jquery_plugin.htm)
-* jqGrid Table Plugin 3.8 (http://www.trirand.com/blog/)
+* jqGrid Table Plugin 3.8 or better (http://www.trirand.com/blog/)

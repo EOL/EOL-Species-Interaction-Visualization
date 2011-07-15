@@ -14,7 +14,6 @@ form legend { font-weight: bold; color: #666; }
 form fieldset div { padding: 0.25em 0; }
 label { margin-right: 5px; padding-right: 5px; width: 150px; display: block; float: left; text-align: right; position: relative; }
 label.error, 
-span.error { color: #C00; }
 label em { position: absolute; right: 0; font-size: 100%; font-style: normal; color: #C00; }
 input.error { border-color: #C00; background-color: #FEF; }
 input:focus,

@@ -35,7 +35,7 @@
     $("#ecosystems_table").jqGrid({
       url:'/ecosystems/index_jqgrid?format=json',
       colModel :[ 
-        {name:'ecosystem_name', label:'Name', index:'ecosystem_name', width:300, editable: true, edittype:'text',  editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'ecosystem_name', label:'Name', index:'ecosystem_name', width:300, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
         {name:'description', label:'Description',index:'description', width:350, sortable: false, editable: true, edittype:'textarea',editoptions:{rows:3,cols:50},searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
         {name:'biome_name', label:'Biome',index:'biome_name', width:250, sortable: true, editable: true, edittype:'select',editoptions:{dataUrl:'/biomes/htmlselect_jqgrid'} }, 
         {name:'biome_id',hidden:'true'},

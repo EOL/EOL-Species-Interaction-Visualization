@@ -77,8 +77,12 @@ module Resourceful
   end
 
   def create
-    eval("@#{model_name} = #{model_class_name}.create(params[:#{model_name.downcase}])")    
-    respond_with(eval("@#{model_name}"))
+    if eval("can? :create, #{model_class_name}")    
+      eval("@#{model_name} = #{model_class_name}.create(params[:#{model_name.downcase}])")    
+      respond_with(eval("@#{model_name}"))
+    else
+      not_authorized    
+    end
   end
       
   def show
@@ -90,15 +94,23 @@ module Resourceful
   end
 
   def update
-    eval("@#{model_name} = #{model_class_name}.find(params[:id])")
-    eval("@#{model_name}.update_attributes(params[:#{model_name}])")
-    respond_with(eval("@#{model_name}"))
+    if eval("can? :update, #{model_class_name}")    
+      eval("@#{model_name} = #{model_class_name}.find(params[:id])")
+      eval("@#{model_name}.update_attributes(params[:#{model_name}])")
+      respond_with(eval("@#{model_name}"))
+    else
+      not_authorized      
+    end
   end
 
   def destroy
-    eval("@#{model_name} = #{model_class_name}.find(params[:id])")    
-    eval("@#{model_name}.destroy")
-    respond_with(eval("@#{model_name}"))
+    if eval("can? :destroy, #{model_class_name}")    
+      eval("@#{model_name} = #{model_class_name}.find(params[:id])")    
+      eval("@#{model_name}.destroy")
+      respond_with(eval("@#{model_name}"))
+    else
+      not_authorized    
+    end
   end
 
   # export full model to CSV
@@ -134,21 +146,25 @@ module Resourceful
 
     case action
       when 'edit' 
-        clean_params_hash
-        # grab the model id and insert into it's railish place in the params hash
-        params[:id]=params_hash[:id]
-        self.update
+          clean_params_hash
+          # grab the model id and insert into it's railish place in the params hash
+          params[:id]=params_hash[:id]
+          self.update
       when 'del'      
-        # jqgrid has the option for a multi-select delete, in which case we will have an array of ids to deal with
-        params[:id].split(',').each {|id| eval("#{model_class_name}.find(id).destroy") } 
-        respond_with(eval("#{model_class_name}.new"))       
+          # jqgrid has the option for a multi-select delete, in which case we will have an array of ids to deal with
+          if eval("can? :destroy, #{model_class_name}")    
+            params[:id].split(',').each {|id| eval("#{model_class_name}.find(id).destroy") } 
+            respond_with(eval("#{model_class_name}.new"))       
+          else
+            not_authorized            
+          end
       when 'add'
-        clean_params_hash      
-        # remove 'id' paramaters before passing the params to Rails, since this is a new model object
-        eval("params[:#{model_name}].delete(:id)")    
-        self.create
+          clean_params_hash      
+          # remove 'id' paramaters before passing the params to Rails, since this is a new model object
+          eval("params[:#{model_name}].delete(:id)")    
+          self.create
       else
-        render :nothing=>true
+        not_authorized
     end
     
   end
