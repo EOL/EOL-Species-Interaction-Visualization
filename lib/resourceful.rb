@@ -77,7 +77,7 @@ module Resourceful
   end
 
   def create
-    if eval("can? :create, #{model_class_name}")    
+    if eval("can? :create, :#{model_name}")    
       eval("@#{model_name} = #{model_class_name}.create(params[:#{model_name.downcase}])")    
       respond_with(eval("@#{model_name}"))
     else
@@ -94,7 +94,7 @@ module Resourceful
   end
 
   def update
-    if eval("can? :update, #{model_class_name}")    
+    if eval("can? :update, :#{model_name}")    
       eval("@#{model_name} = #{model_class_name}.find(params[:id])")
       eval("@#{model_name}.update_attributes(params[:#{model_name}])")
       respond_with(eval("@#{model_name}"))
@@ -104,7 +104,7 @@ module Resourceful
   end
 
   def destroy
-    if eval("can? :destroy, #{model_class_name}")    
+    if eval("can? :destroy, :#{model_name}")    
       eval("@#{model_name} = #{model_class_name}.find(params[:id])")    
       eval("@#{model_name}.destroy")
       respond_with(eval("@#{model_name}"))
@@ -151,13 +151,12 @@ module Resourceful
           params[:id]=params_hash[:id]
           self.update
       when 'del'      
-          # jqgrid has the option for a multi-select delete, in which case we will have an array of ids to deal with
           if eval("can? :destroy, #{model_class_name}")    
             params[:id].split(',').each {|id| eval("#{model_class_name}.find(id).destroy") } 
             respond_with(eval("#{model_class_name}.new"))       
           else
-            not_authorized            
-          end
+            not_authorized                
+          end 
       when 'add'
           clean_params_hash      
           # remove 'id' paramaters before passing the params to Rails, since this is a new model object

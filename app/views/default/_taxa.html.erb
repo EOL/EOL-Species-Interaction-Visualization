@@ -28,7 +28,8 @@
       pager: '#taxa_pager',caption:"Taxa",rowNum:30,rowList:[30,50,100,200],
       sortname: 'entered_name',sortorder: 'asc',
       editurl: '/taxa/actions_jqgrid?format=json'      
-    }).navGrid('#taxa_pager',{'cloneToTop':true},{onInitializeForm:function(){bind_name_autocomplete();},editCaption: 'Edit species',width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{onInitializeForm:function(){bind_name_autocomplete();},addCaption: 'Add species', width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{jqModal:false,left:20,top:100})
+    }).navGrid('#taxa_pager',{<%unless can? :create, :taxon%>'add':false,<%end%><%unless can? :destroy, :taxon%>'del':false,<%end%><%unless can? :update, :taxon%>'edit':false,<%end%>'cloneToTop':true},
+      {onInitializeForm:function(){bind_name_autocomplete();},editCaption: 'Edit species',width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{onInitializeForm:function(){bind_name_autocomplete();},addCaption: 'Add species', width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{jqModal:false,left:20,top:100})
   });
 
   $(function(){ 
@@ -43,7 +44,8 @@
       pager: '#ecosystems_pager',caption:"Ecosystems",rowNum:10000,
       sortname: 'ecosystem_name',sortorder: 'asc',
       editurl: "/ecosystems/actions_jqgrid?format=json"  
-    }).navGrid('#ecosystems_pager',{'cloneToTop':true},{onInitializeForm:function(){reselect_biome();},editCaption: 'Edit ecosystem',width: 650, serializeEditData: function(postdata){pd=postdata;return {'ecosystem':{'oper': 'edit','id': postdata.id, 'description': postdata.description,'biome_id':postdata.biome_name,'name':postdata.ecosystem_name}};}},{addCaption: 'Add ecosystem',width: 650, serializeEditData: function(postdata){pd=postdata;return {'ecosystem':{'oper': 'add','id': postdata.id, 'biome_id':postdata.biome_name,'description': postdata.description,'name':postdata.ecosystem_name}};}},{jqModal:false,left:20,top:100});
+    }).navGrid('#ecosystems_pager',{<%unless can? :create, :ecosystem%>'add':false,<%end%><%unless can? :destroy, :ecosystem%>'del':false,<%end%><%unless can? :update, :ecosystem%>'edit':false,<%end%>'cloneToTop':true},
+      {onInitializeForm:function(){reselect_biome();},editCaption: 'Edit ecosystem',width: 650, serializeEditData: function(postdata){pd=postdata;return {'ecosystem':{'oper': 'edit','id': postdata.id, 'description': postdata.description,'biome_id':postdata.biome_name,'name':postdata.ecosystem_name}};}},{addCaption: 'Add ecosystem',width: 650, serializeEditData: function(postdata){pd=postdata;return {'ecosystem':{'oper': 'add','id': postdata.id, 'biome_id':postdata.biome_name,'description': postdata.description,'name':postdata.ecosystem_name}};}},{jqModal:false,left:20,top:100});
   });
       
  function addTaxaToEcosystem() {

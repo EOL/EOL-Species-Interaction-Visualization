@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     
     message="You are not authorized to perform this action."
     respond_to do |format|
-      format.html 
+      format.html { redirect_to :root, :alert=>message}
       format.xml  { render :xml => message, :status=>401 }
       format.json { render :json => {:message=>"^#{message}"}, :status=>401}
     end

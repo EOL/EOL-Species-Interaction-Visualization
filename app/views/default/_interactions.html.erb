@@ -14,7 +14,8 @@
       pager: '#interaction_types_pager',caption: 'Interaction Types',rowNum:30,rowList:[30,50],
       sortname: 'interaction_name',sortorder: 'asc',multiselect: false,
       editurl: "/interactions/actions_jqgrid?format=json"  
-    }).navGrid('#interaction_types_pager',{'cloneToTop':true},{editCaption: 'Edit interaction type',width: 650, serializeEditData: function(postdata){pd=postdata;return {'interaction':{'oper': 'edit','id': postdata.id, 'interaction_category_id':postdata.category_name,'name':postdata.interaction_name}};}},{addCaption: 'Add interaction type',width: 650, serializeEditData: function(postdata){return {'interaction':{'oper': 'add','interaction_category_id':postdata.category_name,'name':postdata.interaction_name}};}},{jqModal:false,left:20,top:100});
+    }).navGrid('#interaction_types_pager',{<%unless can? :create, :interaction%>'add':false,<%end%><%unless can? :destroy, :interaction%>'del':false,<%end%><%unless can? :update, :interaction%>'edit':false,<%end%>'cloneToTop':true},
+      {editCaption: 'Edit interaction type',width: 650, serializeEditData: function(postdata){pd=postdata;return {'interaction':{'oper': 'edit','id': postdata.id, 'interaction_category_id':postdata.category_name,'name':postdata.interaction_name}};}},{addCaption: 'Add interaction type',width: 650, serializeEditData: function(postdata){return {'interaction':{'oper': 'add','interaction_category_id':postdata.category_name,'name':postdata.interaction_name}};}},{jqModal:false,left:20,top:100});
   });
 
   $(function(){ 
@@ -26,7 +27,8 @@
       pager: '#interaction_categories_pager',caption: 'Interaction Type Categories',rowNum:30,
       sortname: 'name',sortorder: 'asc',multiselect: false,
       editurl: "/interaction_categories/actions_jqgrid?format=json&callback=refreshInteractions"  
-    }).navGrid('#interaction_categories_pager',{'cloneToTop':true},{editCaption: 'Edit interaction category',width: 650, serializeEditData: function(postdata){return {'interactioncategory':postdata};}},{addCaption: 'Add interaction category',width: 650, serializeEditData: function(postdata){return {'interactioncategory':postdata};}},{jqModal:false,left:20,top:100});
+    }).navGrid('#interaction_categories_pager',{<%unless can? :create, :interaction_category%>'add':false,<%end%><%unless can? :destroy, :interaction_category%>'del':false,<%end%><%unless can? :update, :interaction_category%>'edit':false,<%end%>'cloneToTop':true},
+      {editCaption: 'Edit interaction category',width: 650, serializeEditData: function(postdata){return {'interactioncategory':postdata};}},{addCaption: 'Add interaction category',width: 650, serializeEditData: function(postdata){return {'interactioncategory':postdata};}},{jqModal:false,left:20,top:100});
   });
         
 </script>

@@ -3,24 +3,27 @@ class Ability
 
   def initialize(user)
     # Define abilities for the passed in user here.
+
+    # NOTE: only certain actions are actually checked for permissions, therefore most actions are allowed by default
+    # and do not need to be defined here.  Update, create and destroy actions are checked for permissions via the resourceful.rb
+    # file, which acts as the superclass for most controllers.  All other actions by default are not checked and are fully allowed.   
     
     user ||= User.new # guest user
 
-    # by default, we'll let users do anything, then selectively remove permissions as needed
-    can :manage, :all
-      
-    if user.role? :editor # editor role cannot delete anything
-      cannot :destroy, :all
+    if user.role? :admin # administrator can do everything, and can enter admin area
+      can :manage, :all
+      can :administer, :all
     end
     
-    if user.role? :data_entry # data_entry role cannot update or delete
-      cannot [:destroy,:update], :all
+    if user.role? :editor # editor role can update or create any object but cannot delete anything
+      can [:update,:create], :all
     end
     
-    if user.no_role? # if we have no role, then remove the ability to delete, update, create or export
-      cannot [:destroy,:update,:create], :all
+    if user.role? :data_entry # data_entry role can create taxa and observations only and cannot edit or delete them
+      can :create, :taxon
+      can :create, :observation
     end
-    
+        
     # The first argument to `can` is the action you are giving the user permission to do.
     # If you pass :manage it will apply to every action. Other common actions here are
     # :read, :create, :update and :destroy.
