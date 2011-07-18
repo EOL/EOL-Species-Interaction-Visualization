@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
     end
 
   end
+
+  def check_for_admin_logged_in
+    not_authorized unless can? :administer, :all
+  end
             
   def strip_params(input)
     input.split("?")[0]

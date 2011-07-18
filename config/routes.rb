@@ -62,8 +62,11 @@ EolSpeciesViz::Application.routes.draw do
   resources :interactions,:ecosystems do
     get 'index_jqgrid', 'export', :on=>:collection
   end
-  resources :interaction_categories,:biomes do
+  resources :interaction_categories,:biomes,:roles do
     get 'htmlselect_jqgrid', 'export', :on=>:collection
+  end
+  resources :users do
+    get 'index_jqgrid', 'export', :on=>:collection
   end
     
   # This is a legacy wild controller route that's not recommended for RESTful applications.

@@ -1,0 +1,43 @@
+
+<script>
+	$(function() {
+		$( "#navTabs" ).tabs();
+	});
+</script>
+
+<br />
+
+<script language="JavaScript">
+    
+  $(function(){ 
+    $("#user_table").jqGrid({
+      url:'/users/index_jqgrid.json?jqgrid=true',
+      colModel :[ 
+        {name:'email', label:'Email',index:'email', width:350,editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'name', label:'Role',index:'role_name', width:250, sortable: true, editable: true, edittype:'select',editoptions:{dataUrl:'/roles/htmlselect_jqgrid'} }, 
+        {name:'last_sign_in_at', label:'Last Signed In', index:'last_sign_in_at', formatter:'date', formatoptions:{ srcformat:'Y-m-DTh:i:sZ', newformat:'m/d/Y' }, sorttype: "date", datefmt: "m/d/Y h:i:s A" , width:350},
+        {name:'role_id',hidden:'true'},        
+        {name:'password',label:'Password (only enter to change)',hidden:'true',editable: true, edittype:'text',editoptions: {size:50, maxlength: 200}}
+      ],
+      pager: '#user_pager',caption:"Users",rowNum:30,rowList:[30,50,100,200],
+      sortname: 'email',sortorder: 'asc',
+      editurl: '/users/actions_jqgrid?format=json'      
+      }).navGrid('#user_pager',{'cloneToTop':true},
+        {editCaption: 'Edit user',width: 800, serializeEditData: function(postdata){pd=postdata;return {'user':{'oper': 'edit','id': postdata.id,'password': postdata.password,'email': postdata.email,'role_id':postdata.name}};}},{addCaption: 'Add user', width: 800, serializeEditData: function(postdata){pd=postdata;return {'user':{'oper': 'add','password': postdata.password,'email': postdata.email,'role_id':postdata.name}};}},{jqModal:false,left:20,top:100})
+  });
+</script>
+ <%=link_to '[export all users to csv]', :controller=>'users', :action=>'export'%>
+
+<table id="user_table"></table> 
+ <div id="user_pager"></div>
+ 
+ <script>
+  // bind events
+  
+  $(document).ready(
+      function()
+      {       
+        removeBottomToolbarButtons('user');
+      }
+  );  
+</script>

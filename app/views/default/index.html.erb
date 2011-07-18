@@ -6,6 +6,7 @@
         <li><a href="#interactions">Interaction Types</a></li>
         <li><a href="#observations">Observations</a></li>
         <li><a href="#viz">Visualize</a></li>
+        <% if can? :administer, :all%><li><a href="#users">Users</a></li><% end %>
      </ul>
      
      <div id="taxa">
@@ -31,6 +32,14 @@
       <%= render :partial=>'visualize' %>
      
      </div>
+     
+     <% if can? :administer, :all%>
+       <div id="users">
+     
+        <%= render :partial=>'users/index' %>
+     
+       </div>     
+     <% end %>
        
   </div>
 

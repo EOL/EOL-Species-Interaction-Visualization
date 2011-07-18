@@ -1,0 +1,5 @@
+<select> 
+  <% @roles.each do |role| %>
+  <option value="<%=role.id%>"><%=role.name%></option> 
+  <% end %>
+</select>

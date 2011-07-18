@@ -8,6 +8,8 @@ class Ability
     # and do not need to be defined here.  Update, create and destroy actions are checked for permissions via the resourceful.rb
     # file, which acts as the superclass for most controllers.  All other actions by default are not checked and are fully allowed.   
     
+    # by design, each user can only be in one role -- however, this file is coded so that if this is changed in the future, multiple roles support is possible
+    
     user ||= User.new # guest user
 
     if user.role? :admin # administrator can do everything, and can enter admin area

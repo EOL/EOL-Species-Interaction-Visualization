@@ -172,7 +172,9 @@ module Resourceful
   def clean_params_hash
     # remove 'oper' paramater before passing the params to Rails, since it's not part of the model object
     eval("params.delete(:oper)")        
-    eval("params[:#{model_name}].delete(:oper) if params[:#{model_name}]")        
+    eval("params[:#{model_name}].delete(:oper) if params[:#{model_name}]")     
+    # remove 'password' parameter if it's blank so admin's can update users without having to change the password all the time (blank means no change)
+    eval("params[:#{model_name}].delete(:password) if params[:#{model_name}][:password].blank?")         
   end
 
 end

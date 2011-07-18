@@ -1,17 +1,17 @@
 <script>
-  function bind_name_autocomplete() {
+  function bindNameAutocomplete() {
     $( "#entered_name" ).autocomplete({source: "/taxa/taxon_name_autocomplete.json",minLength: 2});  
     return true;
   }
   
   // since the form is not built and the drop-down menu is not shown to the user immediately, we need to wait a bit before reselecting the correct biome
-  function reselect_biome() {
-   var t=setTimeout("get_biome_id();",1000);
+  function reselectBiome() {
+   var t=setTimeout("getBiomeID();",1000);
    return true; 
   }
   
   // this method will find the correct biome_id and reselect it in the drop-down menu when a user is editing an ecosystem
-  function get_biome_id() {
+  function getBiomeID() {
     var selected_row_id = $("#ecosystems_table").jqGrid('getGridParam','selrow');
     var row = $("#ecosystems_table").jqGrid('getRowData',selected_row_id);  
     $('#biome_name').val(row.biome_id);
@@ -29,7 +29,7 @@
       sortname: 'entered_name',sortorder: 'asc',
       editurl: '/taxa/actions_jqgrid?format=json'      
     }).navGrid('#taxa_pager',{<%unless can? :create, :taxon%>'add':false,<%end%><%unless can? :destroy, :taxon%>'del':false,<%end%><%unless can? :update, :taxon%>'edit':false,<%end%>'cloneToTop':true},
-      {onInitializeForm:function(){bind_name_autocomplete();},editCaption: 'Edit species',width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{onInitializeForm:function(){bind_name_autocomplete();},addCaption: 'Add species', width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{jqModal:false,left:20,top:100})
+      {onInitializeForm:function(){bindNameAutocomplete();},editCaption: 'Edit species',width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{onInitializeForm:function(){bindNameAutocomplete();},addCaption: 'Add species', width: 650, serializeEditData: function(postdata){return {'taxon':postdata};}},{jqModal:false,left:20,top:100})
   });
 
   $(function(){ 
@@ -45,7 +45,7 @@
       sortname: 'ecosystem_name',sortorder: 'asc',
       editurl: "/ecosystems/actions_jqgrid?format=json"  
     }).navGrid('#ecosystems_pager',{<%unless can? :create, :ecosystem%>'add':false,<%end%><%unless can? :destroy, :ecosystem%>'del':false,<%end%><%unless can? :update, :ecosystem%>'edit':false,<%end%>'cloneToTop':true},
-      {onInitializeForm:function(){reselect_biome();},editCaption: 'Edit ecosystem',width: 650, serializeEditData: function(postdata){pd=postdata;return {'ecosystem':{'oper': 'edit','id': postdata.id, 'description': postdata.description,'biome_id':postdata.biome_name,'name':postdata.ecosystem_name}};}},{addCaption: 'Add ecosystem',width: 650, serializeEditData: function(postdata){pd=postdata;return {'ecosystem':{'oper': 'add','id': postdata.id, 'biome_id':postdata.biome_name,'description': postdata.description,'name':postdata.ecosystem_name}};}},{jqModal:false,left:20,top:100});
+      {onInitializeForm:function(){reselectBiome();},editCaption: 'Edit ecosystem',width: 650, serializeEditData: function(postdata){pd=postdata;return {'ecosystem':{'oper': 'edit','id': postdata.id, 'description': postdata.description,'biome_id':postdata.biome_name,'name':postdata.ecosystem_name}};}},{addCaption: 'Add ecosystem',width: 650, serializeEditData: function(postdata){pd=postdata;return {'ecosystem':{'oper': 'add','id': postdata.id, 'biome_id':postdata.biome_name,'description': postdata.description,'name':postdata.ecosystem_name}};}},{jqModal:false,left:20,top:100});
   });
       
  function addTaxaToEcosystem() {

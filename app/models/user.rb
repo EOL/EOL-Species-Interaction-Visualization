@@ -2,33 +2,30 @@ class User < ActiveRecord::Base
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :validatable,
          :recoverable, :rememberable, :trackable, 
          :token_authenticatable, :encryptable
 
-  has_and_belongs_to_many :roles
+  belongs_to :role
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-
-  after_create :add_to_roles
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role_id
   
-  def add_to_roles
-    self.roles << Role.find_by_name('DataEntry') # by default, add new users to data entry role
+  after_create :add_to_role
+  
+  def add_to_role
+    if self.no_role?
+      self.role = Role.find_by_name('DataEntry') # by default, add new users to data entry role
+      self.save
+    end
   end
   
   def role?(role)
-      return !!self.roles.find_by_name(role.to_s.camelize)
+      self.no_role? ? false : role.to_s.camelize == self.role.name
   end
   
   def no_role?
-      return !!self.roles.empty?
+      return !!self.role_id.nil?
   end
-  
-  def display_roles
-    output=[]
-    self.roles.each {|role| output << role.name}
-    output.join(',')
-  end
-  
+    
 end
