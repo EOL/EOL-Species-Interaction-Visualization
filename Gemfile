@@ -13,7 +13,7 @@ gem 'capistrano-ext'
 # gem 'ruby-debug'
 
 # using acts_as_tree for the biomes, which are hierarchical
-gem 'acts_as_tree',:git=>'git://github.com/parasew/acts_as_tree.git'
+#gem 'acts_as_tree',:git=>'git://github.com/parasew/acts_as_tree.git'
 
 # using mysql as our database
 gem 'mysql', :require => 'mysql'
