@@ -19,8 +19,8 @@
         datatype: 'jsonp',
         jsonReader : { 
               root: 'results', 
-              page: onPageFromEOL,   // which page we are on
-              total: totalPagesFromEOL,  // total number of pages
+              page: onPageFromEOL,   // which page we are on, a function defined in 'application.js'
+              total: totalPagesFromEOL,  // total number of pages, a function defined in 'application.js'
               records: 'totalResults', // total number of results
               cell: '', 
               id: 'id',
@@ -45,6 +45,9 @@
               return false;
             }
           <% end %>
+          if (totalResults == 0) {// if no results are found, continue
+            noEOLmatch();
+          } 
           $('#status').html("Found " + totalResults + " taxa in EOL matching '<%=@taxon.entered_name%>'...<br />");
           // find all EOL images
           findImages();
@@ -65,7 +68,7 @@
     // get an EOL taxa image for the specified ID and set the image column in the appropriate row of the table
     function getEOLImage(id) {
        $.ajax({
-          type: "GET",dataType: "jsonp", url: "http://www.eol.org/api/pages/" + id + ".json",
+          type: "GET",dataType: "jsonp", url: "<%=$WEB_SERVICE_BASE_URL%>pages/" + id + ".json",
           data: "vetted=1&common_names=1&images=1&videos=0&text=0&details=1",
           success: function(data, textStatus, jqXHR){
               if (data.dataObjects.length > 0)  {
@@ -96,6 +99,18 @@
          error: function(jqXHR, textStatus, errorThrown){errorMessage(errorThrown);}
        });
      }
+
+     function noEOLmatch() {
+       $('#status').html('No match found...');
+       startLoading();
+       $.ajax({
+          type: "POST",dataType: "json",url: "/taxa/confirm_eol_taxon?format=json",
+          data: "id=" + <%=@taxon.id%> + "&eol_id=none",
+          complete: function(jqXHR, textStatus){endLoading();},
+          success: function(data, textStatus, jqXHR){taxaConfirmed();warningMessage('No match was found');},
+          error: function(jqXHR, textStatus, errorThrown){errorMessage(errorThrown);}
+        });
+      }
   
     <% if @id # this means we are showing only a single taxon, so upon confirmation, we can just close the dialog %>
       function taxaConfirmed() {

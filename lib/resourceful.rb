@@ -177,4 +177,57 @@ module Resourceful
     eval("params[:#{model_name}].delete(:password) if params[:#{model_name}][:password].blank?")         
   end
 
+  def run_custom_query(base_query)
+       # this method can be called if you need an 'index' action for a model, but need to specify a custom query
+       # for example, if you need a join table instead of just a regular find on a model object
+
+       result_set=eval("#{model_class_name}.find_by_sql(\"#{base_query}\")")
+
+       on_page=params[:page] || 1
+       rows_to_return=params[:rows] || "30"
+       sort_by=params[:sidx]
+       sort_order=params[:sord] || "asc"
+
+       search_field=params[:searchField]
+       search_string=params[:searchString]
+       search_operator=params[:searchOper] || "cn" # default to contains
+
+       if rows_to_return.downcase != "all"
+         offset=rows_to_return.to_i*on_page.to_i - rows_to_return.to_i
+         offset = 0 if offset < 0
+         total_pages=(result_set.size/rows_to_return.to_f).ceil
+       else
+         offset=0
+         total_pages=1      
+       end
+
+       eval("@#{model_name}=Hash.new")
+       eval("@#{model_name}[:total]=total_pages.to_s")
+       eval("@#{model_name}[:page]=on_page.to_s")
+       eval("@#{model_name}[:records]=result_set.size.to_s")
+
+       build_query=""
+
+       if search_field
+         case search_operator
+           when "cn" then build_query+=" where #{search_field} like '%#{search_string}%'"
+           when "bw" then build_query+=" where #{search_field} like '#{search_string}%'"
+           when "ew" then build_query+=" where #{search_field} like '%#{search_string}%'"
+           when "eq" then build_query+=" where #{search_field} = '#{search_string}'"
+         end
+       end
+       build_query+=" order by #{sort_by} #{sort_order}" if sort_by
+       build_query+=" limit #{rows_to_return} offset #{offset} " unless rows_to_return.to_s.downcase == "all"
+
+       page_of_result_set=eval("#{model_class_name}.find_by_sql(\"#{base_query} #{build_query}\")")
+
+       rows=Array.new
+       page_of_result_set.each {|entry| rows << entry.attributes}
+
+       eval("@#{model_name}[:rows] = rows")
+
+       return eval("@#{model_name}")
+  
+  end
+
 end

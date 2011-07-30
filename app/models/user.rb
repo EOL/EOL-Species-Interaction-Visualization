@@ -8,6 +8,12 @@ class User < ActiveRecord::Base
 
   belongs_to :role
 
+  has_many :taxa
+  has_many :ecosystems
+  has_many :interactions
+  has_many :interaction_categories
+  has_many :observations
+  
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role_id
   

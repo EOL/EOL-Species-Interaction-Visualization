@@ -56,7 +56,7 @@ EolSpeciesViz::Application.routes.draw do
     get 'find_by_interaction', 'export', :on=> :collection
   end
   resources :taxa do
-    get 'search', 'match_to_eol', 'taxon_name_autocomplete', 'match_taxon_to_eol', 'export', :on=>:collection
+    get 'index_jqgrid', 'search', 'match_to_eol', 'taxon_name_autocomplete', 'match_taxon_to_eol', 'export', :on=>:collection
     get 'confirm_eol_taxon'
   end
   resources :interactions,:ecosystems do

@@ -1,6 +1,7 @@
 class Observation < ActiveRecord::Base
 
   belongs_to :interaction
+  belongs_to :user
   belongs_to :parent_taxon, :class_name=>'Taxon', :foreign_key=>'left_taxon_id'
   belongs_to :child_taxon, :class_name=>'Taxon', :foreign_key=>'right_taxon_id'
 

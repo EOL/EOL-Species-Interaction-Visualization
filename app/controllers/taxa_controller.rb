@@ -8,6 +8,16 @@ class TaxaController < ApplicationController
   before_filter :ajax_only, :only=>:confirm_eol_taxon  
 
   include Resourceful
+
+  # this is a custom query method, so instead of using the resourceful 'index' method (which does a model object find(:all),
+  # we are calling a function defined resourceful that generates the data we need to return using a custom query, which may include join tables  
+  def index_jqgrid
+
+    sql_query="select t.*,u.email from taxa as t inner join users as u on t.user_id=u.id"
+    @taxa=run_custom_query(sql_query)
+    respond_with(@taxa)
+    
+  end
   
   def search
 
@@ -66,7 +76,7 @@ class TaxaController < ApplicationController
       @taxon=Taxon.find_by_id(@id)
       @auto_match_single = false
     else
-      @taxon=Taxon.find(:first,:conditions=>'eol_taxon_id is null or eol_taxon_id=""',:order=>'scientific_name ASC,entered_name ASC') 
+      @taxon=Taxon.find(:first,:conditions=>'(eol_taxon_id is null or eol_taxon_id="") AND (last_eol_update is null or last_eol_update="")',:order=>'scientific_name ASC,entered_name ASC') 
       @auto_match_single = true 
     end
 
@@ -89,9 +99,14 @@ class TaxaController < ApplicationController
   def confirm_eol_taxon
         
     @taxon=Taxon.find(params[:id])
-    @taxon.scientific_name=params[:scientific_name]
-    @taxon.eol_taxon_id=params[:eol_id]
-    @taxon.image_url=params[:image_url]
+    
+    if params[:eol_id]=='none'
+      @taxon.eol_taxon_id=nil
+    else
+      @taxon.scientific_name=params[:scientific_name]
+      @taxon.eol_taxon_id=params[:eol_id]
+      @taxon.image_url=params[:image_url]
+    end
     @taxon.last_eol_update=Time.now
     @taxon.save
     

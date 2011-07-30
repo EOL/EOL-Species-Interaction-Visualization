@@ -10,14 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110714205617) do
+ActiveRecord::Schema.define(:version => 20110729194644) do
 
   create_table "biomes", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
-    t.integer  "sort_order", :default => 100
+    t.integer  "sort_order",   :default => 100
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "left_column"
+    t.integer  "right_column"
+    t.integer  "scope"
   end
 
   create_table "ecosystems", :force => true do |t|
@@ -27,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20110714205617) do
     t.integer  "sort_order",                 :default => 100
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",                    :default => 1,   :null => false
   end
 
   create_table "ecosystems_taxa", :id => false, :force => true do |t|
@@ -37,24 +41,27 @@ ActiveRecord::Schema.define(:version => 20110714205617) do
   add_index "ecosystems_taxa", ["taxon_id", "ecosystem_id"], :name => "index_ecosystems_taxa_on_taxon_id_and_ecosystem_id", :unique => true
 
   create_table "interaction_categories", :force => true do |t|
-    t.string   "name",       :limit => 500, :null => false
+    t.string   "name",       :limit => 500,                :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",                   :default => 1, :null => false
   end
 
   create_table "interactions", :force => true do |t|
-    t.string   "name",                    :limit => 500, :null => false
-    t.integer  "interaction_category_id",                :null => false
+    t.string   "name",                    :limit => 500,                :null => false
+    t.integer  "interaction_category_id",                               :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",                                :default => 1, :null => false
   end
 
   create_table "observations", :force => true do |t|
-    t.integer  "left_taxon_id",  :null => false
-    t.integer  "right_taxon_id", :null => false
-    t.integer  "interaction_id", :null => false
+    t.integer  "left_taxon_id",                 :null => false
+    t.integer  "right_taxon_id",                :null => false
+    t.integer  "interaction_id",                :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",        :default => 1, :null => false
   end
 
   create_table "roles", :force => true do |t|
@@ -64,7 +71,7 @@ ActiveRecord::Schema.define(:version => 20110714205617) do
   end
 
   create_table "taxa", :force => true do |t|
-    t.string   "entered_name",    :limit => 200, :null => false
+    t.string   "entered_name",    :limit => 200,                :null => false
     t.string   "scientific_name", :limit => 400
     t.string   "image_url",       :limit => 400
     t.datetime "last_eol_update"
@@ -72,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20110714205617) do
     t.string   "rank"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id",                        :default => 1, :null => false
   end
 
   create_table "taxonomies", :force => true do |t|

@@ -46,12 +46,16 @@ function endLoading() {
 
 // special functions that are used to create the values jqGrid needs to do proper paging, using the EOL API json as a direct source
 function onPageFromEOL (obj) {
-  return obj.self.substr(obj.self.lastIndexOf('page=')+5);
+	if (obj.self) {	return obj.self.substr(obj.self.lastIndexOf('page=')+5);}
+		else
+		{ return 1; }
 }
 
 // special functions that are used to create the values jqGrid needs to do proper paging, using the EOL API json as a direct source
 function totalPagesFromEOL (obj) {
-  return Math.ceil(parseFloat(obj.totalResults)/parseFloat(obj.itemsPerPage));
+	if (obj.self) {return Math.ceil(parseFloat(obj.totalResults)/parseFloat(obj.itemsPerPage));}
+		else
+		{ return 1; }		
 }
 
 function removeBottomToolbarButtons (name) {

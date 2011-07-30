@@ -5,6 +5,7 @@ class Taxon < ActiveRecord::Base
   validates_uniqueness_of :entered_name, :message=>'^Taxon name is already in the system.'
    
   has_and_belongs_to_many :ecosystems
+  belongs_to :user
 
   has_many :taxonomies, :dependent=>:destroy
   has_many :child_observations, :class_name=>'Observation', :foreign_key => 'left_taxon_id', :dependent=>:destroy

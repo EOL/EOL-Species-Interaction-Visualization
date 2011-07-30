@@ -6,7 +6,7 @@
 
   $(function(){ 
     $("#interaction_types_table").jqGrid({
-      url:'/interactions/index_jqgrid?format=json',
+      url:'/interactions/index_jqgrid.json',
       colModel :[ 
         {name:'interaction_name', label:'Name', index:'interaction_name', width:300, editable: true, editoptions: {size:50, maxlength: 200}, edittype:'text', searchoptions: { sopt: ['cn', 'bw', 'eq','ew' ]}}, 
         {name:'category_name', label:'Category',index:'category_name', width:300, sortable: true, editable: true, edittype:'select',editoptions:{dataUrl:'/interaction_categories/htmlselect_jqgrid'}}, 

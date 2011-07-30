@@ -6,9 +6,10 @@ class CreateRoles < ActiveRecord::Migration
     end
     # note: role names should be store in CamelizedFormat
     # role names are referenced in the 'Ability' model
-    Role.create(:id=>1,:name=>'Admin')
+    admin=Role.create(:id=>1,:name=>'Admin')
     Role.create(:id=>2,:name=>'Editor')
     Role.create(:id=>3,:name=>'DataEntry')    
+    User.find(1).update_attributes(:role_id=>admin.id) #default user is an admin
   end
  
   def self.down

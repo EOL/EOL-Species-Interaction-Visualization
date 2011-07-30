@@ -11,7 +11,7 @@
     
   $(function(){ 
     $("#user_table").jqGrid({
-      url:'/users/index_jqgrid.json?jqgrid=true',
+      url:'/users/index_jqgrid.json',
       colModel :[ 
         {name:'email', label:'Email',index:'email', width:350,editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
         {name:'name', label:'Role',index:'role_name', width:250, sortable: true, editable: true, edittype:'select',editoptions:{dataUrl:'/roles/htmlselect_jqgrid'} }, 
