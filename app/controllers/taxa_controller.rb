@@ -83,7 +83,8 @@ class TaxaController < ApplicationController
     render :layout=>false
 
   end
-
+  
+  # AJAX ONLY METHODS BELOW
   def taxon_name_autocomplete
     
     scientific_names=Taxon.find(:all,:conditions=>["scientific_name like ?","#{params[:term]}%"])
@@ -95,7 +96,6 @@ class TaxaController < ApplicationController
     
   end
   
-  # AJAX ONLY METHODS BELOW
   def confirm_eol_taxon
         
     @taxon=Taxon.find(params[:id])

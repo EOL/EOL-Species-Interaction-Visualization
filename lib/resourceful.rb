@@ -79,6 +79,8 @@ module Resourceful
   def create
     if eval("can? :create, :#{model_name}")    
       eval("@#{model_name} = #{model_class_name}.create(params[:#{model_name.downcase}])")    
+      # if model object has a user_id column, associate with logged in user upon creation
+      eval("@#{model_name}.update_attribute(:user_id,current_user.id) if @#{model_name}.respond_to?(:user_id)")          
       respond_with(eval("@#{model_name}"))
     else
       not_authorized    

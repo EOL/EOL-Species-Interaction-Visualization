@@ -14,7 +14,11 @@ class Taxon < ActiveRecord::Base
   scope :with_name_like, lambda {|str| 
     { :conditions => ['lower(scientific_name) like ? OR lower(entered_name) like ?', %(%#{str.downcase}%),  %(%#{str.downcase}%)]}
   }
- 
+
+  scope :with_name, lambda {|str| 
+    { :limit=>1,:conditions => ['lower(scientific_name) = ? OR lower(entered_name) = ?', %(#{str.downcase}),  %(#{str.downcase})]}
+  }
+   
   def eol_taxon?
     !self.eol_taxon_id.nil?
   end

@@ -1,1 +1,34 @@
-This is where observations will go.
+<% if can? :create, :observation %>
+  <h3>Enter an Observation</h3>
+  <%= render :partial=>'observations/create' %>
+<% end %>
+
+<script>
+  
+  $(function(){ 
+    $("#observations_table").jqGrid({
+      url:'/observations/index_jqgrid.json',
+      colModel :[ 
+        {name:'left_entered_name', label:'First Taxon', index:'left_entered_name', width:200, sortable: true}, 
+        {name:'interaction_name', label:'Interaction',index:'interaction_name', width:100, sortable: true}, 
+        {name:'right_entered_name', label:'Second Taxon',index:'right_entered_name', width:200, sortable: true}, 
+      ],
+      pager: '#observations_pager',caption: 'Observations',rowNum:30,rowList:[30,50],
+      sortname: 'created_at',sortorder: 'asc',multiselect: false,
+    })
+    });  
+</script>
+
+ <%=link_to '[export all observations to csv]', :controller=>'observations', :action=>'export'%>
+ <table id="observations_table"></table> 
+ <div id="observations_pager"></div>
+
+ <script>
+   // bind events
+   $(document).ready(
+       function()
+       {
+         removeBottomToolbarButtons('observations');
+       }
+   );  
+ </script>

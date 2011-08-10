@@ -13,5 +13,20 @@ class InteractionsController < ApplicationController
     respond_with(@interactions)
   
   end
+
+  # AJAX ONLY METHODS BELOW
   
+  # given a interaction category, return an HTML select list of interactions for the user to select
+  def get_interaction_select
+
+    interaction_category_id=params[:interaction_category_id]
+    if interaction_category_id
+      interactions=Interaction.where(:interaction_category_id=>interaction_category_id).order('name')
+      render :partial=>'interaction_select', :layout=>false,:locals=>{:interactions=>interactions}
+    else
+      render :nothing=>true
+    end
+    
+  end
+    
 end

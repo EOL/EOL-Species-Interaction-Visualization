@@ -53,15 +53,19 @@ EolSpeciesViz::Application.routes.draw do
   root :to => "default#index"
 
   resources :observations do
-    get 'find_by_interaction', 'export', :on=> :collection
+    get 'index_jqgrid', 'export', :on=> :collection
+    post 'create_from_form'
   end
   resources :taxa do
     get 'index_jqgrid', 'search', 'match_to_eol', 'taxon_name_autocomplete', 'match_taxon_to_eol', 'export', :on=>:collection
     get 'confirm_eol_taxon'
   end
-  resources :interactions,:ecosystems do
-    get 'index_jqgrid', 'export', :on=>:collection
+  resources :interactions do
+    get 'index_jqgrid', 'export','get_interaction_select', :on=>:collection
   end
+  resources :ecosystems do
+    get 'index_jqgrid', 'export', :on=>:collection
+  end  
   resources :interaction_categories,:biomes,:roles do
     get 'htmlselect_jqgrid', 'export', :on=>:collection
   end
