@@ -24,42 +24,7 @@ class TaxaController < ApplicationController
     respond_with(Taxon.with_name_like(params[:name]))
 
   end
-  
-  # export results to CSV
-  def export
-  
-      taxa = Taxon.find(:all, :order => "entered_name ASC")
-      outfile = "taxa_" + Time.now.strftime("%m-%d-%Y") + ".csv"
-
-      csv_data = CSV.generate do |csv|
-        csv << [
-        "id",
-        "Entered Name",
-        "EOL Scientific Name",
-        "EOL Image URL",
-        "Last EOL Match",
-        "EOL Taxon ID",
-        "Entered Date"
-        ]
-        taxa.each do |taxon|
-          csv << [
-          taxon.id,
-          taxon.entered_name,
-          taxon.scientific_name,
-          taxon.image_url,
-          taxon.last_eol_update,
-          taxon.eol_taxon_id,
-          taxon.created_at
-          ]
-        end
-      end
-
-      send_data csv_data,
-        :type => 'text/csv; charset=iso-8859-1; header=present',
-        :disposition => "attachment; filename=#{outfile}"
     
-  end
-  
   # find all taxa in need of matching and begin the matching process
   def match_to_eol
     

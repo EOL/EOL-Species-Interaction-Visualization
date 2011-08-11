@@ -7,7 +7,10 @@ class ObservationsController < ApplicationController
   # this is a custom query method, so instead of using the resourceful 'index' method (which does a model object find(:all),
   # we are calling a function defined resourceful that generates the data we need to return using a custom query, which may include join tables
   def index_jqgrid
-    sql_query="select o.id,o.created_at,i.name as interaction_name,o.left_taxon_id,o.right_taxon_id,t1.scientific_name as left_scientific_name,t1.entered_name as left_entered_name,t1.rank as left_rank,t2.scientific_name as right_scientific_name,t2.entered_name as right_entered_name,t2.rank as right_rank from observations o,taxa t1,taxa t2,interactions i where o.left_taxon_id=t1.id and o.right_taxon_id=t2.id and i.id=o.interaction_id"
+    sql_query="select o.id,i.name as interaction_name,o.left_taxon_id,o.right_taxon_id,t1.rank as left_rank,t2.rank as right_rank,o.created_at,"
+    sql_query += "case when t1.scientific_name <> '' then t1.scientific_name else t1.entered_name END as left_taxon_name,"
+    sql_query += "case when t2.scientific_name <> '' then t2.scientific_name else t2.entered_name END as right_taxon_name "
+    sql_query += " from observations o,taxa t1,taxa t2,interactions i where o.left_taxon_id=t1.id and o.right_taxon_id=t2.id and i.id=o.interaction_id"
     sql_query += " and o.interaction_id=#{params[:interaction_id]}" unless params[:interaction_id].blank? 
     @observations=run_custom_query(sql_query)
     respond_with(@observations)
@@ -21,7 +24,7 @@ class ObservationsController < ApplicationController
     # get form values
     left_taxon_name=params[:left_taxon_name]
     right_taxon_name=params[:right_taxon_name]
-    interaction_id=params[:interaction_id]
+    interaction_id=params[:interaction][:id]
     
     # look up taxa by names entered
     left_taxon=Taxon.with_name(left_taxon_name)
@@ -32,7 +35,7 @@ class ObservationsController < ApplicationController
     @validation_error += 'The first taxon you entered was not found in the system. '  if left_taxon_name.blank? || left_taxon.blank?
     @validation_error += 'The second taxon you entered was not found in the system. ' if right_taxon_name.blank? || right_taxon.blank?
     @validation_error += 'You must enter two different taxa. ' if (right_taxon == left_taxon) && !left_taxon_name.blank?
-    @validation_error += 'You must select an interaction. ' unless interaction_id
+    @validation_error += 'You must select an interaction. ' unless interaction_id != ''
     
     if @validation_error.blank? # create observation record if there aren't any errors
       existing_observation=Observation.where(:left_taxon_id=>left_taxon.first.id,:right_taxon_id=>right_taxon.first.id,:interaction_id=>interaction_id)

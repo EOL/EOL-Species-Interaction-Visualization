@@ -13,6 +13,7 @@ class DefaultController < ApplicationController
     # grab interaction categories that have associated interactions and then the initial set of interactions for the observation form
     @interaction_categories_observation_select=InteractionCategory.find_all_with_interactions
     @interactions_observation_select=Interaction.where(:interaction_category_id=>@interaction_categories_observation_select.first.id)
+    @all_interactions=Interaction.all(:order=>'name')
     
   end
 

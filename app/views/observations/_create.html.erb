@@ -11,7 +11,7 @@
       $.ajax({url: '/interactions/get_interaction_select',
         data: 'interaction_category_id=' + select_value,
         success: function(data){
-          $('#interaction_select').html(data);
+          $('#interactions_select_drop_down').html(data);
           }
       })
     });
@@ -25,7 +25,7 @@
 <tr><td><%= label_tag 'First Taxon' %></td><td><%= text_field_tag 'left_taxon_name', '', :size => 40 %></td></tr>
 <tr><td><%= label_tag 'Second Taxon' %></td><td><%= text_field_tag 'right_taxon_name', '', :size => 40 %></td></tr>
 <tr><td><%= label_tag 'Interaction Category' %></td><td><%= select_tag 'interaction_categories_select', options_from_collection_for_select(@interaction_categories_observation_select,'id','name') %></td></tr>
-<tr><td><%= label_tag 'Interaction' %></td><td><span id="interaction_select"><%=render :partial=>'interactions/interaction_select', :locals=>{:interactions=>@interactions_observation_select}%></span></td></tr>
+<tr><td><%= label_tag 'Interaction' %></td><td><span id="interactions_select_drop_down"><%=render :partial=>'interactions/interaction_select', :locals=>{:interactions=>@interactions_observation_select,:element_id=>'interactions_select'}%></span></td></tr>
 <tr><td colspan="2" align="center"><%= submit_tag 'Save' %></td></tr>
 </table>
 

@@ -1,24 +1,29 @@
 <% if can? :create, :observation %>
   <h3>Enter an Observation</h3>
   <%= render :partial=>'observations/create' %>
+<br />
 <% end %>
 
 <script>
-  
   $(function(){ 
     $("#observations_table").jqGrid({
       url:'/observations/index_jqgrid.json',
       colModel :[ 
-        {name:'left_entered_name', label:'First Taxon', index:'left_entered_name', width:200, sortable: true}, 
-        {name:'interaction_name', label:'Interaction',index:'interaction_name', width:100, sortable: true}, 
-        {name:'right_entered_name', label:'Second Taxon',index:'right_entered_name', width:200, sortable: true}, 
+        {name:'left_taxon_name', label:'First Taxon', index:'left_taxon_name', width:300, sortable: true, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'interaction_name', label:'Interaction',index:'interaction_name', width:190, sortable: true, search:false}, 
+        {name:'right_taxon_name', label:'Second Taxon',index:'right_taxon_name', width:300, sortable: true, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
       ],
       pager: '#observations_pager',caption: 'Observations',rowNum:30,rowList:[30,50],
-      sortname: 'created_at',sortorder: 'asc',multiselect: false,
-    })
+      editurl: '/observations/actions_jqgrid?format=json',
+      sortname: 'created_at',sortorder: 'asc',multiselect: false
+    }).navGrid('#observations_pager',{'edit':false,'add':false,<%unless can? :destroy, :observation%>'del':false,<%end%>'cloneToTop':true});
     });  
 </script>
+<h3>View Observations</h3>
 
+
+  Filter by interaction: <%=render :partial=>'interactions/interaction_select', :locals=>{:interactions=>@all_interactions,:element_id=>'interactions_filter_select'}%><br />
+  
  <%=link_to '[export all observations to csv]', :controller=>'observations', :action=>'export'%>
  <table id="observations_table"></table> 
  <div id="observations_pager"></div>
@@ -29,6 +34,19 @@
        function()
        {
          removeBottomToolbarButtons('observations');
+         filterByInteractions();
        }
    );  
+   
+  function filterByInteractions() {
+    // when the user selects a new interaction, reload the observations grid with a new querystring parameter
+     $('#interactions_filter_select').change(function(){
+       select_value=$('#interactions_filter_select').val();
+       new_data_url='/observations/index_jqgrid.json?interaction_id='+select_value;
+       $("#observations_table").setGridParam({url:new_data_url});        
+       $("#observations_table").trigger("reloadGrid");
+     });
+   }
+
+   </script>
  </script>
