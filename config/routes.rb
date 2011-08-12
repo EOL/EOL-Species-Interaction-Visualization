@@ -61,7 +61,7 @@ EolSpeciesViz::Application.routes.draw do
     get 'confirm_eol_taxon'
   end
   resources :interactions do
-    get 'index_jqgrid', 'export','get_interaction_select', :on=>:collection
+    get 'index_jqgrid', 'export', 'htmlselect_jqgrid',:on=>:collection
   end
   resources :ecosystems do
     get 'index_jqgrid', 'export', :on=>:collection

@@ -1,14 +1,14 @@
 <script>
-  function bindObservationNameAutocomplete() {
-    $( "#left_taxon_name" ).autocomplete({source: "/taxa/taxon_name_autocomplete.json",minLength: 2});  
-    $( "#right_taxon_name" ).autocomplete({source: "/taxa/taxon_name_autocomplete.json",minLength: 2});  
+  function bindObservationNameAutocompleteForm() {
+    $( "#left_taxon_name_form" ).autocomplete({source: "/taxa/taxon_name_autocomplete.json",minLength: 2});  
+    $( "#right_taxon_name_form" ).autocomplete({source: "/taxa/taxon_name_autocomplete.json",minLength: 2});  
     return true;
   }
   
   function getInteractions() {
     $('#interaction_categories_select').change(function(){
       select_value=$('#interaction_categories_select').val();
-      $.ajax({url: '/interactions/get_interaction_select',
+      $.ajax({url: '/interactions/htmlselect_jqgrid',
         data: 'interaction_category_id=' + select_value,
         success: function(data){
           $('#interactions_select_drop_down').html(data);
@@ -22,8 +22,8 @@
 <%= form_tag(url_for(:controller=>'observations', :action=>'create_from_form'), :remote => true,:id => 'observation_form') do %>
 
 <table>
-<tr><td><%= label_tag 'First Taxon' %></td><td><%= text_field_tag 'left_taxon_name', '', :size => 40 %></td></tr>
-<tr><td><%= label_tag 'Second Taxon' %></td><td><%= text_field_tag 'right_taxon_name', '', :size => 40 %></td></tr>
+<tr><td><%= label_tag 'First Taxon' %></td><td><%= text_field_tag 'left_taxon_name_form', '', :size => 40 %></td></tr>
+<tr><td><%= label_tag 'Second Taxon' %></td><td><%= text_field_tag 'right_taxon_name_form', '', :size => 40 %></td></tr>
 <tr><td><%= label_tag 'Interaction Category' %></td><td><%= select_tag 'interaction_categories_select', options_from_collection_for_select(@interaction_categories_observation_select,'id','name') %></td></tr>
 <tr><td><%= label_tag 'Interaction' %></td><td><span id="interactions_select_drop_down"><%=render :partial=>'interactions/interaction_select', :locals=>{:interactions=>@interactions_observation_select,:element_id=>'interactions_select'}%></span></td></tr>
 <tr><td colspan="2" align="center"><%= submit_tag 'Save' %></td></tr>
@@ -37,7 +37,7 @@
   $(document).ready(
       function()
       {       
-        bindObservationNameAutocomplete();
+        bindObservationNameAutocompleteForm();
         getInteractions();
       }
   );  

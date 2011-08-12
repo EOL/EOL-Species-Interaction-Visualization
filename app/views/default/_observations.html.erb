@@ -1,6 +1,8 @@
 <% if can? :create, :observation %>
-  <h3>Enter an Observation</h3>
-  <%= render :partial=>'observations/create' %>
+    <a href="#" id="observation_create_form_toggle">[enter a new observation]</a>
+  <div style="display:none"; id="observation_create_form">
+    <%= render :partial=>'observations/create' %>
+  </div>  
 <br />
 <% end %>
 
@@ -9,44 +11,43 @@
     $("#observations_table").jqGrid({
       url:'/observations/index_jqgrid.json',
       colModel :[ 
-        {name:'left_taxon_name', label:'First Taxon', index:'left_taxon_name', width:300, sortable: true, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
-        {name:'interaction_name', label:'Interaction',index:'interaction_name', width:190, sortable: true, search:false}, 
-        {name:'right_taxon_name', label:'Second Taxon',index:'right_taxon_name', width:300, sortable: true, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'left_taxon_name', label:'First Taxon', index:'left_taxon_name', width:300, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200},sortable: true, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'interaction_name', label:'Interaction',index:'i.name', width:190, sortable: true,  editable:true, edittype:'select',editoptions:{dataUrl:'/interactions/htmlselect_jqgrid'},searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'right_taxon_name', label:'Second Taxon',index:'right_taxon_name', width:300, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200},sortable: true, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
       ],
       pager: '#observations_pager',caption: 'Observations',rowNum:30,rowList:[30,50],
-      editurl: '/observations/actions_jqgrid?format=json',
+      editurl: '/observations/action?format=json',
       sortname: 'created_at',sortorder: 'asc',multiselect: false
-    }).navGrid('#observations_pager',{'edit':false,'add':false,<%unless can? :destroy, :observation%>'del':false,<%end%>'cloneToTop':true});
+    }).navGrid('#observations_pager',{<%unless can? :create, :observation%>'add':false,<%end%><%unless can? :update, :observation%>'edit':false,<%end%><%unless can? :destroy, :observation%>'del':false,<%end%>'cloneToTop':true},
+    {onInitializeForm:function(){bindObservationNameAutocompleteJqGrid();},editCaption: 'Edit observation',width: 650, serializeEditData: function(postdata){return {'observation':postdata};}},{onInitializeForm:function(){bindObservationNameAutocompleteJqGrid();},addCaption: 'Add observation', width: 650, serializeEditData: function(postdata){return {'observation':postdata};}},{jqModal:false,left:20,top:100})    
     });  
 </script>
-<h3>View Observations</h3>
 
-
-  Filter by interaction: <%=render :partial=>'interactions/interaction_select', :locals=>{:interactions=>@all_interactions,:element_id=>'interactions_filter_select'}%><br />
   
  <%=link_to '[export all observations to csv]', :controller=>'observations', :action=>'export'%>
  <table id="observations_table"></table> 
  <div id="observations_pager"></div>
 
  <script>
+ 
+ 	function toggleCreateForm () {
+		$('#observation_create_form').toggle('fade');
+		return false;
+	}
+
+   function bindObservationNameAutocompleteJqGrid() {
+     $( "#left_taxon_name" ).autocomplete({source: "/taxa/taxon_name_autocomplete.json",minLength: 2});  
+     $( "#right_taxon_name" ).autocomplete({source: "/taxa/taxon_name_autocomplete.json",minLength: 2});  
+     return true;
+   }
+   
    // bind events
    $(document).ready(
        function()
        {
          removeBottomToolbarButtons('observations');
-         filterByInteractions();
+         $("#observation_create_form_toggle").click(toggleCreateForm);
        }
    );  
    
-  function filterByInteractions() {
-    // when the user selects a new interaction, reload the observations grid with a new querystring parameter
-     $('#interactions_filter_select').change(function(){
-       select_value=$('#interactions_filter_select').val();
-       new_data_url='/observations/index_jqgrid.json?interaction_id='+select_value;
-       $("#observations_table").setGridParam({url:new_data_url});        
-       $("#observations_table").trigger("reloadGrid");
-     });
-   }
-
-   </script>
  </script>

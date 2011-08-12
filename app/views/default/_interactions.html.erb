@@ -8,8 +8,8 @@
     $("#interaction_types_table").jqGrid({
       url:'/interactions/index_jqgrid.json',
       colModel :[ 
-        {name:'interaction_name', label:'Name', index:'interaction_name', width:300, editable: true, editoptions: {size:50, maxlength: 200}, edittype:'text', searchoptions: { sopt: ['cn', 'bw', 'eq','ew' ]}}, 
-        {name:'category_name', label:'Category',index:'category_name', width:300, sortable: true, editable: true, edittype:'select',editoptions:{dataUrl:'/interaction_categories/htmlselect_jqgrid'}}, 
+        {name:'interaction_name', label:'Name', index:'i.name', width:300, editable: true, editoptions: {size:50, maxlength: 200}, edittype:'text', searchoptions: { sopt: ['cn', 'bw', 'eq','ew' ]}}, 
+        {name:'category_name', label:'Category',index:'ic.name', width:300, sortable: true, editable: true, edittype:'select',searchoptions: { sopt: ['cn', 'bw', 'eq','ew' ]},editoptions:{dataUrl:'/interaction_categories/htmlselect_jqgrid'}}, 
       ],
       pager: '#interaction_types_pager',caption: 'Interaction Types',rowNum:30,rowList:[30,50],
       sortname: 'interaction_name',sortorder: 'asc',multiselect: false,

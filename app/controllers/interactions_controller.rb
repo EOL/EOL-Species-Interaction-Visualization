@@ -16,16 +16,16 @@ class InteractionsController < ApplicationController
 
   # AJAX ONLY METHODS BELOW
   
-  # given a interaction category, return an HTML select list of interactions for the user to select
-  def get_interaction_select
+  # given a interaction category, return an HTML select list of interactions for the user to select (or all interactions if no category given)
+  def htmlselect_jqgrid
 
     interaction_category_id=params[:interaction_category_id]
     if interaction_category_id
       interactions=Interaction.where(:interaction_category_id=>interaction_category_id).order('name')
-      render :partial=>'interaction_select', :layout=>false,:locals=>{:interactions=>interactions,:element_id=>'interactions_select'}
     else
-      render :nothing=>true
+      interactions=Interaction.order('name')
     end
+    render :partial=>'interaction_select', :layout=>false,:locals=>{:interactions=>interactions,:element_id=>'interactions_select'}
     
   end
     

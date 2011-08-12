@@ -23,7 +23,7 @@
       colModel :[ 
         {name:'entered_name', label:'Taxon Name',index:'entered_name', width:300,editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
         {name:'scientific_name', label:'EOL Scientific Name', index:'scientific_name', width:350,  searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
-        {name:'eol_taxon_id', label:'EOL ID',index:'eol_taxon_id', width:80, formatter:makeEOLLink} 
+        {name:'eol_taxon_id', search:false,label:'EOL ID',index:'eol_taxon_id', width:80, formatter:makeEOLLink} 
       ],
       pager: '#taxa_pager',caption:"Taxa",rowNum:30,rowList:[30,50,100,200],
       sortname: 'entered_name',sortorder: 'asc',
@@ -36,10 +36,10 @@
     $("#ecosystems_table").jqGrid({
       url:'/ecosystems/index_jqgrid.json',
       colModel :[ 
-        {name:'ecosystem_name', label:'Name', index:'ecosystem_name', width:300, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'ecosystem_name', label:'Name', index:'e.name', width:300, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200}, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
         {name:'description', label:'Description',index:'description', width:350, sortable: false, editable: true, edittype:'textarea',editoptions:{rows:3,cols:50},searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
-        {name:'biome_name', label:'Biome',index:'biome_name', width:250, sortable: true, editable: true, edittype:'select',editoptions:{dataUrl:'/biomes/htmlselect_jqgrid'} }, 
-        {name:'biome_id',hidden:'true'},
+        {name:'biome_name', label:'Biome',index:'biome_name', width:250, sortable: true, editable: true, search: false, edittype:'select',editoptions:{dataUrl:'/biomes/htmlselect_jqgrid'} }, 
+        {name:'biome_id',hidden:'true',search:false},
       ],
       pager: '#ecosystems_pager',caption:"Ecosystems",rowNum:10000,
       sortname: 'ecosystem_name',sortorder: 'asc',
