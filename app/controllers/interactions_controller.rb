@@ -23,7 +23,7 @@ class InteractionsController < ApplicationController
     interaction_category_id=params[:interaction_category_id]
     @reload=params[:reload]
     
-    if interaction_category_id
+    if interaction_category_id && !interaction_category_id.empty?
       @interactions=Interaction.where(:interaction_category_id=>interaction_category_id).order('name')
     else
       @interactions=Interaction.order('name')

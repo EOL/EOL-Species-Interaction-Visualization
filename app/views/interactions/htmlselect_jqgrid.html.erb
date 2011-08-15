@@ -1,5 +1,6 @@
 <% unless @reload %>
 <select>
+  <option value="">-- select --</option>
 <% end %>
   <% @interactions.each do |interaction| %>
     <option value="<%=interaction.id%>"><%=interaction.name%></option> 
