@@ -1,25 +1,25 @@
-<% if can? :create, :observation %>
-    <a href="#" id="observation_create_form_toggle">[enter a new observation]</a>
-  <div style="display:none"; id="observation_create_form">
-    <%= render :partial=>'observations/create' %>
-  </div>  
-<br />
-<% end %>
-
 <script>
   $(function(){ 
     $("#observations_table").jqGrid({
       url:'/observations/index_jqgrid.json',
       colModel :[ 
         {name:'left_taxon_name', label:'First Taxon', index:'left_taxon_name', width:300, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200},sortable: true, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
+        {name:'interaction_category_name', label:'Category',index:'ic.name', width:80, sortable: true,  editable:true, edittype:'select',editoptions:{dataUrl:'/interaction_categories/htmlselect_jqgrid'},searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
         {name:'interaction_name', label:'Interaction',index:'i.name', width:190, sortable: true,  editable:true, edittype:'select',editoptions:{dataUrl:'/interactions/htmlselect_jqgrid'},searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
         {name:'right_taxon_name', label:'Second Taxon',index:'right_taxon_name', width:300, editable: true, edittype:'text', editoptions: {size:50, maxlength: 200},sortable: true, searchoptions: { sopt: ['cn', 'bw', 'eq','ew']}}, 
       ],
       pager: '#observations_pager',caption: 'Observations',rowNum:30,rowList:[30,50],
-      editurl: '/observations/action?format=json',
+      editurl: '/observations/actions_jqgrid?format=json',
       sortname: 'created_at',sortorder: 'asc',multiselect: false
     }).navGrid('#observations_pager',{<%unless can? :create, :observation%>'add':false,<%end%><%unless can? :update, :observation%>'edit':false,<%end%><%unless can? :destroy, :observation%>'del':false,<%end%>'cloneToTop':true},
-    {onInitializeForm:function(){bindObservationNameAutocompleteJqGrid();},editCaption: 'Edit observation',width: 650, serializeEditData: function(postdata){return {'observation':postdata};}},{onInitializeForm:function(){bindObservationNameAutocompleteJqGrid();},addCaption: 'Add observation', width: 650, serializeEditData: function(postdata){return {'observation':postdata};}},{jqModal:false,left:20,top:100})    
+    {onInitializeForm:function(){bindEditGrid();},editCaption: 'Edit observation',width: 650, 
+    serializeEditData:function(postdata){pd=postdata;
+      return {'observation':{'oper': 'edit','id': postdata.id, 'interaction_id':postdata.interaction_name,'left_taxon_name':postdata.left_taxon_name,
+      'right_taxon_name':postdata.right_taxon_name}};}},
+      {onInitializeForm:function(){bindEditGrid();},addCaption: 'Add observation', width: 650, 
+      serializeEditData:function(postdata){pd=postdata;
+        return {'observation':{'oper': 'add','id': postdata.id, 'interaction_id':postdata.interaction_name,'left_taxon_name':postdata.left_taxon_name,
+        'right_taxon_name':postdata.right_taxon_name}};}},{jqModal:false,left:20,top:100})    
     });  
 </script>
 
@@ -29,24 +29,30 @@
  <div id="observations_pager"></div>
 
  <script>
- 
- 	function toggleCreateForm () {
-		$('#observation_create_form').toggle('fade');
-		return false;
-	}
-
-   function bindObservationNameAutocompleteJqGrid() {
+  
+   function bindEditGrid() {
      $( "#left_taxon_name" ).autocomplete({source: "/taxa/taxon_name_autocomplete.json",minLength: 2});  
      $( "#right_taxon_name" ).autocomplete({source: "/taxa/taxon_name_autocomplete.json",minLength: 2});  
+     var t=setTimeout("bindCategoryName();",1000); // since the drop down menu is not created immediately and is not in the DOM, we need to wait a bit before binding the change event
      return true;
    }
-   
+
+   function bindCategoryName() {
+     $( "#interaction_category_name").change(function(){
+       select_value=$('#interaction_category_name').val();
+       $.ajax({url: '/interactions/htmlselect_jqgrid',
+         data: 'reload=true&interaction_category_id=' + select_value,
+         success: function(data){
+           $('#interaction_name').html(data);
+           }
+       })
+     });
+   }
    // bind events
    $(document).ready(
        function()
        {
          removeBottomToolbarButtons('observations');
-         $("#observation_create_form_toggle").click(toggleCreateForm);
        }
    );  
    

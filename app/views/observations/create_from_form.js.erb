@@ -1,8 +1,0 @@
-<% if @validation_error.blank? %>
-	successMessage('Observation created.');
-	$('#left_taxon_name').val('');
-	$('#right_taxon_name').val('');
-	$("#observations_table").trigger("reloadGrid");
-<% else %>
-	warningMessage('<%=@validation_error%>');
-<% end %>

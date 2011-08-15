@@ -1,5 +1,6 @@
 <select> 
+  <option value="">-- select --</option>
   <% @interaction_categories.each do |interaction_category| %>
-  <option value="<%=interaction_category.id%>"><%=interaction_category.name%></option> 
+    <option value="<%=interaction_category.id%>"><%=interaction_category.name%></option> 
   <% end %>
 </select>
