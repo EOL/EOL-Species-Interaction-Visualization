@@ -28,7 +28,7 @@ class Taxon < ActiveRecord::Base
   end
   
   def name
-    self.scientific_name.empty? ? self.entered_name : self.scientific_name
+    self.scientific_name.blank? ? self.entered_name : self.scientific_name
   end
   
   # do some name cleansing before calling EOL API
